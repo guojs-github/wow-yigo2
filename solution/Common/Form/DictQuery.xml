@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Caption="字典查询" Key="DictQuery">
+	<!--<DataSource>
+		<DataObject Key="DictQuery" Caption="字典查询" PrimaryType="Virtual" SecondaryType="Normal" MainTableKey="DictQuery">
+			<TableCollection>
+				<Table Key="DictQuery" Caption="字典查询" TableMode="Detail" SourceType="Query" Persist="False">
+					<Column Key="SOID" Caption="SOID" Persist="True" DataType="Long"/>
+					<Column Key="Code" Caption="代码" Persist="True" DataType="Varchar" Length="50"/>
+					<Column Key="Name" Caption="名称" Persist="True" DBColumnName="Name" DataType="Varchar" Length="50"/>
+				</Table>
+			</TableCollection>
+		</DataObject>
+	</DataSource>-->
+	<Body PopHeight="450px" PopWidth="600px"> 
+		<Block>
+			<GridLayoutPanel Key="main" >
+				<RowDefCollection RowGap="5">
+					<RowDef Height="10px"/>
+					<RowDef Height="25px"/>
+					<RowDef Height="300px"/> 
+					<RowDef Height="25px"/> 
+					<RowDef Height="10px"/>
+				</RowDefCollection>
+				<ColumnDefCollection>
+					<ColumnDef Width="10%"/>
+					<ColumnDef Width="50%"/>
+					<ColumnDef Width="15%"/>
+					<ColumnDef Width="15%"/>
+					<ColumnDef Width="10%"/>
+				</ColumnDefCollection>
+				<!--<ToolBar Key="main_toolbar" X="0" Y="0" XSpan="1" YSpan="1" IsDefault="True"/>-->
+				<!--<Label Key="L_Content" Caption="查询内容" X="0" Y="0"/>-->
+				<TextEditor Key="Content" Caption="查询内容" X="1" Y="1" XSpan="2" Enable="True">
+					<DataBinding DefaultFormulaValue="para('QueryContent')">
+					</DataBinding>
+				</TextEditor>
+				<Button Key="Query" Caption="查询" X="3" Y="1" XSpan="1">
+					<OnClick>
+						<![CDATA[
+							ShowDictView("DictView",getvalue('Content'));
+						]]>	
+					</OnClick>
+				</Button>
+				<DictView Key="DictView" FormulaItemKey="Para('ItemKey')" X="1" Y="2" XSpan="3" PageRowCount="5">
+					<!--<RowClick>
+						<![CDATA[openDict(GetRowItemKey('DictTree'),GetRowID('DictTree'),'Container')]]>	
+					</RowClick>-->
+					<RowDblClick>
+						<![CDATA[
+							doEventCallback("DictBlur");Close();
+						]]>	
+					</RowDblClick>
+				</DictView>
+				<!--<ListView Key="list" TableKey="DictQuery" X="1" Y="1" XSpan="3" PageLoadType="DB" PageRowCount="25">
+					<RowDblClick>
+						<![CDATA[
+							Open('StockIn', OID)
+						]]>	
+					</RowDblClick>
+					<ListViewColumnCollection>
+						<ListViewColumn Key="SOID" Width="50px" Caption="ID" ColumnType="Label" DataColumnKey="SOID">
+						</ListViewColumn>
+						<ListViewColumn Key="Code" Width="50px" Caption="CODE" ColumnType="Label" DataColumnKey="Code">
+						</ListViewColumn>
+						<ListViewColumn Key="Name" Width="50px" Caption="Name" ColumnType="Label" DataColumnKey="Name">
+						</ListViewColumn>
+					</ListViewColumnCollection>
+				</ListView>-->
+				<!--<Button Key="OK" Caption="确定" X="2" Y="3">
+					<OnClick>
+						<![CDATA[
+							doEventCallback("DictBlur");Close();
+						]]>	
+					</OnClick>
+				</Button>
+				<Button Key="Close" Caption="取消" X="3" Y="3">
+					<OnClick>
+						<![CDATA[
+							Close();
+						]]>	
+					</OnClick>
+				</Button>-->
+			</GridLayoutPanel>
+		</Block>
+	</Body>
+</Form>
+	

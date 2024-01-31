@@ -1,0 +1,90 @@
+/**
+	heel-web component hint control style.
+
+    2023.9.19 created by guojs.
+**/
+
+.heel-web .hw-hint {
+    display: none;
+    position: fixed;
+    bottom: 0.8575em;
+    z-index: 100;
+
+    width: 100%;
+    height: 3.143em;
+    line-height: 3.143em;
+
+    font-size: inherit;
+    text-align: center;
+}
+
+.heel-web .hw-hint > .hw-hint-content {
+    display: inline-block;
+    padding: 0 0.7856em;
+
+    font-size: inherit;
+    background-color: white;
+    box-shadow: 0 0 0.31424em 0 gray;
+    border-radius: 0.23568em;
+
+	animation: -show-hint; 
+	animation-duration: 0.5s ;
+}
+
+.heel-web .hw-hint > .hw-hint-content > .icon {
+    font-size: 1.257em;
+    color: #40a8e8;
+}
+
+.heel-web .hw-hint > .hw-hint-content > .message {
+    font-size: 0.8485em;
+}
+
+.heel-web .hw-hint.warning > .hw-hint-content {
+    background-color: lightyellow;
+    box-shadow: 0 0 0.31424em 0 #ED6D15;
+}
+
+.heel-web .hw-hint.warning > .hw-hint-content > .icon {
+    color: #ED6D15;
+}
+
+.heel-web .hw-hint.error > .hw-hint-content {
+    background-color: rgba(255, 0 ,0, 0.2);
+    box-shadow: 0 0 0.31424em 0 red;
+}
+
+.heel-web .hw-hint.error > .hw-hint-content > .icon {
+    color: red;
+}
+
+/*Show hint **********************/
+@keyframes -show-hint {
+    0% {
+		transform: translateY(0) scale(0);
+		opacity: 0;
+	}  
+    50% {
+		transform: translateY(-100px) scale(1.1);
+		opacity: 0.2;
+	}  
+    100% {
+		transform: translateY(0) scale(1);
+		opacity: 1;
+	}  
+}  
+
+@-webkit-keyframes -show-hint {
+    0% {
+		transform: translateY(0) scale(0);
+		opacity: 0;
+	}  
+    50% {
+		transform: translateY(-100px) scale(1.1);
+		opacity: 0.2;
+	}  
+    100% {
+		transform: translateY(0) scale(1);
+		opacity: 1;
+	}  
+} 

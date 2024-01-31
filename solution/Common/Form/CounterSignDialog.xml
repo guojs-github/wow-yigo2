@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Key="CounterSignDialog" Caption="会签对话框">
+    <DataSource>
+        <DataObject Key="CounterSignDialog" Caption="会签对话框">
+            <TableCollection/>
+            <OIDFilter/>
+        </DataObject>
+    </DataSource>
+    <Body>
+        <Block>
+            <GridLayoutPanel Key="GridLayoutPanel0" Padding="5px" Caption="GridLayoutPanel0">
+                <TextArea Key="Opinion" Caption="意见" X="0" Y="1" Enable="True" HAlign="Left" XSpan="4">
+                    <DataBinding/>
+                </TextArea>
+                <Button Key="APPROVE" Caption="通过" X="0" Y="3" Enable="True">
+                    <DataBinding/>
+                    <OnClick>
+                        <![CDATA[parent.CommitWorkitem(-1,1,Opinion);
+Close();
+]]>
+                    </OnClick>
+                </Button>
+                <Button Key="OPPOSE" Caption="驳回" X="1" Y="3" Enable="True">
+                    <DataBinding/>
+                    <OnClick>
+                        <![CDATA[parent.CommitWorkitem(-1,0,Opinion);Close();]]>
+                    </OnClick>
+                </Button>
+                <Button Key="cancel" Caption="取消" X="3" Y="3" Enable="True">
+                    <DataBinding/>
+                    <OnClick>
+                        <![CDATA[
+Close();
+			]]>
+                    </OnClick>
+                </Button>
+                <Label Key="T_Opinion" Caption="意见" X="0" Y="0" XSpan="4">
+                    <DataBinding/>
+                </Label>
+                <Button Key="GiveUp" Caption="放弃" X="2" Y="3">
+                    <OnClick>
+                        <![CDATA[parent.CommitWorkitem(-1,2,Opinion);
+Close();]]>
+                    </OnClick>
+                </Button>
+                <RowDefCollection RowGap="8">
+                    <RowDef Height="30px"/>
+                    <RowDef Height="174px"/>
+                    <RowDef Height="10px"/>
+                    <RowDef Height="20px"/>
+                    <RowDef Height="10px"/>
+                </RowDefCollection>
+                <ColumnDefCollection ColumnGap="8">
+                    <ColumnDef Width="100px"/>
+                    <ColumnDef Width="100px"/>
+                    <ColumnDef Width="100px"/>
+                    <ColumnDef Width="100px"/>
+                </ColumnDefCollection>
+            </GridLayoutPanel>
+        </Block>
+    </Body>
+</Form>

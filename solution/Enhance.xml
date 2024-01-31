@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Enhance>
+    <ExtService>
+        <Service Name="Hello" Impl="com.bokesoft.yigo2.service.heel.sample.Hello" Description="Just say hello"/>
+        <Service Name="QuestionSetStatus" Impl="com.bokesoft.yigo2.service.heel.sample.question.SetStatus"/>
+        <Service Name="QuestionDelete" Impl="com.bokesoft.yigo2.service.heel.sample.question.Delete"/>
+        <Service Name="QuestionIsDeleted" Impl="com.bokesoft.yigo2.service.heel.sample.question.IsDeleted"/>
+        <Service Name="QuestionUpdateOptionPic" Impl="com.bokesoft.yigo2.service.heel.sample.question.UpdateOptionPic"/>
+        <Service Name="RuleDelete" Impl="com.bokesoft.yigo2.service.heel.sample.rule.Delete"/>
+        <Service Name="RuleIsDeleted" Impl="com.bokesoft.yigo2.service.heel.sample.rule.IsDeleted"/>
+        <Service Name="RuleSetStatus" Impl="com.bokesoft.yigo2.service.heel.sample.rule.SetStatus"/>
+        <Service Name="PaperDelete" Impl="com.bokesoft.yigo2.service.heel.sample.paper.Delete"/>
+        <Service Name="PaperIsDeleted" Impl="com.bokesoft.yigo2.service.heel.sample.paper.IsDeleted"/>
+        <Service Name="PaperIsGenerated" Impl="com.bokesoft.yigo2.service.heel.sample.paper.IsGenerated"/>
+        <Service Name="PaperSetStatus" Impl="com.bokesoft.yigo2.service.heel.sample.paper.SetStatus"/>
+        <Service Name="PaperGenerateQuestions" Impl="com.bokesoft.yigo2.service.heel.sample.paper.GenerateQuestions"/>
+        <Service Name="GetById" Impl="com.bokesoft.yigo2.service.heel.sample.common.GetById"/>
+        <Service Name="AttachmentAdd" Impl="com.bokesoft.yigo2.service.heel.sample.attachment.Add"/>
+        <Service Name="AttachmentGetById" Impl="com.bokesoft.yigo2.service.heel.sample.attachment.GetById"/>
+    </ExtService>
+</Enhance>

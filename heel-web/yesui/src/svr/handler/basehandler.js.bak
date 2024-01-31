@@ -1,0 +1,255 @@
+YIUI.Handler = (function () {
+  	var Return = {
+		formatDate: function (date, format) {
+			var o = {
+				"M+": date.getMonth() + 1,
+				"d+": date.getDate(),
+				"h+": date.getHours(),
+				"H+": date.getHours(),
+				"m+": date.getMinutes(),
+				"s+": date.getSeconds(),
+				"q+": Math.floor((date.getMonth() + 3) / 3),
+				"S": date.getMilliseconds()
+			};
+			if (/(y+)/.test(format)) {
+				format = format.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+				for (var k in o) {
+					if (new RegExp("(" + k + ")").test(format)) {
+						format = format.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+					}
+				}
+				return format;
+			}
+		},
+
+		//DataTable 赋值转换方法
+		convertValue: function (value, type) {
+			var ret;
+			switch (type) {
+				case DataType.STRING:
+				ret = YIUI.TypeConvertor.toString(value);
+				break;
+				case DataType.INT:
+				case DataType.LONG:
+				case DataType.DOUBLE:
+				case DataType.FLOAT:
+				case DataType.NUMERIC:
+				ret = YIUI.TypeConvertor.toDecimal(value);
+				break;
+				case DataType.BOOLEAN:
+				ret = value ? true : false;
+				break;
+				case DataType.DATE:
+				case DataType.DATETIME:
+				ret = YIUI.TypeConvertor.toDate(value);
+				break;
+				default:
+				ret = value;
+			}
+			return ret;
+		},
+
+		doOnClick: function (formID, formula) {
+			if (formula) {
+				var form = YIUI.FormStack.getForm(formID);
+				var cxt = new View.Context(form);
+				form.eval(formula, cxt, null);
+			}
+		},
+
+		getComponentValue: function (control, dataTable, columnKey) {
+			var value = dataTable.getByKey(columnKey);
+			if (value == null) {
+				return value;
+			}
+			var result, type = control.type, itemKey;
+			switch (type) {
+				case YIUI.CONTROLTYPE.DICT:
+				case YIUI.CONTROLTYPE.DYNAMICDICT:
+				case YIUI.CONTROLTYPE.COMPDICT:
+				itemKey = control.itemKey;
+				if (control.multiSelect) {
+					if (YIUI.TypeConvertor.toString(value).length == 0) {
+						break;
+					}
+					if (type == YIUI.CONTROLTYPE.DYNAMICDICT) {
+						itemKey = dataTable.getByKey(columnKey + "ItemKey");
+					}
+					if (itemKey) {
+						var oids = YIUI.TypeConvertor.toString(value).split(","), oid, list = [];
+						for (var i = 0, size = oids.length; i < size; i++) {
+							oid = YIUI.TypeConvertor.toLong(oids[i]);
+							list.push(new YIUI.ItemData({
+							oid: oid,
+							itemKey: itemKey
+							}));
+						}
+						result = list;
+					}
+					if (type == YIUI.CONTROLTYPE.COMPDICT) {
+					// 动态字典不允许多选
+					}
+				} else {
+					if (YIUI.TypeConvertor.toLong(value) <= 0) {
+						break;
+					}
+					if (type == YIUI.CONTROLTYPE.DYNAMICDICT || type == YIUI.CONTROLTYPE.COMPDICT) {
+						itemKey = dataTable.getByKey(columnKey + "ItemKey");
+					}
+					var oid = YIUI.TypeConvertor.toLong(value);
+					result = new YIUI.ItemData({
+						oid: oid,
+						itemKey: itemKey
+					});
+				}
+				break;
+				default:
+				result = value;
+				break;
+			}
+			return result;
+		},
+
+		setValueToDocument: function (control, dataTable, columnKey, newValue) {
+
+			if (dataTable.tableMode == YIUI.TableMode.HEAD && !dataTable.first()) {
+				dataTable.addRow(true);
+			}
+
+			var type = control.type;
+			var dataType = dataTable.getColByKey(columnKey).type;
+
+			if (newValue != null) {
+				switch (type) {
+				case YIUI.CONTROLTYPE.DICT:
+				case YIUI.CONTROLTYPE.DYNAMICDICT:
+				case YIUI.CONTROLTYPE.COMPDICT:
+					if (control.multiSelect) {
+						if (newValue.length > 0) {
+							var str = '';
+							for (var i = 0; i < newValue.length; i++) {
+								str += ',' + newValue[i].oid;
+							}
+							this.impl_setObject(dataTable, columnKey, str.substring(1));
+
+							if (type == YIUI.CONTROLTYPE.DYNAMICDICT || type == YIUI.CONTROLTYPE.COMPDICT) {
+								this.impl_setObject(dataTable, columnKey + 'ItemKey', newValue[0].itemKey);
+							}
+						}
+					} else {
+						this.impl_setObject(dataTable, columnKey, newValue.oid);
+						if (type == YIUI.CONTROLTYPE.DYNAMICDICT || type == YIUI.CONTROLTYPE.COMPDICT) {
+							this.impl_setObject(dataTable, columnKey + 'ItemKey', newValue.itemKey);
+						}
+					}
+					break;
+				default:
+					this.impl_setObject(dataTable, columnKey, Return.convertValue(newValue, dataType));
+				}
+			} else {
+				this.impl_setObject(dataTable, columnKey, Return.convertValue(newValue, dataType));
+			}
+		},
+
+		// 头表设置一行,明细设置多行
+		impl_setObject: function (table, columnKey, value) {
+			if (table.tableMode == YIUI.TableMode.HEAD) {
+				table.setByKey(columnKey, value);
+			} else {
+				table.beforeFirst();
+				while (table.next()) {
+				table.setByKey(columnKey, value);
+				}
+			}
+		},
+
+		setSubDetailValueToDocument: function (form, control, table, newValue, fireEvent) {
+			var grid = form.getComponent(control.parentGridKey),
+				rowIndex = (grid == null ? -1 : grid.getFocusRowIndex());
+			if (isNaN(rowIndex) || rowIndex == -1) {
+				rowIndex = grid.getLastEmptyRowIndex();
+				if (isNaN(rowIndex) || rowIndex == -1) {
+					return;
+				}
+				grid.setFocusRowIndex(rowIndex, false);
+			}
+
+			if (table) {
+				var rowData = grid.getRowDataAt(rowIndex);
+				if (YIUI.GridUtil.isEmptyRow(rowData)) {
+					grid.getHandler().flushRow(form, grid, rowIndex);
+
+					this.setValueToDocument(control, table, control.columnKey, newValue);
+
+					if (grid.newEmptyRow && grid.isEnable()) {
+						grid.appendEmptyRow(rowIndex);
+					}
+					grid.loadSubDetail();
+				}
+			} else {
+				grid.setValueByKey(rowIndex, control.bindingCellKey, newValue, true, fireEvent);
+			}
+		},
+
+		doValueChanged: function (control, newValue, commitValue, fireEvent) {
+			var form = YIUI.FormStack.getForm(control.ofFormID),
+				tableKey = control.tableKey,
+				document = form.getDocument(),
+				dataTable;
+
+			if (commitValue) {
+				if (tableKey) {
+					dataTable = document.getByKey(tableKey);
+				}
+
+				if (control.isSubDetail) {
+					this.setSubDetailValueToDocument(form, control, dataTable, newValue, fireEvent);
+				} else {
+					dataTable && this.setValueToDocument(control, dataTable, control.columnKey, newValue);
+				}
+
+				// 触发事件之前需要做的事
+				form.getViewDataMonitor().preFireValueChanged(control);
+
+				// 触发事件
+				if (fireEvent) {
+					form.getViewDataMonitor().fireValueChanged(control);
+				}
+				// 触发事件之后需要做的事
+				form.getViewDataMonitor().postFireValueChanged(control);
+
+				// 变体刷新
+				if (fireEvent && form.useVariant && form.variant && form.variant.dependency.indexOf(control.key) != -1) {
+					form.getViewDataMonitor().refreshVariant(true);
+				}
+			}
+		},
+
+		validated: function (formID, validation) {
+			var passed = true;
+			if (validation) {
+				var form = YIUI.FormStack.getForm(formID);
+				var cxt = new View.Context(form);
+				passed = form.eval(validation, cxt);
+			}
+			return passed;
+		},
+
+		hasChanging: function (changing) {
+			var hasChanging = false;
+			if (changing) {
+				hasChanging = true;
+			}
+			return hasChanging;
+		},
+
+		changing: function (formID, changing) {
+			if (changing) {
+				var form = YIUI.FormStack.getForm(formID);
+				var cxt = new View.Context(form);
+				form.eval(changing, cxt);
+			}
+		}
+	};
+	return Return;
+})();

@@ -1,0 +1,44 @@
+/**
+	heel web button style
+	2023.3.30 created by guojs 
+**/
+.heel-web button.hw-button.hw-primary {
+	background-color: #0c8eff;
+	border: 1px solid #0c8eff;
+	
+	transition: transform 0.25s;
+}
+
+.heel-web button.hw-button.hw-primary > span.txt {
+	color: white !important;
+}
+
+.heel-web button.hw-button.hw-primary:hover {
+	border-radius: 0;
+	-webkit-border-radius: 0;
+	
+	transform: scale(0.95);
+}
+
+.heel-web .hw-def-button {
+	padding: 0 10px;
+
+	color: #333333;	
+	background-color: white;
+
+	border: 1px solid white;
+    border-radius: 2px;
+}
+
+.heel-web .hw-def-button.hw-primary {
+	color: #40a8e8;	
+}
+
+.heel-web .hw-def-button:hover {
+	box-shadow:0 0 4px 0 #40a8e8;
+	outline: 1.5px solid #40a8e8;
+
+	background-color: white;
+
+	cursor: pointer;	
+}

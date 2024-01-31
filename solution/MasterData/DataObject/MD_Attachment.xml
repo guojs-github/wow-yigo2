@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<DataObject Key="MD_Attachment" Caption="附件清单" PrimaryTableKey="MD_Attachment" NoPrefix="ATT" PrimaryType="Entity" Version="7">
+    <TableCollection>
+        <Table Key="MD_Attachment" Caption="附件清单">
+            <Column Key="OID" Caption="对象标识" DataType="Long"/>
+            <Column Key="SOID" Caption="主对象标识" DataType="Long"/>
+            <Column Key="POID" Caption="父对象标识" DataType="Long"/>
+            <Column Key="VERID" Caption="对象版本" DataType="Integer"/>
+            <Column Key="DVERID" Caption="对象明细版本" DataType="Integer"/>
+            <Column Key="Status" Caption="状态" DataType="Integer"/>
+            <Column Key="No" Caption="编码" DataType="Varchar" Length="100"/>
+            <Column Key="CREATOR" DataType="Long" Caption="创建人"/>
+            <Column Key="CREATETIME" Caption="创建时间" DataType="DateTime"/>
+            <Column Key="RefType" Caption="关联对象类型" DataType="Varchar" Length="100"/>
+            <Column Key="RefId" Caption="关联对象ID" DataType="Long"/>
+            <Column Key="Url" Caption="附件引用地址" DataType="Varchar"/>
+            <Column Key="FileName" Caption="附件的文件名" DataType="Varchar"/>
+        </Table>
+    </TableCollection>
+</DataObject>

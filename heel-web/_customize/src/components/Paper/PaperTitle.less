@@ -1,0 +1,23 @@
+/*
+	paper title style
+*/
+@import '/src/assets/style/index.less';
+
+@test-data-height: 20px;
+
+div.paper-title {
+    font-size: @font-size-big;
+    font-weight: bold;
+    text-align: center;
+    width: calc(100% - 40px);
+    border-bottom: 2px solid @color-light-gray;
+
+    & > div.test-data {
+        height: @test-data-height;
+
+        color: @color-light-gray;
+        font-size: @font-size-default;
+        text-align: center;
+        line-height: @test-data-height;
+    }
+}

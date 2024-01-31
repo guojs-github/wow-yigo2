@@ -1,0 +1,65 @@
+/*侧栏字体*/
+.treemenu li a span {
+	color: #74787a;
+	font-family: "微软雅黑";
+	font-size: 14px;
+}
+.treemenu-accordionmenu > li.isParent > a.clicked span.treenode-name, .treemenu-accordionmenu > li.isParent > a:hover span.treenode-name {
+	color: #4d4d4d;
+	font-weight: bold;
+}
+.treemenu li a:hover{
+	background: #eaeaea;
+	border-radius: 2px;
+}
+.treemenu li a.clicked {
+	background: #ddd;
+	border-radius: 2px;
+}
+.treemenu li a:hover span.treenode-name, .treemenu li a.clicked span.treenode-name {
+	color: #4d4d4d;
+	font-weight: bold;
+}
+/* .ui-tabs-nav li.ui-tabcontainer.aria-selected a {
+	border-bottom: 2px solid #3797F0;
+	background-color: #fff;
+} */
+/*悬停、点击下拉列表样式*/
+.cmb-vw ul li:hover {
+	background: #eaeaea;
+	border-color: #b7b7b7;
+	width:100%;
+	color: #4d4d4d;
+	border-radius: 2px;
+	cursor: pointer;
+}
+.cmb-vw ul .sel {
+	color:#4d4d4d;
+	background-color: #ddd;
+}
+.dropdown-menu li>a:hover, .dropdown-menu li>a:focus {
+	color:#4d4d4d;
+	font-weight:700;
+	background-color: #eaeaea;
+}
+/* .ui-tabs-nav li.aria-selected {
+	background-color: #3797F0;
+} */
+.ui-tabs-nav li a:hover {
+	border-radius:3px;
+	margin-bottom: 0;
+	padding-bottom: 0;
+	background-color: #c6c6c6;
+}
+.ui-tabpnl .ui-tabs-nav li a:hover {
+	border-radius:5px 5px 0 0;
+	margin-bottom: 0;
+	padding-bottom: 0;
+	background-color: #eaeaea;
+}
+.ui-tabpnl .ui-tabs-nav li.aria-selected a:hover {
+	background-color:#63b6eb
+}
+.ui-tabp ul.ui-tabs-nav {
+	border-bottom: 2px solid #63b6eb;
+}

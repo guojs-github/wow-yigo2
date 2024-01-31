@@ -1,0 +1,27 @@
+#photo_imgBox1{overflow:hidden;position:absolute; top:20px; right:25px; }
+img{ display:block;}
+#photo_imgBox{ position:absolute; z-index:1; left:0; top:0; visibility:hidden;}
+#photo_showBox{overflow:hidden; background:url(images/diwen.png); position:absolute;}
+#photo_choiceCentral{ position:absolute;}
+#photo_choiceBox{position:absolute; z-index:2;}
+#photo_choiceLeft,#photo_choiceRight,#photo_choiceTop,#photo_choiceBottom{ position:absolute; opacity:0.1; filter:alpha(opacity:10); background:red;}
+#photo_controlBox{overflow:hidden;position:absolute; right:25px;}
+#photo_btn1,#photo_btn2{ float:left;color:#fff; width:16px; height:16px; font-size:14px;line-height:14px; cursor:pointer; text-align:center; border-radius:2px; border:none; outline:none; background:#7ed3fe;}
+#photo_btn2{ float:right;}
+#photo_btn1:active,#photo_btn2:active{ background:#71bde4}
+#photo_control{height:4px; background:#ccc; float:left; position:relative; margin:6px 0 0 10px;border-radius:2px;}
+#photo_slider{ width:10px; height:8px; background:#ffc844; position:absolute; top:-2px; left:95px; border-radius:2px; cursor:pointer;}
+#photo_posBox{position:relative; z-index:-1;background:url(images/diwen.png)}
+#photo_imgsmallBox{ position:absolute ; left:0; top:0; z-index:3; visibility:hidden;}
+#show{ border:2px solid #f0f0f0; overflow:hidden; position:relative;}
+.photo_lineTop,.photo_lineBottom,.photo_lineLeft,.photo_lineRight{ background:#fff url(images/line.gif); position:absolute;opacity:0.3; filter:alpha(opacity:30);}
+.photo_lineTop,.photo_lineBottom{height:1px; left:0;}
+.photo_lineLeft,.photo_lineRight{width:1px;top:0;}
+.photo_lineTop{ top:0;}
+.photo_lineBottom{ bottom:0;}
+.photo_lineLeft{ left:0}
+.photo_lineRight{ right:0}
+#photo_photoMain{ border:1px solid #aaa; position:absolute;z-index:2; background:#f0f0f0;box-shadow:0px 0px 30px 2px #aaa;-moz-box-shadow:0px 0px 30px 2px #aaa; overflow:hidden; display:none;}
+#mask{ width:100%;height:100%; position:fixed; top:0; left:0; background:#000;opacity:0.1; filter:alpha(opacity:10);z-index:1; display:none;}
+
+

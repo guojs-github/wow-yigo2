@@ -1,0 +1,153 @@
+/*
+	tricks style
+*/
+@import './routine';
+
+.-box-shadow {
+	.-box-shadow-routine();
+}
+
+.-triangle-up {
+	display: inline-block;
+    
+	width: 0;
+    height: 0;
+    border: 8px solid transparent;
+    border-bottom-color: gray;
+}
+
+.-floating {
+	transition: transform 0.2s;
+}
+
+.-floating:hover {
+	transform: translateY(-5px);
+}
+
+.-scale {
+	transition: transform 0.2s;
+}
+
+.-scale:hover {
+	transform: scale(1.01);
+}
+
+/*Animations******************/
+.-tricks-animation(@style, @duration: 0.5s) {
+	animation: @style; 
+	animation-duration: @duration;
+	-webkit-animation: @style @duration;
+}
+
+/*Fade in**********************/
+@keyframes fade-in {  
+    0% {.-opacity(0);}  
+    30% {.-opacity(0.2);}  
+    70% {.-opacity(0.8);}  
+    100% {.-opacity(1);}  
+}  
+
+@-webkit-keyframes fade-in {
+    0% {.-opacity(0);}  
+    30% {.-opacity(0.2);}  
+    70% {.-opacity(0.8);}  
+    100% {.-opacity(1);}  
+} 
+
+.-fade-in {
+	.-opacity(1);
+	.-tricks-animation(fade-in, 0.3s);
+}
+
+/*Fade out**********************/
+@keyframes fade-out {  
+    0% {.-opacity(1);}  
+    30% {.-opacity(0.8);}  
+    70% {.-opacity(0.2);}  
+    100% {.-opacity(0);}  
+}  
+
+@-webkit-keyframes fade-out {
+    0% {.-opacity(1);}  
+    30% {.-opacity(0.8);}  
+    70% {.-opacity(0.2);}  
+    100% {.-opacity(0);}  
+} 
+
+.-fade-out {
+	.-opacity(0);
+	.-tricks-animation(fade-out, 0.3s);
+}
+
+/*Rotate y 180 degree & fade in**********************/
+@keyframes -rotate-y-180-fade-in {  
+    0% {transform: rotateY(0deg);.-opacity(0);}  
+    50% {transform: rotateY(160deg);.-opacity(0.6);}  
+    100% {transform: rotateY(180deg);.-opacity(1);}  
+}  
+
+@-webkit-keyframes -rotate-y-180-fade-in {
+    0% {transform: rotateY(0deg);.-opacity(0);}  
+    50% {transform: rotateY(160deg);.-opacity(0.6);}  
+    100% {transform: rotateY(180deg);.-opacity(1);}  
+} 
+
+.-rotate-y-180-fade-in {
+	.-opacity(1);  
+    transform: rotateY(180deg);
+	.-tricks-animation(-rotate-y-180-fade-in, 0.5s);
+}
+
+/*Rotate y 180 degree & fade out**********************/
+@keyframes -rotate-y-180-fade-out {  
+    0% {transform: rotateY(180deg);.-opacity(1);}  
+    50% {transform: rotateY(20deg);.-opacity(0.4);}  
+    100% {transform: rotateY(0deg);.-opacity(0);}  
+}  
+
+@-webkit-keyframes -rotate-y-180-fade-out {
+    0% {transform: rotateY(180deg);.-opacity(1);}  
+    50% {transform: rotateY(20deg);.-opacity(0.4);}  
+    100% {transform: rotateY(0deg);.-opacity(0);}  
+} 
+
+.-rotate-y-180-fade-out {
+	.-opacity(0);  
+    transform: rotateY(0deg);
+	.-tricks-animation(-rotate-y-180-fade-out, 0.5s);
+}
+
+/*Flip in**********************/
+@keyframes -flip-in {  
+    0% {transform: perspective(1000px) rotateX(-90deg);.-opacity(0);}  
+    50% {transform: perspective(1000px) rotateX(10deg);.-opacity(0.8);}  
+    100% {transform: perspective(1000px) rotateX(0deg);.-opacity(1);}  
+}  
+
+@-webkit-keyframes -flip-in {
+    0% {transform: perspective(1000px) rotateX(-90deg);.-opacity(0);}  
+    50% {transform: perspective(1000px) rotateX(10deg);.-opacity(0.8);}  
+    100% {transform: perspective(1000px) rotateX(0deg);.-opacity(1);}  
+} 
+
+.-flip-in {
+	.-opacity(1);  
+	.-tricks-animation(-flip-in, 1s);		
+}
+
+
+/*Flip out**********************/
+@keyframes -flip-out {  
+    0% {transform: perspective(1000px) rotateX(0deg);.-opacity(1);}  
+    100% {transform: perspective(1000px) rotateX(-90deg);.-opacity(0);}  
+}  
+
+@-webkit-keyframes -flip-out {
+    0% {transform: perspective(1000px) rotateX(0deg);.-opacity(1);}  
+    100% {transform: perspective(1000px) rotateX(-90deg);.-opacity(0);}  
+} 
+
+.-flip-out {
+	.-opacity(0);  
+	.-tricks-animation(-flip-out, 0.5s);		
+}

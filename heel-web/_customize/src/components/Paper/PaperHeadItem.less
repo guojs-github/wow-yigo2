@@ -1,0 +1,28 @@
+/*
+	paper head item style
+*/
+@import '/src/assets/style/index.less';
+
+@paper-head-item-height: 30px;
+@paper-head-item-line-height: 30px;
+
+div.paper-head-item {
+	& > .lab {
+		.-single-line;
+
+		height: @paper-head-item-height;
+		line-height: @paper-head-item-line-height;
+
+		color: gray;
+		text-align: right;
+	}
+
+	& > .val {
+		.-single-line;
+
+		height: @paper-head-item-height;
+		line-height: @paper-head-item-line-height;
+
+		font-weight: bold;
+	}
+}

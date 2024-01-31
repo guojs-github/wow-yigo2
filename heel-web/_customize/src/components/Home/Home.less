@@ -1,0 +1,34 @@
+/*
+	home style
+*/
+@import '/src/assets/style/index.less';
+
+.home {
+    .title {
+        .-row();
+        .-box-shadow-routine(10, .5);
+        padding: 0 10px;
+    
+        width: calc(100% - 20px);
+        font-size: @font-size-big;
+        font-weight: bold;
+        color: white;
+        background-color: @color-dark-blue;
+    }
+    
+    .item {
+        padding: 0 10px;
+        margin-top: 6px;
+
+        width: calc(100% - 20px);
+        color: @color-black;        
+        font-size: @font-size-default;
+        .-box-shadow-routine(4, 0.5);
+    }
+
+    .item:hover {
+        background-color: @color-light-light-gray;
+        font-weight: bold;
+        cursor: pointer;
+    }
+}

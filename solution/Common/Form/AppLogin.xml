@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Caption="登录" Key="AppLogin" Authenticate="False">
+	<Body> 
+		<Block>
+			<GridLayoutPanel Key="desktop" >
+				<RowDefCollection>
+					<RowDef Height="50%"/>
+					<RowDef Height="460px"/>
+					<RowDef Height="50%"/>
+				</RowDefCollection>
+				<ColumnDefCollection>
+					<ColumnDef Width="50%"/>
+					<ColumnDef Width="440px"/>
+					<ColumnDef Width="50%"/>
+				</ColumnDefCollection>
+				<GridLayoutPanel Key="main" BackImage="Login.png" X="1" Y="1" XSpan="1" YSpan="1">
+					<RowDefCollection RowHeight="40" RowGap="5">
+						<RowDef Height="190px"/>
+						<RowDef/>
+						<RowDef Height="10px"/>
+						<RowDef/>
+						<RowDef Height="26px"/>
+						<RowDef Height="40px"/>
+						<RowDef Height="8px"/>
+					</RowDefCollection>
+					<ColumnDefCollection>
+						<ColumnDef Width="80px"/>
+						<ColumnDef Width="100%"/>
+						<ColumnDef Width="120px"/>
+						<ColumnDef Width="80px"/>
+					</ColumnDefCollection>
+					<TextEditor Key="code" Caption="用户名" X="1" Y="1" XSpan="2" EmbedText="用户名">
+					</TextEditor>
+					<PasswordEditor Key="password" Caption="密码" X="1" Y="3" XSpan="2" EmbedText="密码"/>
+					<CheckBox Key="RemberCode" Caption="记住用户名" X="1" Y="5"/>
+					<Button Key="login" Caption="登录" X="2" Y="5">
+						<OnClick>
+				<![CDATA[
+		Login(code,password);SetResult(true);Close();
+					]]>	
+						</OnClick>
+					</Button>
+				</GridLayoutPanel>
+			</GridLayoutPanel>
+		</Block>
+	</Body>
+</Form>

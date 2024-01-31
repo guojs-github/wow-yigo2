@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Key="TS_ExamPaperView" Caption="试卷" FormType="View" Version="85">
+    <DataSource>
+        <DataObject Key="TS_ExamPaperView" Caption="试卷" PrimaryTableKey="TS_ExamPaperView" SecondaryType="">
+            <TableCollection>
+                <Table Key="TS_ExamPaperView" Caption="试卷" TableMode="Detail" SourceType="Query" Persist="false">
+                    <Column Key="OID" Caption="对象标识" DataType="Long"/>
+                    <Column Key="Status" Caption="状态" DataType="Integer"/>
+                    <Column Key="No" Caption="编码" DataType="Varchar" Length="10"/>
+                    <Column Key="CREATOR" Caption="创建人" DataType="Long"/>
+                    <Column Key="CREATETIME" Caption="创建时间" DataType="DateTime"/>
+                    <Column Key="MODIFIER" Caption="修改人" DataType="Long"/>
+                    <Column Key="MODIFYTIME" Caption="修改时间" DataType="DateTime"/>
+                    <Column Key="Category" Caption="类别" DataType="Long"/>
+                    <Column Key="Department" Caption="发布部门" DataType="Long"/>
+                    <Column Key="Remark" Caption="备注" DataType="Varchar" Length="1000"/>
+                    <Column Key="RuleId" Caption="生成规则ID" DataType="Long"/>
+                    <Column Key="IsDeleted" Caption="是否删除" DataType="Integer" DefaultValue=""/>
+                    <Column Key="RuleDescription" Caption="生成规则描述" DataType="Varchar" Length="1000"/>
+                    <Column Key="TotalScore" Caption="总分" DataType="Numeric" Precision="16" Scale="2"/>
+                    <Column Key="PassingScore" Caption="及格分" DataType="Numeric" Precision="16" Scale="2"/>
+                    <Column Key="Duration" Caption="时长(分钟)" DataType="Integer"/>
+                    <Column Key="CreatorName" Caption="创建人姓名" DataType="Varchar"/>
+                    <Column Key="ModifierName" Caption="修改人姓名" DataType="Varchar"/>
+                    <Column Key="Previw" Caption="Previw" DataType="Varchar"/>
+                    <Statement>
+                        <![CDATA[select * from (
+	select
+	    header.OID,
+	    header.Status,
+	    header.No,
+	    header.RuleId,
+	    header.RuleDescription,
+	    header.Category,
+	    header.Department,
+	    header.TotalScore,
+	    header.PassingScore,
+	    header.Duration,
+	    header.Creator,
+	    creator.Name as CreatorName,
+	    header.CREATETIME,
+	    header.Modifier,
+	    modifier.Name as ModifierName,
+	    header.ModifyTime,
+	    header.Remark
+	from
+	    ts_exam_paper_header header
+	    left join (select oid, name from sys_operator) creator on creator.oid = header.creator
+	    left join (select oid, name from sys_operator) modifier on modifier.oid = header.Modifier
+	where
+    	header.isdeleted = 0
+) a  ]]>
+                    </Statement>
+                </Table>
+            </TableCollection>
+        </DataObject>
+    </DataSource>
+    <OperationCollection>
+        <Operation Key="New" Caption="新增">
+            <Action>
+                <![CDATA[New("TS_ExamPaperDetail")]]>
+            </Action>
+        </Operation>
+        <Operation Key="Delete" Caption="删除">
+            <Action>
+                <![CDATA[// 删除
+var count = 0;
+var row = 0;
+var selected = 0;
+var id = 0;
+var idList = "";
+loop "List"(true) {
+    selected = GetCellValue("List", row, "select"); // Confirm("selected="&selected);
+    id = GetCellValue("List", row, "OID"); // Confirm("id="&id);    
+    if (selected) { // 选中？
+        // 计数
+        count = count + 1;
+        // 拼接选中的id
+        idList = IIF(idList == "", id, idList + "," + id);
+    }    
+
+    row = row + 1; // 下一行
+}
+
+if (Length(idList) <= 0) {
+    Confirm("请勾选【已输入】、【已停用】试卷，再执行【删除】操作");
+} else {
+    // Confirm("删除试卷:"&idList);
+    SetPara("idList", idList);
+    Confirm("您要删除选中的"&count&"份试卷？",
+        "YES_NO",
+        {
+            YES:{
+                InvokeService("PaperDelete", false, false, GetPara("idList"));
+                query();
+            },
+            NO:{
+            }
+        });
+}
+
+]]>
+            </Action>
+        </Operation>
+        <Operation Key="Enable" Caption="启用">
+            <Action>
+                <![CDATA[// 批量启用
+var count = 0;
+var row = 0;
+var selected = 0;
+var statusId = 0;
+var id = 0;
+var idList = "";
+loop "List"(true) {
+    selected = GetCellValue("List", row, "select"); // Confirm("selected="&selected);
+    statusId = GetCellValue("List", row, "Status"); // Confirm("status="&statusId);
+    id = GetCellValue("List", row, "OID"); // Confirm("id="&id);    
+    if (selected) { // 选中？
+        // 计数
+        count = count + 1;
+        // 拼接选中的id
+        idList = IIF(idList == "", id, idList + "," + id);
+    }
+    
+    row = row + 1; // 下一行
+}
+
+if (Length(idList) <= 0) {
+    Confirm("请勾选【已输入】、【已停用】试卷，再执行【启用】操作");
+} else {
+    // Confirm("启用试卷:"&idList);
+    SetPara("idList", idList);
+    Confirm("您要启用选中的"&count&"份试卷？",
+        "YES_NO",
+        {
+            YES:{
+                InvokeService("PaperSetStatus", false, false, GetPara("idList"), true);
+                query();
+            },
+            NO:{
+            }
+        });
+}]]>
+            </Action>
+        </Operation>
+        <Operation Key="Disable" Caption="停用">
+            <Action>
+                <![CDATA[// 批量停用
+var count = 0;
+var row = 0;
+var selected = 0;
+var statusId = 0;
+var id = 0;
+var idList = "";
+loop "List"(true) {
+    selected = GetCellValue("List", row, "select"); // Confirm("selected="&selected);
+    statusId = GetCellValue("List", row, "Status"); // Confirm("status="&statusId);
+    id = GetCellValue("List", row, "OID"); // Confirm("id="&id);    
+    if (selected) { // 选中？
+        // 计数
+        count = count + 1;
+        // 拼接选中的id
+        idList = IIF(idList == "", id, idList + "," + id);
+    }
+    
+    row = row + 1; // 下一行
+}
+
+if (Length(idList) <= 0) {
+    Confirm("请勾选【已启用】试卷，再执行【停用】操作");
+} else {
+    // Confirm("停用试卷:"&idList);
+    SetPara("idList", idList);
+    Confirm("您要停用选中的"&count&"份试卷？",
+        "YES_NO",
+        {
+            YES:{
+                InvokeService("PaperSetStatus", false, false, GetPara("idList"), false);
+                query();
+            },
+            NO:{
+            }
+        });
+}
+]]>
+            </Action>
+        </Operation>
+    </OperationCollection>
+    <Body>
+        <Block>
+            <SplitPanel Key="panel_main" Orientation="Vertical" Caption="panel_main">
+                <FlexFlowLayoutPanel Key="main" Caption="根面板">
+                    <ToolBar Key="main_toolbar" Height="pref" Caption="main_toolbar">
+                        <ToolBarItemCollection/>
+                    </ToolBar>
+                    <GridLayoutPanel Key="panel_condition" Height="pref" Caption="panel_condition">
+                        <Dict Key="ConditionCategory" Caption="类别" BuddyKey="Lab_ConditionCategory" X="1" Y="1" ItemKey="MD_Enum">
+                            <Condition ColumnKey="Category" TableKey="TS_ExamPaperView" CondSign="="/>
+                            <ItemFilter>
+                                <Filter Query="select oid from md_enum where type = '考题类别'" Type="DataSet"/>
+                            </ItemFilter>
+                        </Dict>
+                        <Label Key="Lab_ConditionCategory" Caption="类别" X="0" Y="1">
+                            <Format HAlign="Right"/>
+                        </Label>
+                        <Button Key="Query" Caption="查询" X="9" Y="1">
+                            <OnClick>
+                                <![CDATA[query()]]>
+                            </OnClick>
+                        </Button>
+                        <Button Key="Reset" Caption="重置" X="9" Y="3">
+                            <OnClick>
+                                <![CDATA[ResetCondition()]]>
+                            </OnClick>
+                        </Button>
+                        <Dict Key="ConditionDepartment" Caption="发布部门" BuddyKey="Lab_ConditionDepartment" X="3" Y="1" ItemKey="MD_Enum">
+                            <Condition ColumnKey="Department" TableKey="TS_ExamPaperView" CondSign="="/>
+                            <ItemFilter>
+                                <Filter Query="select oid from md_enum where type = '发布部门'" Type="DataSet"/>
+                            </ItemFilter>
+                        </Dict>
+                        <Label Key="Lab_ConditionDepartment" Caption="发布部门" X="2" Y="1">
+                            <Format HAlign="Right"/>
+                        </Label>
+                        <TextEditor Key="ConditionNo" Caption="试卷" BuddyKey="Lab_ConditionNo" X="5" Y="1">
+                            <Condition ColumnKey="No" TableKey="TS_ExamPaperView" CondSign="like"/>
+                        </TextEditor>
+                        <Label Key="Lab_ConditionNo" Caption="试卷" X="4" Y="1">
+                            <Format HAlign="Right"/>
+                        </Label>
+                        <ComboBox Key="ConditionStatus" Caption="状态" BuddyKey="Lab_ConditionStatus" X="7" Y="1" SourceType="Status">
+                            <Condition ColumnKey="Status" TableKey="TS_ExamPaperView" CondSign="="/>
+                        </ComboBox>
+                        <Label Key="Lab_ConditionStatus" Caption="状态" X="6" Y="1">
+                            <Format HAlign="Right"/>
+                        </Label>
+                        <TextEditor Key="ConditionCreator" Caption="创建人" BuddyKey="Lab_ConditionCreator" X="1" Y="3">
+                            <Condition ColumnKey="CreatorName" TableKey="TS_ExamPaperView" CondSign="like"/>
+                        </TextEditor>
+                        <Label Key="Lab_ConditionCreator" Caption="创建人" X="0" Y="3">
+                            <Format HAlign="Right"/>
+                        </Label>
+                        <RowDefCollection RowGap="5">
+                            <RowDef Height="5px"/>
+                            <RowDef Height="30px"/>
+                            <RowDef Height="5px"/>
+                            <RowDef Height="30px"/>
+                            <RowDef Height="5px"/>
+                        </RowDefCollection>
+                        <ColumnDefCollection ColumnGap="5">
+                            <ColumnDef Width="100px"/>
+                            <ColumnDef MinWidth="100px"/>
+                            <ColumnDef Width="100px"/>
+                            <ColumnDef MinWidth="100px"/>
+                            <ColumnDef Width="100px"/>
+                            <ColumnDef MinWidth="100px"/>
+                            <ColumnDef Width="100px"/>
+                            <ColumnDef MinWidth="100px"/>
+                            <ColumnDef Width="100px"/>
+                            <ColumnDef Width="100px"/>
+                            <ColumnDef Width="20px"/>
+                        </ColumnDefCollection>
+                    </GridLayoutPanel>
+                </FlexFlowLayoutPanel>
+                <Grid Key="List" Caption="List" NewEmptyRow="false" CanDelete="false" CanInsert="false" CanShift="false">
+                    <GridColumnCollection>
+                        <GridColumn Key="Select" Caption="选择" Width="80px"/>
+                        <GridColumn Key="Previw" Caption="预览" Width="80px"/>
+                        <GridColumn Key="Status" Caption="状态" Width="100px"/>
+                        <GridColumn Key="OID" Caption="OID" Visible="false" Width="80px"/>
+                        <GridColumn Key="No" Caption="试卷" Width="180px"/>
+                        <GridColumn Key="Category" Caption="类别" Width="120px"/>
+                        <GridColumn Key="Department" Caption="发布部门" Width="80px"/>
+                        <GridColumn Key="RuleDescription" Caption="规则描述" Width="400px"/>
+                        <GridColumn Key="TotalScore" Caption="总分" Width="100px"/>
+                        <GridColumn Key="PassingScore" Caption="合格分" Width="100px"/>
+                        <GridColumn Key="Duration" Caption="时长(分钟)" Width="100px"/>
+                        <GridColumn Key="Creator" Caption="创建人" Width="100px"/>
+                        <GridColumn Key="CreateTime" Caption="创建时间" Width="150px"/>
+                        <GridColumn Key="Modifier" Caption="修改人" Width="100px"/>
+                        <GridColumn Key="ModifyTime" Caption="修改时间" Width="150px"/>
+                    </GridColumnCollection>
+                    <GridRowCollection>
+                        <GridRow Key="row1" TableKey="TS_ExamPaperView">
+                            <GridCell Key="select" Caption="选择" CellType="CheckBox" IsSelect="true"/>
+                            <GridCell Key="Previw" CellType="Button" Caption="预览" CellSortType="None">
+                                <DataBinding ColumnKey="Previw"/>
+                                <OnClick>
+                                    <![CDATA[PreviewPaper(OID);]]>
+                                </OnClick>
+                            </GridCell>
+                            <GridCell Key="Status" Caption="状态" CellType="ComboBox" Enable="false" CellSortType="None" SourceType="Status">
+                                <DataBinding ColumnKey="Status"/>
+                            </GridCell>
+                            <GridCell Key="OID" Caption="OID" CellSortType="None">
+                                <DataBinding ColumnKey="OID"/>
+                            </GridCell>
+                            <GridCell Key="No" Caption="试卷" CellType="HyperLink" CellSortType="Desc">
+                                <DataBinding ColumnKey="No"/>
+                                <OnClick>
+                                    <![CDATA[openDetail();]]>
+                                </OnClick>
+                            </GridCell>
+                            <GridCell Key="Category" Caption="类别" CellType="Dict" Enable="false" CellSortType="None" ItemKey="MD_Enum">
+                                <DataBinding ColumnKey="Category"/>
+                            </GridCell>
+                            <GridCell Key="Department" Caption="发布部门" CellType="Dict" Enable="false" CellSortType="None" ItemKey="MD_Enum">
+                                <DataBinding ColumnKey="Department"/>
+                            </GridCell>
+                            <GridCell Key="RuleDescription" Caption="规则描述" CellSortType="None">
+                                <DataBinding ColumnKey="RuleDescription"/>
+                            </GridCell>
+                            <GridCell Key="TotalScore" Caption="总分" CellSortType="None">
+                                <DataBinding ColumnKey="TotalScore"/>
+                            </GridCell>
+                            <GridCell Key="PassingScore" Caption="合格分" CellSortType="None">
+                                <DataBinding ColumnKey="PassingScore"/>
+                            </GridCell>
+                            <GridCell Key="Duration" Caption="时长(分钟)" CellSortType="None">
+                                <DataBinding ColumnKey="Duration"/>
+                            </GridCell>
+                            <GridCell Key="Creator" Caption="创建人" CellType="Dict" Enable="false" CellSortType="None" ItemKey="Operator">
+                                <DataBinding ColumnKey="CREATOR"/>
+                            </GridCell>
+                            <GridCell Key="CreateTime" Caption="创建时间" CellType="DatePicker" Enable="false" CellSortType="None">
+                                <DataBinding ColumnKey="CREATETIME"/>
+                            </GridCell>
+                            <GridCell Key="Modifier" Caption="修改人" CellType="Dict" Enable="false" CellSortType="None" ItemKey="Operator">
+                                <DataBinding ColumnKey="MODIFIER"/>
+                            </GridCell>
+                            <GridCell Key="ModifyTime" Caption="修改时间" CellType="DatePicker" Enable="false" CellSortType="None">
+                                <DataBinding ColumnKey="MODIFYTIME"/>
+                            </GridCell>
+                        </GridRow>
+                    </GridRowCollection>
+                    <RowDblClick>
+                        <![CDATA[openDetail();]]>
+                    </RowDblClick>
+                </Grid>
+                <SplitSize Size="150px"/>
+                <SplitSize Size="100%"/>
+            </SplitPanel>
+        </Block>
+    </Body>
+    <MacroCollection>
+        <Macro Key="query">
+            <![CDATA[// 执行查询操作
+DealCondition();
+LoadData();
+ShowData();]]>
+        </Macro>
+        <Macro Key="openDetail">
+            <![CDATA[// 打开详情界面
+var isDeleted = false;
+isDeleted = InvokeService("PaperIsDeleted", false, false, OID); 
+if (!isDeleted) {
+    Open("TS_ExamPaperDetail", OID);
+}]]>
+        </Macro>
+        <Macro Key="GetSelectedItemInfo">
+            <![CDATA[// 获取表格选中条目的统计数据
+]]>
+        </Macro>
+    </MacroCollection>
+</Form>

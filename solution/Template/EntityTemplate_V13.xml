@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Key="#FormKey#" Caption="#FormCaption#" FormType="Entity" ViewKey="">
+    <DataSource>
+        <DataObject Key="#FormKey#" Caption="#FormKey#" PrimaryTableKey="#FormKey#Head" PrimaryType="Entity">
+            <TableCollection>
+                <Table Key="#FormKey#Head" Caption="头表1" IndexPrefix="I_#FormKey#Head">
+                    <Column Key="OID" Caption="对象标识" DataType="Long"/>
+                    <Column Key="SOID" Caption="主对象标识" DataType="Long"/>
+                    <Column Key="POID" Caption="父对象标识" DataType="Long"/>
+                    <Column Key="VERID" Caption="对象版本" DataType="Integer"/>
+                    <Column Key="DVERID" Caption="对象明细版本" DataType="Integer"/>
+                    <Column Key="NO" Caption="单据编号" DataType="Varchar" Length="255"/>
+                    <Column Key="Status" Caption="单据状态" DataType="Integer"/>
+                    <Column Key="BillDate" Caption="单据日期" DataType="DateTime"/>
+                    <Column Key="Creator" Caption="制单人" DataType="Long" Description="保存人员" ItemKey="Operator"/>
+                    <Column Key="CreateTime" Caption="制单日期" DataType="DateTime"/>
+                    <Column Key="Modifier" Caption="修改人" DataType="Long"/>
+                    <Column Key="ModifyTime" Caption="修改时间" DataType="DateTime"/>
+                    <Column Key="InstanceID" Caption="流程实例" DataType="Long"/>
+                </Table>
+                <Table Key="#FormKey#Detail" Caption="明细表" DBTableName="#FormKey#Detail" TableMode="Detail" IndexPrefix="I_#FormKey#Detail">
+                    <Column Key="OID" Caption="对象标识" DataType="Long" DBColumnName="OID"/>
+                    <Column Key="POID" Caption="父对象标识" DataType="Long" DBColumnName="POID"/>
+                    <Column Key="SOID" Caption="主对象标识" DataType="Long" DBColumnName="SOID"/>
+                    <Column Key="VERID" Caption="对象版本" DataType="Integer" DBColumnName="VERID"/>
+                    <Column Key="DVERID" Caption="对象明细版本" DataType="Integer" DBColumnName="DVERID"/>
+                    <Column Key="Sequence" Caption="序号" DataType="Integer" DBColumnName="SEQUENCE"/>
+                </Table>
+            </TableCollection>
+        </DataObject>
+    </DataSource>
+    <OperationCollection>
+        <Operation Key="WORKITEM" Caption="WORKITEM" Tag="WORKITEM"/>
+        <Operation Key="BPM" Caption="BPM" Tag="BPM"/>
+        <Operation Key="Save" Caption="保存" Visible="!ReadOnly()">
+            <Action>
+                <![CDATA[SaveData(); UpdateView();]]>
+            </Action>
+        </Operation>
+        <Operation Key="New" Caption="新增" Visible="ReadOnly()">
+            <Action>
+                <![CDATA[New('#FormKey#', 'self');]]>
+            </Action>
+        </Operation>
+        <Operation Key="Delete" Caption="删除" Visible="ReadOnly()">
+            <Action>
+                <![CDATA[DeleteData();UpdateView();Close();]]>
+            </Action>
+        </Operation>
+        <Operation Key="Edit" Caption="编辑" Visible="ReadOnly()">
+            <Action>
+                <![CDATA[Edit();]]>
+            </Action>
+        </Operation>
+        <Operation Key="Cancel" Caption="取消" Visible="!ReadOnly()">
+            <Action>
+                <![CDATA[Cancel();]]>
+            </Action>
+        </Operation>
+        <Operation Key="Close" Caption="关闭" Visible="ReadOnly()">
+            <Action>
+                <![CDATA[Close()]]>
+            </Action>
+        </Operation>
+    </OperationCollection>
+    <ScriptCollection>
+        <Script Key="Load" Caption="载入" Range="Action" Verb="Load">
+            <![CDATA[LoadData();]]>
+        </Script>
+    </ScriptCollection>
+    <Body>
+        <Block>
+            <FlexFlowLayoutPanel Key="root" Caption="根面板">
+                <ToolBar Key="ToolBar1" Height="pref" Caption="ToolBar1" IsDefault="true">
+                    <ToolBarItemCollection/>
+                </ToolBar>
+                <SplitPanel Key="main" Orientation="Vertical" Height="100%" Caption="主面板">
+                    <GridLayoutPanel Key="first_head" Height="pref" Padding="5px" Caption="基本信息">
+                        <Label Key="Lab_NO" Caption="单据编号" X="0" Y="0"/>
+                        <TextEditor Key="NO" Caption="单据编号" BuddyKey="Lab_NO" X="1" Y="0" Enable="false" CopyNew="false">
+                            <DataBinding TableKey="#FormKey#Head" ColumnKey="NO"/>
+                        </TextEditor>
+                        <Label Key="Lab_BillDate" Caption="单据日期" X="2" Y="0"/>
+                        <DatePicker Key="BillDate" Caption="单据日期" BuddyKey="Lab_BillDate" X="3" Y="0" Enable="false">
+                            <DataBinding TableKey="#FormKey#Head" ColumnKey="BillDate"/>
+                        </DatePicker>
+                        <Label Key="Lab_Status" Caption="单据状态" X="4" Y="0"/>
+                        <ComboBox Key="Status" Caption="单据状态" BuddyKey="Lab_Status" X="5" Y="0" SourceType="Status">
+                            <DataBinding TableKey="#FormKey#Head" ColumnKey="Status"/>
+                        </ComboBox>
+                        <RowDefCollection RowHeight="30" RowGap="6">
+                            <RowDef/>
+                            <RowDef/>
+                            <RowDef/>
+                        </RowDefCollection>
+                        <ColumnDefCollection ColumnGap="20">
+                            <ColumnDef Width="60px"/>
+                            <ColumnDef Width="33%"/>
+                            <ColumnDef Width="60px"/>
+                            <ColumnDef Width="33%"/>
+                            <ColumnDef Width="60px"/>
+                            <ColumnDef Width="34%"/>
+                        </ColumnDefCollection>
+                    </GridLayoutPanel>
+                    <Grid Key="detail" Caption="明细" Height="100%">
+                        <GridColumnCollection>
+                            <GridColumn Key="C0" Caption="选择" ColumnType="Detail" Visible="true" Width="100px" ColumnExpand="false"/>
+                        </GridColumnCollection>
+                        <GridRowCollection>
+                            <GridRow Key="R_0" RowType="Detail" TableKey="#FormKey#Detail">
+                                <GridCell Key="Select" Caption="选择" CellType="CheckBox" Enable="true" IsSelect="true"/>
+                            </GridRow>
+                        </GridRowCollection>
+                    </Grid>
+                    <GridLayoutPanel Key="second_head" Height="pref" Padding="5px" Caption="审批信息">
+                        <Dict Key="Creator" Caption="制单人" BuddyKey="Lab_Creator" X="1" Y="0" Enable="false" ItemKey="Operator">
+                            <DataBinding TableKey="#FormKey#Head" ColumnKey="Creator"/>
+                        </Dict>
+                        <Label Key="Lab_Creator" Caption="制单人" X="0" Y="0"/>
+                        <DatePicker Key="CreateTime" Caption="制单时间" BuddyKey="Lab_CreateTime" X="3" Y="0" Enable="false" CopyNew="false">
+                            <DataBinding TableKey="#FormKey#Head" ColumnKey="CreateTime"/>
+                        </DatePicker>
+                        <Label Key="Lab_CreateTime" Caption="制单时间" X="2" Y="0"/>
+                        <Dict Key="Modifier" Caption="修改人" BuddyKey="Lab_Modifier" X="1" Y="1" Enable="false" CopyNew="false" ItemKey="Operator">
+                            <DataBinding TableKey="#FormKey#Head" ColumnKey="Modifier"/>
+                        </Dict>
+                        <Label Key="Lab_Modifier" Caption="修改人" X="0" Y="1"/>
+                        <DatePicker Key="ModifyTime" Caption="修改时间" BuddyKey="Lab_ModifyTime" X="3" Y="1" Enable="false" CopyNew="false">
+                            <DataBinding TableKey="#FormKey#Head" ColumnKey="ModifyTime"/>
+                        </DatePicker>
+                        <Label Key="Lab_ModifyTime" Caption="修改时间" X="2" Y="1"/>
+                        <RowDefCollection RowHeight="30" RowGap="6">
+                            <RowDef/>
+                            <RowDef/>
+                        </RowDefCollection>
+                        <ColumnDefCollection ColumnGap="20">
+                            <ColumnDef Width="60px"/>
+                            <ColumnDef Width="50%"/>
+                            <ColumnDef Width="60px"/>
+                            <ColumnDef Width="50%"/>
+                        </ColumnDefCollection>
+                    </GridLayoutPanel>
+                    <SplitSize Size="100px"/>
+                    <SplitSize Size="100%"/>
+                    <SplitSize Size="100px"/>
+                </SplitPanel>
+            </FlexFlowLayoutPanel>
+        </Block>
+    </Body>
+</Form>

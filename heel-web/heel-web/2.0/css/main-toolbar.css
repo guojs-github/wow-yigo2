@@ -1,0 +1,71 @@
+/**
+	Yigo2.0 main toolbar
+	2022.12.6 GuoJS created
+**/
+@media screen and (max-height: 600px) {
+    .heel-web .ui-tbr {
+        font-size: 13px !important;
+    }
+}
+
+@media screen and (min-height: 600px) {
+    .heel-web .ui-tbr {
+        font-size: 1.8vh !important;
+    }
+}
+
+.heel-web .ui-tbr {
+	height:	3.143em;
+}
+
+.heel-web .ui-tbr > .tbr-ul {
+	height:	3.143em;
+
+	font-size: inherit;
+}
+
+.heel-web .ui-tbr.empty {
+	display: block;
+}
+
+.heel-web .ui-tbr .tbr-item {
+	margin: 0.15em;
+
+	font-size:  inherit;
+}
+
+.heel-web .ui-tbr .tbr-item > a.tbr-btn {
+	height: 2.75em;
+	line-height: 2.75em;
+
+	font-size: inherit;
+	transition: transform 0.25s;
+}
+
+.heel-web .ui-tbr .tbr-item > a.tbr-btn:hover {
+	box-shadow:0 0 0.3143em 0 #40a8e8;
+	outline: 0.0393em solid #40a8e8;
+
+	cursor: pointer;
+	transform: scale(0.9);
+}
+
+.heel-web .ui-tbr .tbr-item > a.tbr-btn .txt {
+	padding: 0 1.25em;
+
+	font-size: 0.943em;
+}
+
+.heel-web .ui-tbr .tbr-item > a.tbr-btn:hover .txt {
+	color: #40a8e8;	
+	cursor: pointer;
+}
+
+.heel-web .ui-tbr .tbr-item.ui-readonly > a.tbr-btn:hover .txt {
+	cursor: not-allowed;
+}
+
+
+.heel-web .ui-tbr .tbr-item > .quarantine {
+	display: none;
+}

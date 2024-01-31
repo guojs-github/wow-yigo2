@@ -1,0 +1,42 @@
+/*
+    Datetime control default style.
+
+    2023.8.17 created by guojs.
+*/
+
+.heel-web .ui-tp > .txt:focus + .arrow 
+,.heel-web .ui-dp > .txt:focus + .arrow 
+,.heel-web .ui-mp > .txt:focus + .arrow 
+{
+    animation: -heart-beat 1s ease-in-out infinite;
+}
+
+.heel-web .ul-h 
+,.heel-web .ul-m
+,.heel-web .ul-s {
+    border: 0;
+}
+
+
+.heel-web .ul-h li 
+,.heel-web .ul-m li
+,.heel-web .ul-s li
+{
+    transition: transform 0.3s;
+}
+
+.heel-web .ul-h li:hover 
+,.heel-web .ul-m li:hover
+,.heel-web .ul-s li:hover
+{
+	background-color: #c7e0f4;
+	box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
+	transform: translateY(-3px);
+}
+
+.heel-web .ul-h li.select 
+,.heel-web .ul-m li.select
+,.heel-web .ul-s li.select
+{
+    background-color: #c7e0f4;
+}

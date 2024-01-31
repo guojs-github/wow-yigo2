@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Caption="代理添加对话框" Key="AddDelegate">
+    <Body PopHeight="300px" PopWidth="800px">
+        <Block>
+            <GridLayoutPanel Caption="GridLayoutPanel0" Key="GridLayoutPanel0">
+                <Button Caption="取消" Key="Button1" X="8" Y="6">
+                    <OnClick RunType="Client">
+                        <![CDATA[Close();]]>
+                    </OnClick>
+                </Button>
+                <CheckBox Caption="始终有效" Key="alwaysValid" X="1" XSpan="5" Y="2">
+                    <DataBinding DefaultValue="1" ValueChanged="SetValue(&quot;startTime&quot;, '');SetValue(&quot;endTime&quot;, '');"/>
+                </CheckBox>
+                <Button Caption="确定" Key="Button0" X="6" Y="6">
+                    <OnClick RunType="Client">
+                        <![CDATA[
+                                   if(alwaysValid==false&&startTime>=endTime)
+                                   {
+                                   Confirm("结束日期不早于起始日期")
+                                   }
+                                   else{
+                                    AddDelegateData(delegateType,GetOperator(),tgtOperatorID,ToInt(1),'','',startTime, alwaysValid, endTime);parent.LoadData();parent.RefreshControl('list');Close();}
+                                   
+                        ]]>
+                    </OnClick>
+                </Button>
+                <Label Caption="结束日期" Key="Label5" Visible="GetValue('alwaysValid')==false" VisibleDependency="alwaysValid" X="4" Y="3"/>
+                <DatePicker Caption="endTime" Key="endTime" OnlyDate="false" Visible="GetValue('alwaysValid')==false" VisibleDependency="alwaysValid" X="5" XSpan="4" Y="3">
+                    <DataBinding/>
+                </DatePicker>
+                <DatePicker Caption="startTime" Key="startTime" OnlyDate="false" Visible="GetValue('alwaysValid')==false" VisibleDependency="alwaysValid" X="2" Y="3">
+                    <DataBinding/>
+                </DatePicker>
+                <Label Caption="起始日期" Key="Label4" Visible="GetValue('alwaysValid')==false" VisibleDependency="alwaysValid" X="1" Y="3"/>
+                <Label Caption="代理操作员" Key="Label1" X="4" Y="1"/>
+                <Label Caption="代理类型" Key="Label6" X="1" Y="1"/>
+                <ComboBox Caption="delegateType" Key="delegateType" X="2" Y="1">
+                    <DataBinding Required="true"/>
+                    <Item Caption="授权" Key="AUTHORIZE" Value="1"/>
+                    <Item Caption="代理" Key="DELEGATE" Value="2"/>
+                </ComboBox>
+                <Dict Caption="tgtOperatorID" ItemKey="Operator" Key="tgtOperatorID" X="5" XSpan="4" Y="1">
+                    <DataBinding Required="true"/>
+                </Dict>
+                <RowDefCollection RowGap="8">
+                    <RowDef Height="20px"/>
+                    <RowDef Height="30px"/>
+                    <RowDef Height="30px"/>
+                    <RowDef Height="30px"/>
+                    <RowDef Height="30px"/>
+                    <RowDef Height="30px"/>
+                    <RowDef Height="25px"/>
+                    <RowDef Height="20px"/>
+                </RowDefCollection>
+                <ColumnDefCollection ColumnGap="8">
+                    <ColumnDef Width="20px"/>
+                    <ColumnDef Width="70px"/>
+                    <ColumnDef Width="250px"/>
+                    <ColumnDef Width="13px"/>
+                    <ColumnDef Width="70px"/>
+                    <ColumnDef Width="60px"/>
+                    <ColumnDef Width="71px"/>
+                    <ColumnDef Width="20px"/>
+                    <ColumnDef Width="70px"/>
+                    <ColumnDef Width="20px"/>
+                </ColumnDefCollection>
+            </GridLayoutPanel>
+        </Block>
+    </Body>
+</Form>

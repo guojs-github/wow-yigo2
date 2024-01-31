@@ -1,2 +1,5 @@
 # wow-yigo2
-Best Case 4 Boke Yigo2
+Boke Yigo2 best practice
+
+# 2024-01-31
+从GibLab迁移项目

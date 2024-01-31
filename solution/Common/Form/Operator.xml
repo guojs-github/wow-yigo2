@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Caption="操作员" Key="Operator" FormType="Dict">
+    <DataSource>
+        <DataObject Key="Operator" Caption="操作员" PrimaryTableKey="SYS_Operator" PrimaryType="Entity" SecondaryType="Dict">
+            <TableCollection>
+                <Table Key="SYS_Operator" Caption="基本信息" DBTableName="SYS_Operator">
+                    <Column Key="OID" Caption="对象标识" DataType="Long" DBColumnName="OID"/>
+                    <Column Key="POID" Caption="父对象标识" DataType="Long" DBColumnName="POID"/>
+                    <Column Key="SOID" Caption="主对象标识" DataType="Long" DBColumnName="SOID"/>
+                    <Column Key="VERID" Caption="对象版本" DataType="Integer" DBColumnName="VERID"/>
+                    <Column Key="DVERID" Caption="对象明细版本" DataType="Integer" DBColumnName="DVERID"/>
+                    <Column Key="Status" Caption="状态" DataType="Integer" DefaultValue="0"/>
+                    <Column Key="Enable" Caption="启用标记" DataType="Integer" DefaultValue="1"/>
+                    <Column Key="NodeType" Caption="NodeType" DataType="Integer" DefaultValue="0"/>
+                    <Column Key="ParentID" Caption="父节点" DataType="Long" DefaultValue="0"/>
+                    <Column Key="TLeft" Caption="TLeft" DataType="Integer"/>
+                    <Column Key="TRight" Caption="TRight" DataType="Integer"/>
+                    <Column Key="Code" Caption="代码" DataType="Varchar" Length="50"/>
+                    <Column Key="Name" Caption="名称" DBColumnName="Name" DataType="Varchar" Length="50"/>
+                    <Column Key="Password" Caption="密码" DBColumnName="Password" DataType="Varchar" Length="512"/>
+                </Table>
+                <Table Key="SYS_OperatorRole" Caption="基本信息" DBTableName="SYS_OperatorRole" TableMode="Detail">
+                    <Column Key="OID" Caption="对象标识" DataType="Long" DBColumnName="OID"/>
+                    <Column Key="POID" Caption="父对象标识" DataType="Long" DBColumnName="POID"/>
+                    <Column Key="SOID" Caption="主对象标识" DataType="Long" DBColumnName="SOID"/>
+                    <Column Key="VERID" Caption="对象版本" DataType="Integer" DBColumnName="VERID"/>
+                    <Column Key="DVERID" Caption="对象明细版本" DataType="Integer" DBColumnName="DVERID"/>
+                    <Column Key="Sequence" Caption="序号" DataType="Integer" IsSequence="True"/>
+                    <Column Key="Role" Caption="角色" DataType="Long"/>
+                </Table>
+            </TableCollection>
+            <PreSaveProcess>
+                <Process>
+                    <![CDATA[
+						if (Length(SYS_Operator.Password)==0) {
+							SYS_Operator.Password=EncryptPassword("");
+						}
+					]]>
+                </Process>
+            </PreSaveProcess>
+            <OIDFilter/>
+        </DataObject>
+    </DataSource>
+    <Body>
+        <Block>
+            <SplitPanel Key="main_split" Orientation="Vertical" Height="pref">
+                <GridLayoutPanel Key="basis" Height="100%" Padding="5px">
+                    <Label Key="L_Code" Caption="代码" X="0" Y="0"/>
+                    <TextEditor Key="Code" Caption="代码" X="1" Y="0">
+                        <DataBinding ColumnKey="Code" TableKey="SYS_Operator"/>
+                    </TextEditor>
+                    <Label Key="L_Name" Caption="名称" X="0" Y="1"/>
+                    <TextEditor Key="Name" Caption="名称" X="1" Y="1">
+                        <DataBinding ColumnKey="Name" TableKey="SYS_Operator"/>
+                    </TextEditor>
+                    <RowDefCollection RowHeight="25" RowGap="5">
+                        <RowDef/>
+                        <RowDef/>
+                        <RowDef/>
+                        <RowDef Height="30px"/>
+                        <RowDef Height="30px"/>
+                    </RowDefCollection>
+                    <ColumnDefCollection>
+                        <ColumnDef Width="50%"/>
+                        <ColumnDef Width="50%"/>
+                    </ColumnDefCollection>
+                </GridLayoutPanel>
+                <Grid Key="role_grid">
+                    <GridColumnCollection>
+                        <GridColumn Key="column1" Caption="角色" Visible="true" Width="80px"/>
+                    </GridColumnCollection>
+                    <GridRowCollection>
+                        <GridRow Key="R1" RowHeight="30" TableKey="SYS_OperatorRole">
+                            <GridCell Key="Role" Caption="角色" CellType="Dict" ItemKey="Role">
+                                <DataBinding ColumnKey="Role"/>
+                            </GridCell>
+                        </GridRow>
+                    </GridRowCollection>
+                </Grid>
+                <SplitSize Size="50%"/>
+                <SplitSize Size="50%"/>
+            </SplitPanel>
+        </Block>
+    </Body>
+</Form>

@@ -1,0 +1,55 @@
+/*
+	paper checkbox style
+*/
+@import '/src/assets/style/index.less';
+
+@paper-checkbox-size: 10px;
+@paper-checkbox-border-width: 2px;
+
+div.paper-checkbox-wrap {
+    height: auto;
+    cursor: pointer;
+
+    label.paper-checkbox {
+        position: relative;
+        cursor: pointer;
+
+        div.box {
+            position: absolute;
+            top: 5px;
+            left: 4px;
+
+            width: @paper-checkbox-size;
+            height: @paper-checkbox-size;
+            background-color: @color-light-gray;
+            border: @paper-checkbox-border-width @color-light-gray solid;
+            border-radius: 1px;
+        }
+
+        input:checked+div.box {
+            background-color: white;
+            border: @paper-checkbox-border-width @color-light-gray solid;
+        }
+
+        input:checked+div.box::before {
+            position: absolute;
+            top: calc(-1 * (@paper-checkbox-size + 5px));
+
+            content: "\2714"; // 勾选字符
+            color: @color-red;
+            font-size: @font-size-middle;
+            font-weight: bold;
+        }
+
+        div.title {
+            margin-left: 10px;
+        }
+    }
+
+    div.picture {
+        & > img {
+            margin-left: 30px;
+            max-height: 200px;
+        }
+    }
+}

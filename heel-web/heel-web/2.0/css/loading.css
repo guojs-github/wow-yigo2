@@ -1,0 +1,13 @@
+/**
+	Yigo2.0 loading
+	2022.12.12 GuoJS Created
+**/
+.heel-web .loading.mask {
+	background-color: black;
+	opacity: 0.2;
+}
+
+.heel-web .loading.image > img {
+	width: 64px;
+	height: 64px;
+}

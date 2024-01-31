@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Key="GlobalSearchView" Caption="全局搜索" FormType="View" Version="29">
+    <DataSource>
+        <DataObject Key="GlobalSearchView" Caption="全局搜索" PrimaryTableKey="GlobalSearchView">
+            <TableCollection>
+                <Table Key="GlobalSearchView" Caption="全局搜索" TableMode="Detail" SourceType="Query" Persist="false">
+                    <Column Key="OID" Caption="对象标识" DataType="Long"/>
+                    <Column Key="SOID" Caption="主对象标识" DataType="Long"/>
+                    <Column Key="POID" Caption="父对象标识" DataType="Long"/>
+                    <Column Key="VERID" Caption="对象版本" DataType="Integer"/>
+                    <Column Key="DVERID" Caption="对象明细版本" DataType="Integer"/>
+                    <Column Key="key_words" Caption="key_words" DataType="Varchar"/>
+                </Table>
+            </TableCollection>
+        </DataObject>
+    </DataSource>
+    <Body>
+        <Block>
+            <SplitPanel Key="main_panel" Orientation="Vertical" Caption="main_panel">
+                <FlexFlowLayoutPanel Key="upper_panel" Caption="upper_panel">
+                    <ToolBar Key="ToolBar1" Height="pref" Caption="ToolBar1">
+                        <ToolBarItemCollection/>
+                    </ToolBar>
+                    <GridLayoutPanel Key="GridLayoutPanel1" Height="pref" Caption="GridLayoutPanel1">
+                        <Button Key="btn_query" Caption="查询" X="3" Y="1"/>
+                        <TextEditor Key="keywords" Caption="关键字" BuddyKey="Lab_keywords" X="1" Y="1">
+                            <DataBinding TableKey="GlobalSearchView" ColumnKey="key_words"/>
+                        </TextEditor>
+                        <Label Key="Lab_keywords" Caption="关键字" X="0" Y="1">
+                            <Format HAlign="Right"/>
+                        </Label>
+                        <RowDefCollection RowGap="5" RowHeight="30">
+                            <RowDef Height="5px"/>
+                            <RowDef/>
+                            <RowDef Height="5px"/>
+                            <RowDef/>
+                        </RowDefCollection>
+                        <ColumnDefCollection ColumnGap="5">
+                            <ColumnDef Width="80px"/>
+                            <ColumnDef Width="100%"/>
+                            <ColumnDef Width="10px"/>
+                            <ColumnDef Width="100px"/>
+                            <ColumnDef Width="10px"/>
+                        </ColumnDefCollection>
+                    </GridLayoutPanel>
+                </FlexFlowLayoutPanel>
+                <ListView Caption="result_list" Key="result_list" PageLoadType="DB">
+                    <ListViewColumnCollection>
+                        <ListViewColumn Key="column1" Caption="column1"/>
+                    </ListViewColumnCollection>
+                </ListView>
+                <SplitSize Size="100px"/>
+                <SplitSize Size="100%"/>
+            </SplitPanel>
+        </Block>
+    </Body>
+    <OnLoad>
+        <![CDATA[SetFocus("keywords")]]>
+    </OnLoad>
+</Form>

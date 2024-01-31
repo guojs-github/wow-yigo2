@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Key="Browser" Caption="浏览器">
+    <Body PopHeight="600px" PopWidth="800px">
+        <Block>
+            <FlexFlowLayoutPanel Key="root" Caption="根面板">
+                <WebBrowser Key="Browser" Height="100%">
+					<DataBinding DefaultFormulaValue="Para('URL')"/>
+				</WebBrowser>
+            </FlexFlowLayoutPanel>
+        </Block>
+    </Body>
+</Form>

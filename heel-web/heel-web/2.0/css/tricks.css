@@ -1,0 +1,271 @@
+/**
+	特效样式
+	2022.11.16 GuoJS 创建
+**/
+
+.hw-floating {
+	transition: transform 1s;
+}
+
+.hw-floating:hover {
+	transform: translateY(-5px) scale(1.2);
+}
+
+.hw-scale {
+	transition: transform 0.3s;
+}
+
+.hw-scale:hover {
+	transform: scale(0.85);
+}
+
+.hw-scale-rotate {
+	transition: transform 0.3s;
+}
+
+.hw-scale-rotate:hover {
+	transform: scale(0.85) rotateZ(180deg);
+}
+
+
+.hw-focus-scale {
+	transition: transform 0.3s;
+}
+
+.hw-focus-scale:focus {
+	transform: scale(1.05);
+}
+
+/*Flip in simple**********************/
+@keyframes -flip-in-simple {  
+    0% {
+		transform: perspective(1000px) rotateX(-90deg);
+	}  
+    100% {
+		transform: perspective(1000px) rotateX(0deg);
+	}  
+}  
+
+@-webkit-keyframes -flip-in-simple {
+    0% {
+		transform: perspective(1000px) rotateX(-90deg);
+	}  
+    100% {
+		transform: perspective(1000px) rotateX(0deg);
+	}  
+} 
+
+/*Flip in**********************/
+@keyframes -flip-in {  
+    0% {
+		transform: perspective(1000px) rotateX(-90deg);
+	}  
+    60% {
+		transform: perspective(1000px) rotateX(20deg);
+	}  
+    80% {
+		transform: perspective(1000px) rotateX(-10deg);
+	}  
+    100% {
+		transform: perspective(1000px) rotateX(0deg);
+	}  
+}  
+
+@-webkit-keyframes -flip-in {
+    0% {
+		transform: perspective(1000px) rotateX(-90deg);
+	}  
+    60% {
+		transform: perspective(1000px) rotateX(20deg);
+	}  
+    80% {
+		transform: perspective(1000px) rotateX(-10deg);
+	}  
+    100% {
+		transform: perspective(1000px) rotateX(0deg);
+	}  
+} 
+
+.heel-web-flip-in {
+	animation: -flip-in; 
+	animation-duration: 1s;
+	-webkit-animation: -flip-in 1s;
+}
+
+/*Drop in**********************/
+@keyframes -drop-in {  
+    0% {
+		transform: translateY(-1000px);
+	}  
+    40% {
+		transform: translateY(20px);
+	}  
+    100% {
+		transform: translateY(0);
+	}  
+}  
+
+@-webkit-keyframes -drop-in {
+    0% {
+		transform: translateY(-1000px);
+	}  
+    40% {
+		transform: translateY(20px);
+	}  
+    100% {
+		transform: translateY(0);
+	}  
+} 
+
+.heel-web-drop-in {
+	animation: -drop-in; 
+	animation-duration: 0.5s;
+	-webkit-animation: -drop-in 0.5s;
+}
+
+/*Drop out**********************/
+@keyframes -drop-out {  
+    0% {
+		transform: translateY(0);
+	}  
+    60% {
+		transform: translateY(20px);
+	}  
+    100% {
+		transform: translateY(-1000px);
+	}  
+}  
+
+@-webkit-keyframes -drop-out {
+    0% {
+		transform: translateY(0);
+	}  
+    60% {
+		transform: translateY(20px);
+	}  
+    100% {
+		transform: translateY(-1000px);
+	}  
+} 
+
+.heel-web-drop-out {
+	transform: translateY(-1000px);
+	
+	animation: -drop-out; 
+	animation-duration: 0.5s;
+	-webkit-animation: -drop-out 0.5s;
+}
+
+/*shake**********************/
+@keyframes -drop-down-with-shake {  
+    0% {
+		transform: scale(1);
+	}  
+	35% {
+		transform: scale(1.05);
+	}  
+    70% {
+		transform: scale(1);
+	}  
+	85% {
+		transform: scale(1.01);
+	}  
+    100% {
+		transform: translateY(1);
+	}  
+}  
+
+@-webkit-keyframes -drop-down-with-shake {
+    0% {
+		transform: scale(1);
+	}  
+	35% {
+		transform: scale(1.05);
+	}  
+    70% {
+		transform: scale(1);
+	}  
+	85% {
+		transform: scale(1.01);
+	}  
+    100% {
+		transform: translateY(1);
+	}   
+} 
+
+.heel-web-drop-down-with-shake {
+	animation: -drop-down-with-shake; 
+	animation-duration: 0.3s;
+	-webkit-animation: -drop-down-with-shake 0.3s;
+}
+
+/*Rotate y axis**********************/
+@keyframes -rotate-y {
+	from {
+		transform: perspective(1000px) rotateY(0deg);
+	}
+    to {
+		transform: perspective(1000px) rotateY(360deg);
+	}  
+}  
+
+@-webkit-keyframes -rotate-y {
+	from {
+		transform: perspective(1000px) rotateY(0deg);
+	}
+    to {
+		transform: perspective(1000px) rotateY(360deg);
+	}  
+} 
+
+/* Rotate y axis to show **********************/
+@keyframes -rotate-y-in {
+	from {
+		transform: perspective(1000px) rotateY(90deg);
+	}
+    to {
+		transform: perspective(1000px) rotateY(0deg);
+	}  
+}  
+
+@-webkit-keyframes -rotate-y-in {
+	from {
+		transform: perspective(1000px) rotateY(90deg);
+	}
+    to {
+		transform: perspective(1000px) rotateY(0deg);
+	}  
+} 
+
+/* Scale x axis to show **********************/
+@keyframes -scale-x-in {
+	from {
+		transform: scaleX(0.1);
+	}
+    to {
+		transform: scaleX(1);
+	}  
+}  
+
+@-webkit-keyframes -scale-x-in {
+	from {
+		transform: scaleX(0.1);
+	}
+    to {
+		transform: scaleX(1);
+	}  
+}  
+
+/* Heart beat **********************/
+@keyframes -heart-beat {
+	0% { transform: scale(1); }
+	50% { transform: scale(0.9); }
+	100% { transform: scale(1); }
+}  
+
+@-webkit-keyframes -heart-beat {
+	0% { transform: scale(1); }
+	50% { transform: scale(0.9); }
+	100% { transform: scale(1); }
+} 
+

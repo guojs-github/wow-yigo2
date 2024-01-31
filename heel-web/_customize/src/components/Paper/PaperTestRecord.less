@@ -1,0 +1,41 @@
+/*
+	paper test record style
+*/
+@import '/src/assets/style/index.less';
+
+@paper-test-record-row-height: 40px;
+
+div.paper-test-record {   
+    .-box-shadow();
+
+    padding: 0;
+
+    &.-content.-section {
+        width: calc(100% - 40px);
+    }
+
+    & > .-flex-row {
+        justify-content: flex-start;
+        align-items: center;
+        height: @paper-test-record-row-height;
+        line-height: @paper-test-record-row-height;
+
+        & > .col {
+            text-align: center;
+            width: 100%;
+        }
+
+        & > .col.selectable {
+            cursor: pointer;
+
+            &:hover {
+                .-box-shadow-routine(@depth: 4,@opacity: 0.8)
+            }
+        }
+    }
+
+    & > .head {
+        background-color: @color-light-light-gray;
+        font-weight: bold;
+    }
+}

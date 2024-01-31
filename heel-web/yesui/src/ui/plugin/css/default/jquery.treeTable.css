@@ -1,0 +1,54 @@
+.tree_table .default_node, .tree_table .default_active_node {width:16px;height:18px;border: medium none; margin: 0; padding: 0;display: inline-block;}
+.tree_table .default_active_node {cursor: pointer;}
+/* .tree_table .default_leaf{background:url(./allbgs.png) no-repeat -16px 0px;width:16px;}
+.tree_table .default_last_leaf{background:url(./allbgs.png) no-repeat -64px 0px;width:16px;}
+.tree_table .default_vertline{background:url(./allbgs.png) repeat-y -32px 0px;width:16px;}
+.tree_table .default_open, .tree_table .default_hover_open{background:url(./allbgs.png) no-repeat 0px 0px;width:16px;}
+.tree_table .default_shut, .tree_table .default_hover_shut{background:url(./allbgs.png) no-repeat -48px 0px;width:16px;}
+.tree_table .default_last_shut, .tree_table .default_hover_last_shut{background:url(./allbgs.png) no-repeat -96px 0px;width:16px;}
+.tree_table .default_last_open, .tree_table .default_hover_last_open{background:url(./allbgs.png) no-repeat -112px 0px;width:16px;} */
+
+.tree_table .default_leaf {background:url(./tree.png) no-repeat -56px -18px;width:16px;}
+.tree_table .default_last_leaf{background:url(./tree.png) no-repeat -56px -36px;width:16px;}
+.tree_table .default_vertline{background:url(./line_conn.gif) 0 0 repeat-y;width:16px;}
+.tree_table .default_open, .tree_table .default_hover_open{background:url(./tree.png) no-repeat -92px -18px;width:16px;}
+.tree_table .default_shut, .tree_table .default_hover_shut{background:url(./tree.png) no-repeat -74px -18px;width:16px;}
+.tree_table .default_last_shut, .tree_table .default_hover_last_shut{background:url(./tree.png) no-repeat -74px -36px;width:16px;}
+.tree_table .default_last_open, .tree_table .default_hover_last_open{background:url(./tree.png) no-repeat -92px -36px;width:16px;}
+
+.tree_table .tree_table_text {
+	height:16px;
+	line-height:16px;
+	
+}
+.tree_table .tree_table_text:hover{
+	cursor: pointer;
+}
+/* .tree_table .tree_table_icon {
+	background-image: url(./tree.png);
+	background-repeat: no-repeat;
+	width:16px;
+} */
+.tree_table .default_node {
+	width:20px;
+	height:20px;
+	vertical-align:middle;
+}
+.tree_table .icon_close, .tree_table .icon_open {
+	background:url(./expanded.png) no-repeat;
+}
+.tree_table tr.disabled .icon_open, .tree_table tr.disabled .icon_close {
+	background:url(./b_disable.png) no-repeat;
+}
+.tree_table tr.invalid .icon_open, .tree_table tr.invalid .icon_close {
+	background:url(./b_invalid.png) no-repeat;
+}
+.tree_table .icon_leaf {
+	background:url(./leaf.png) no-repeat;
+}
+.tree_table tr.disabled .icon_leaf {
+	background:url(./l_disable.png) no-repeat;
+}
+.tree_table tr.invalid .icon_leaf {
+	background:url(./l_invalid.png) no-repeat;
+}

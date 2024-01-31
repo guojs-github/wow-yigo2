@@ -1,0 +1,14 @@
+/**
+ * dict dropdown control style.
+ * 
+ * 2023.8.28 created by guojs.
+ */
+
+.heel-web .dt-vw .chainmean > span.hw-def-button {
+    float: right;
+    margin: 8px 2px;
+
+    height: 24px;
+    line-height: 24px;
+    width: auto;
+}

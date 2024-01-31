@@ -1,0 +1,82 @@
+/**
+ * Checkbox control style.
+ * 
+ * 2023.8.30 created by guojs.
+ */
+
+.heel-web .ui-chk {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+
+    border: 0;
+}
+
+.heel-web .ui-chk > span.chk {
+    margin-top: 0 !important;
+    margin-left: 3px;
+
+    background-image: none !important;
+    background-color: white;
+    border: 2px solid white;
+    border-radius: 50%;
+    outline: 1px solid #aaaaaa; 
+}
+
+.heel-web .ui-chk > span.chk.checked {
+    outline: 1px solid #40a8e8; 
+}
+
+.heel-web .ui-chk > span.chk.checked::before {
+    position: absolute;
+    top: 0;
+    content: "✔";
+    color: #40a8e8;
+    font-size: 16px;
+
+    animation: -checkbox-switch 0.3s ease-out;
+}
+
+.heel-web .ui-chk.ui-readonly > span.chk.checked {
+    outline: 1px solid #aaaaaa; 
+}
+
+.heel-web .ui-chk.ui-readonly > span.chk.checked::before {
+    color: #aaaaaa;
+}
+
+.heel-web .ui-chk > label {
+    margin-left: 5px;
+
+    cursor: pointer;
+}
+
+.heel-web .ui-chk.ui-readonly > label {
+    cursor: default;
+}
+
+/* checkbox switch **********************/
+@keyframes -checkbox-switch {
+	0% {
+		transform: scale(0.1);
+	}
+	90% {
+		transform: scale(1.2);
+	}
+    100% {
+		transform: scale(1);
+	}
+}  
+
+@-webkit-keyframes -checkbox-switch {
+	0% {
+		transform: scale(0.1);
+	}
+	90% {
+		transform: scale(1.2);
+	}
+    100% {
+		transform: scale(1);
+	}
+} 

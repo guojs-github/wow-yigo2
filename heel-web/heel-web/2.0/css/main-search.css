@@ -1,0 +1,137 @@
+/**
+	Yigo2.0 main window search box
+	2022.11.21 GuoJS created
+**/
+.heel-web .main > .mainLeft > .searchBox button.search {
+	display: none;
+}
+
+.heel-web .main > .mainLeft > .searchBox {
+	min-width: 13em;
+	height: 3.143em;
+
+	font-size: inherit;
+}
+
+.heel-web .main > .mainLeft > .searchBox > .btn {
+	height: 3.143em;
+	line-height: 3.143em;
+
+	font-size: inherit;
+}
+
+.heel-web .main > .mainLeft > .searchBox > .btn > input {
+	margin: 0 0.872em;
+
+	width: calc(100% - 2 * 0.872em) !important;
+	height: auto;
+
+	font-size: 0.9em;
+}
+
+.heel-web .main > .mainLeft > .matchItems {
+	left: 0.5em;
+    max-width: 10000px;
+
+	font-size: inherit;
+}
+
+.heel-web .main > .mainLeft > .hw-recent-dropdown
+, .heel-web .main > .mainLeft > .hw-search-result-list {
+    display: none;
+    position: absolute;
+	left: 0.5em;
+	top: 3.2em;
+    z-index: 111;
+    overflow: hidden;	
+
+    width: auto;
+
+	font-size: inherit;
+    background-color: #fff;
+	border: 1px solid transparent;
+}
+
+.heel-web .main > .mainLeft > .hw-recent-dropdown .title {
+    padding: 0.393em 1.179em 0.393em 0.786em;
+
+	font-size: inherit;
+    color: white;
+    background-color: darkgray;
+}
+
+.heel-web .main > .mainLeft > .hw-recent-dropdown .title > span {
+	font-size: 1em;
+}
+
+
+.heel-web .main > .mainLeft > .hw-recent-dropdown .control-box {
+	float: right;
+	
+	height: 1.5em;
+	line-height: 1.5em;
+	font-size: 1em;
+	color: white;
+	
+	cursor: pointer;
+}
+
+.heel-web .main > .mainLeft > .hw-recent-dropdown .control-box:hover {
+	color: #c7e0f4;
+}
+
+.heel-web .main > .mainLeft > .hw-recent-dropdown ul
+, .heel-web .main > .mainLeft > .hw-search-result-list ul
+, .heel-web .main > .mainLeft > .matchItems ul {
+	font-size: inherit;
+}
+
+.heel-web .main > .mainLeft > .hw-recent-dropdown li
+, .heel-web .main > .mainLeft > .hw-search-result-list li
+, .heel-web .main > .mainLeft > .matchItems li {
+	white-space: nowrap;
+
+	height: auto;
+	line-height: normal;
+
+	font-size: inherit;
+	color: #323232;
+}
+
+.heel-web .main > .mainLeft > .hw-recent-dropdown li > a
+, .heel-web .main > .mainLeft > .hw-search-result-list li > a
+, .heel-web .main > .mainLeft > .matchItems li > a {
+	display: block;
+	padding: 0 1.1786em 0 0.7857em;	
+
+	height: 2.75em;
+	line-height: 2.75em;
+	
+	font-size: inherit;
+	cursor: pointer;
+}
+
+.heel-web .main > .mainLeft > .hw-recent-dropdown li > a:hover
+, .heel-web .main > .mainLeft > .hw-search-result-list li > a:hover
+, .heel-web .main > .mainLeft > .matchItems li > a:hover {
+	color: #323232;
+	background: #c7e0f4;
+}
+
+.heel-web .main > .mainLeft > .hw-recent-dropdown li > a.selected
+, .heel-web .main > .mainLeft > .hw-search-result-list li > a.selected {
+	background: #c7e0f4;
+}
+
+.heel-web .main > .mainLeft > .hw-recent-dropdown li > a > .time {
+	padding-right: 0.7857em;
+	
+	font-size: 0.95em;
+	border-right: 0.07857em dashed darkgray;
+}
+
+.heel-web .main > .mainLeft > .hw-recent-dropdown li > a > .name {
+	padding-left: 0.7857em;
+
+	font-size: 0.95em;
+}

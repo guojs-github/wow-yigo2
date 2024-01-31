@@ -1,0 +1,201 @@
+/**
+ * dialog control style of grid layout.
+ * 
+ * 2023.9.21 created by guojs.
+ */
+
+@media screen and (max-height: 600px) {
+    .heel-web .hw-dialog.hw-dialog-grid-layout {
+        font-size: 13px !important;
+    }
+}
+
+@media screen and (min-height: 600px) {
+    .heel-web .hw-dialog.hw-dialog-grid-layout {
+        font-size: 1.8vh !important;
+    }
+}
+
+.heel-web .hw-dialog.hw-dialog-grid-layout > .dialog 
+, .heel-web .hw-dialog.hw-dialog-grid-layout > .dialog > .dialog-header
+, .heel-web .hw-dialog.hw-dialog-grid-layout > .dialog > .dialog-content
+{
+	font-size: inherit;
+}
+
+.heel-web .hw-dialog.hw-dialog-grid-layout > .dialog > .dialog-header {
+	padding: 0.2357em 1.0999em;
+}
+
+.heel-web .hw-dialog.hw-dialog-grid-layout > .dialog > .dialog-header > .dialog-title {
+	font-size: 1.1em;
+	height: 2.286em;
+	line-height: 2.286em;
+}
+
+
+.heel-web .hw-dialog.hw-dialog-grid-layout > .dialog > .dialog-header > .dialog-close {
+	top: 0.3928em;
+	right: 0.3928em;
+
+	width: 1.964em;
+	height: 1.964em;
+	font-size: inherit;
+	background-size: 0.8em 0.8em;
+}
+
+.heel-web .hw-dialog.hw-dialog-grid-layout .hw-grid-layout {
+	align-items: flex-start;
+
+	font-size: inherit;
+	height: 15.712em;
+}
+
+.heel-web .hw-dialog.hw-dialog-grid-layout .hw-grid-layout  > .hw-icon {
+	width: 4.721em;
+	height: 4.721em;
+	line-height: 4.721em;
+
+	font-size: inherit;
+}
+
+.heel-web .hw-dialog.hw-dialog-grid-layout .hw-grid-layout  > .hw-icon > svg {
+	vertical-align: middle;
+}
+
+.heel-web .hw-dialog.hw-dialog-grid-layout .hw-grid-layout  > .hw-icon > i {
+	color: #ED6D15;
+	font-size: 16px;
+}
+
+.heel-web .hw-dialog.hw-dialog-grid-layout .hw-grid-layout  > .hw-fields {
+	margin: 0 0.7856em;
+
+	width: auto;
+	min-width: 500px;
+	max-width: 80vw;
+	height: auto;
+
+	font-size: inherit;
+}
+
+.heel-web .hw-dialog.hw-dialog-grid-layout .hw-grid-layout  > .hw-fields > .hw-field {
+	font-size: inherit;
+	border: 1px solid transparent;
+
+	cursor: move;
+	transition: transform 0.25s;
+}
+
+.heel-web .hw-dialog.hw-dialog-grid-layout .hw-grid-layout  > .hw-fields > .hw-field:hover {
+	border: 1px solid #cccccc;
+
+	transform: scale(0.97);
+}
+
+.heel-web .hw-dialog.hw-dialog-grid-layout .hw-grid-layout  > .hw-fields > .hw-field > .hw-field-name {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.heel-web .hw-dialog.hw-dialog-grid-layout .hw-grid-layout  > .hw-fields > .hw-field > .hw-field-name > .hw-move-to-first
+, .heel-web .hw-dialog.hw-dialog-grid-layout .hw-grid-layout  > .hw-fields > .hw-field > .hw-field-name > .hw-move-to-last
+{
+	width: 1.964em;
+	height: 1.964em;
+	line-height: 1.964em;
+
+	font-size: inherit;
+	color: #bbbbbb;
+	cursor: pointer;
+}
+
+.heel-web .hw-dialog.hw-dialog-grid-layout .hw-grid-layout  > .hw-fields > .hw-field > .hw-field-name > .hw-move-to-first:hover
+, .heel-web .hw-dialog.hw-dialog-grid-layout .hw-grid-layout  > .hw-fields > .hw-field > .hw-field-name > .hw-move-to-last:hover
+{
+	color: #40a8e8;
+}
+
+.heel-web .hw-dialog.hw-dialog-grid-layout .hw-grid-layout  > .hw-fields > .hw-field > .hw-field-name svg {
+	transition: transform 0.2s;
+}
+
+.heel-web .hw-dialog.hw-dialog-grid-layout .hw-grid-layout  > .hw-fields > .hw-field > .hw-field-name svg:hover {
+	transform: scale(1.1);
+}
+
+.heel-web .hw-dialog.hw-dialog-grid-layout .hw-grid-layout  > .hw-fields > .hw-field > .hw-field-setting {
+	width: 10.998em;
+	height: 2.75em;
+	line-height: 2.75em;
+
+	font-size: inherit;
+}
+
+.heel-web .hw-dialog.hw-dialog-grid-layout .hw-grid-layout  > .hw-fields > .hw-field > .hw-field-setting > .hw-name {
+	width: 4.999em; 
+
+	font-size: 0.943em;
+}
+
+.heel-web .hw-dialog.hw-dialog-grid-layout .hw-grid-layout  > .hw-fields > .hw-field > .hw-field-setting > .hw-value {
+	width: calc(100% - 4.999em); 
+
+	font-size: 0.943em;
+}
+
+.heel-web .hw-dialog.hw-dialog-grid-layout .hw-grid-layout  > .hw-fields > .hw-field > .hw-field-name {
+	padding: 0 0.393em;
+	font-weight: bold;
+	border: 1px solid #e6e6e6;
+	background-color: #f5f5f5;
+}
+
+.heel-web .hw-dialog.hw-dialog-grid-layout .hw-grid-layout  > .hw-fields > .hw-field > .hw-field-name > span.name {
+	font-size: 0.943em;
+}
+
+.heel-web .hw-dialog.hw-dialog-grid-layout .hw-grid-layout  > .hw-fields > .hw-field > .hw-field-visible > .hw-value > input {
+	margin-top: 1.2507em;
+
+	height: 1.084em;
+	width: 1.084em;
+
+	font-size: inherit;
+	cursor: pointer;
+}
+
+
+.heel-web .hw-dialog.hw-dialog-grid-layout .hw-toolbar {
+	margin: 0 0.7856em;
+	justify-content: space-between;
+
+	height: 3.457em;
+	line-height: 3.457em;
+	font-size: inherit;
+}
+
+.heel-web .hw-dialog.hw-dialog-grid-layout .hw-toolbar > .left 
+, .heel-web .hw-dialog.hw-dialog-grid-layout .hw-toolbar > .right
+, .heel-web .hw-dialog.hw-dialog-grid-layout .hw-toolbar button 
+, .heel-web .hw-dialog.hw-dialog-grid-layout .hw-toolbar button > .txt
+{
+	font-size: inherit;
+}
+
+.heel-web .hw-dialog.hw-dialog-grid-layout .hw-toolbar button {
+	margin: 0 0 0 0.7856em;
+	
+	width: 7.856em; 
+    height: 2.3568em;
+	line-height: 2.3568em;
+
+    letter-spacing: 0;
+}
+
+.heel-web .hw-dialog.hw-dialog-grid-layout .hw-toolbar button.ok
+,.heel-web .hw-dialog.hw-dialog-grid-layout .hw-toolbar button.cancel {
+    letter-spacing: 0.3928em;
+}

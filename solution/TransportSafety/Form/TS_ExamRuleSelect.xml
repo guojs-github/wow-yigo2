@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Key="TS_ExamRuleSelect" Caption="试卷生成规则选择" FormType="View" Version="86">
+    <DataSource>
+        <DataObject Key="TS_ExamRuleSelect" Caption="试卷生成规则选择" PrimaryTableKey="TS_ExamRuleSelect">
+            <TableCollection>
+                <Table Key="TS_ExamRuleSelect" Caption="试卷生成规则选择" TableMode="Detail" SourceType="Query" Persist="false">
+                    <Column Key="OID" Caption="对象标识" DataType="Long"/>
+                    <Column Key="Status" Caption="状态" DataType="Long"/>
+                    <Column Key="No" Caption="规则编号" DataType="Varchar"/>
+                    <Column Key="Category" Caption="考题类别" DataType="Long"/>
+                    <Column Key="Department" Caption="发布部门" DataType="Long"/>
+                    <Column Key="TotalScore" Caption="总分" DataType="Varchar" Precision="16" Scale="2"/>
+                    <Column Key="PassingScore" Caption="及格分" DataType="Varchar" Precision="16" Scale="2"/>
+                    <Column Key="Creator" Caption="创建人" DataType="Long"/>
+                    <Column Key="CreatorName" Caption="创建人姓名" DataType="Varchar"/>
+                    <Column Key="CreateTime" Caption="创建时间" DataType="DateTime"/>
+                    <Column Key="Modifier" Caption="修改人" DataType="Long"/>
+                    <Column Key="ModifierName" Caption="修改人姓名" DataType="Varchar"/>
+                    <Column Key="ModifyTime" Caption="修改时间" DataType="DateTime" SortType="Desc"/>
+                    <Column Key="Description" Caption="Description" DataType="Varchar"/>
+                    <Column Key="Duration" Caption="Duration" DataType="Varchar"/>
+                    <Column Key="Remark" Caption="Remark" DataType="Varchar"/>
+                    <Statement>
+                        <![CDATA[select * from (
+	select
+	    header.OID,
+	    header.Status,
+	    header.No,
+	    header.Category,
+	    header.Department,
+	    header.TotalScore,
+	    header.PassingScore,
+	    header.Duration,
+	    header.Description,
+	    header.Creator,
+	    creator.Name as CreatorName,
+	    header.CREATETIME,
+	    header.Modifier,
+	    modifier.Name as ModifierName,
+	    header.ModifyTime,
+	    header.Remark
+	from
+	    ts_exam_rule_header header
+	    left join (select oid, name from sys_operator) creator on creator.oid = header.creator
+	    left join (select oid, name from sys_operator) modifier on modifier.oid = header.Modifier
+	where
+		(header.isdeleted = 0)
+        and (header.Status = 200)
+) a  ]]>
+                    </Statement>
+                </Table>
+            </TableCollection>
+        </DataObject>
+    </DataSource>
+    <OperationCollection>
+        <Operation Key="Refresh" Caption="刷新">
+            <Action>
+                <![CDATA[query();
+]]>
+            </Action>
+        </Operation>
+    </OperationCollection>
+    <Body PopHeight="70%" PopWidth="70%" Resizable="false">
+        <Block>
+            <FlexFlowLayoutPanel Key="panel_main" Caption="根面板">
+                <ToolBar Key="main_toolbar" Height="pref" Caption="main_toolbar">
+                    <ToolBarItemCollection/>
+                </ToolBar>
+                <SplitPanel Key="panel_content" Orientation="Vertical" Height="100%" Caption="panel_content">
+                    <TabPanel Caption="Tabs" Key="Tabs">
+                        <Grid Key="List" Caption="选择列表" NewEmptyRow="false" CanDelete="false" CanInsert="false" CanShift="false" Height="pref" SelectionMode="Row" Width="pref">
+                            <GridColumnCollection>
+                                <GridColumn Key="SelectRule" Caption="选择" Width="80px"/>
+                                <GridColumn Key="Status" Width="150px" Caption="状态"/>
+                                <GridColumn Key="OID" Caption="OID" Width="80px" Visible="false"/>
+                                <GridColumn Key="No" Caption="编号" Width="180px"/>
+                                <GridColumn Key="Category" Caption="类别" Width="150px"/>
+                                <GridColumn Key="Department" Caption="发布部门" Width="150px"/>
+                                <GridColumn Key="Description" Width="400px" Caption="描述"/>
+                                <GridColumn Key="TotalScore" Caption="总分" Width="100px"/>
+                                <GridColumn Key="PassingScore" Caption="及格分" Width="100px"/>
+                                <GridColumn Key="Duration" Caption="时长(分钟)" Width="80px"/>
+                                <GridColumn Key="CreatorName" Caption="创建人" Width="100px"/>
+                                <GridColumn Key="CreateTime" Caption="创建时间" Width="150px"/>
+                                <GridColumn Key="ModifierName" Caption="修改人" Width="100px"/>
+                                <GridColumn Key="ModifyTime" Caption="修改时间" Width="150px"/>
+                                <GridColumn Key="Remark" Caption="备注" Width="200px"/>
+                            </GridColumnCollection>
+                            <GridRowCollection>
+                                <GridRow Key="row1" TableKey="TS_ExamRuleSelect">
+                                    <GridCell Key="SelectRule" Caption="选择" CellType="Button" Enable="true">
+                                        <OnClick>
+                                            <![CDATA[// 准备返回数据
+var returnData = NewJSONObject();
+returnData.put("ruleId", OID);
+returnData.put("ruleCode", No);
+returnData.put("ruleDescription", Description);
+returnData.put("category", Category);
+returnData.put("department", Department);
+returnData.put("totalScore", TotalScore);
+returnData.put("passingScore", PassingScore);
+returnData.put("duration", Duration);
+SetSessionPara("SELECTED_RULE", returnData);
+
+// 触发OK回调处理
+DoEventCallback("OK");]]>
+                                        </OnClick>
+                                    </GridCell>
+                                    <GridCell Key="Status" CellType="ComboBox" Enable="false" CellSortType="None" SourceType="Status">
+                                        <DataBinding ColumnKey="Status"/>
+                                    </GridCell>
+                                    <GridCell Key="OID" CellSortType="None">
+                                        <DataBinding ColumnKey="OID"/>
+                                    </GridCell>
+                                    <GridCell Key="No" CellSortType="Desc">
+                                        <DataBinding ColumnKey="No"/>
+                                    </GridCell>
+                                    <GridCell Key="Category" CellType="Dict" Enable="false" CellSortType="None" ItemKey="MD_Enum" StateMask="Enable|Disable|Discard">
+                                        <DataBinding ColumnKey="Category"/>
+                                    </GridCell>
+                                    <GridCell Key="Department" CellType="Dict" Enable="false" CellSortType="None" ItemKey="MD_Enum" StateMask="Enable|Disable|Discard">
+                                        <DataBinding ColumnKey="Department"/>
+                                    </GridCell>
+                                    <GridCell Key="Description" CellSortType="None">
+                                        <DataBinding ColumnKey="Description"/>
+                                    </GridCell>
+                                    <GridCell Key="TotalScore" CellSortType="None">
+                                        <DataBinding ColumnKey="TotalScore"/>
+                                    </GridCell>
+                                    <GridCell Key="PassingScore" CellSortType="None">
+                                        <DataBinding ColumnKey="PassingScore"/>
+                                    </GridCell>
+                                    <GridCell Key="Duration" CellSortType="None">
+                                        <DataBinding ColumnKey="Duration"/>
+                                    </GridCell>
+                                    <GridCell Key="CreatorName" CellSortType="None">
+                                        <DataBinding ColumnKey="CreatorName"/>
+                                    </GridCell>
+                                    <GridCell Key="CreateTime" CellType="DatePicker" Enable="false" CellSortType="None">
+                                        <DataBinding ColumnKey="CreateTime"/>
+                                    </GridCell>
+                                    <GridCell Key="ModifierName" CellSortType="None">
+                                        <DataBinding ColumnKey="ModifierName"/>
+                                    </GridCell>
+                                    <GridCell Key="ModifyTime" CellType="DatePicker" Enable="false" CellSortType="None">
+                                        <DataBinding ColumnKey="ModifyTime"/>
+                                    </GridCell>
+                                    <GridCell Key="Remark" CellSortType="None">
+                                        <DataBinding ColumnKey="Remark"/>
+                                    </GridCell>
+                                </GridRow>
+                            </GridRowCollection>
+                        </Grid>
+                        <GridLayoutPanel Key="Condition" Caption="过滤条件">
+                            <Dict Key="ConditionCategory" Caption="类别" BuddyKey="Lab_ConditionCategory" X="1" Y="1" ItemKey="MD_Enum">
+                                <Condition CondSign="=" ColumnKey="Category" TableKey="TS_ExamRuleSelect"/>
+                                <ItemFilter>
+                                    <Filter Query="select oid from md_enum where type = '考题类别'" Type="DataSet"/>
+                                </ItemFilter>
+                            </Dict>
+                            <Label Key="Lab_ConditionCategory" Caption="类别" X="0" Y="1">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <Dict Key="ConditionDepartment" Caption="发布部门" BuddyKey="Lab_ConditionDepartment" X="3" Y="1" ItemKey="MD_Enum">
+                                <Condition CondSign="=" ColumnKey="Department" TableKey="TS_ExamRuleSelect"/>
+                                <ItemFilter>
+                                    <Filter Query="select oid from md_enum where type = '发布部门'" Type="DataSet"/>
+                                </ItemFilter>
+                            </Dict>
+                            <Label Key="Lab_ConditionDepartment" Caption="发布部门" X="2" Y="1">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <RowDefCollection RowGap="5">
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="10px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="10px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                            </RowDefCollection>
+                            <ColumnDefCollection ColumnGap="5">
+                                <ColumnDef Width="100px"/>
+                                <ColumnDef MinWidth="100px"/>
+                                <ColumnDef Width="100px"/>
+                                <ColumnDef MinWidth="100px"/>
+                                <ColumnDef Width="100px"/>
+                                <ColumnDef MinWidth="100px"/>
+                                <ColumnDef Width="100px"/>
+                                <ColumnDef MinWidth="100px"/>
+                                <ColumnDef Width="100px"/>
+                            </ColumnDefCollection>
+                        </GridLayoutPanel>
+                    </TabPanel>
+                    <SplitSize Size="100%"/>
+                </SplitPanel>
+            </FlexFlowLayoutPanel>
+        </Block>
+    </Body>
+    <OnPostShow>
+        <![CDATA[// 打开后就加载数据
+var loaded = GetPara("LOADED");
+if (loaded <> true) { // 显示后就查询
+    SetPara("LOADED", true);
+    
+    // 获取条件参数 
+    var category = GetPara("category"); // Confirm("category="&category);
+    SetValue("ConditionCategory", category);
+    var department = GetPara("department"); // Confirm("department="&department);
+    SetValue("ConditionDepartment", department);
+
+    query();
+}]]>
+    </OnPostShow>
+    <MacroCollection>
+        <Macro Key="query">
+            <![CDATA[// 执行查询操作
+DealCondition();
+LoadData();
+ShowData();]]>
+        </Macro>
+    </MacroCollection>
+</Form>

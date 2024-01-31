@@ -1,0 +1,110 @@
+.scroll-wrap{
+	top: 0;
+	left:0;
+}
+
+.scroll-middle-V{
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 10px;
+	background: #e0e0e0;
+}
+
+.scroll-middle-H{
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	height: 10px;
+	background: #e0e0e0;
+}
+
+.scroll-top,
+.scroll-bottom,
+.scroll-left,
+.scroll-right {
+	position: absolute;	
+	width: 8px;
+	height: 8px;
+	cursor: pointer;
+	background:#f0f0f0;
+}
+
+.scroll-top,
+.scroll-bottom {
+	left: 1px;
+}
+
+.scroll-left,
+.scroll-right {
+	top: 1px;
+}
+
+.scroll-top:after,
+.scroll-bottom:after,
+.scroll-left:after,
+.scroll-right:after {
+	display: block;
+	content: "";
+	width: 0;
+	height: 0;
+}
+
+.scroll-top{top: 0;}
+
+.scroll-top:after{
+	margin-top: 2px;
+	border-bottom: 4px solid #ccc;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+}
+.scroll-bottom{	bottom: 0; }
+
+.scroll-bottom:after{
+	margin-top: 2px;
+	border-top: 4px solid #ccc;
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+}
+
+.scroll-left{ left: 0;}
+
+.scroll-left:after{
+	margin-left:1px;
+	border-right: 4px solid #ccc;
+	border-top: 4px solid transparent;
+	border-bottom: 4px solid transparent;
+}
+.scroll-right{right: 0;}
+
+.scroll-right:after{
+	margin-left:1px;
+	border-left: 4px solid #ccc;
+	border-top: 4px solid transparent;
+	border-bottom: 4px solid transparent;
+}
+
+.scroll-slider-V,
+.scroll-slider-H {
+	position: absolute;
+	background: #f0f0f0;
+	border-radius:4px;
+	cursor: pointer;
+}
+.scroll-slider-V:hover,
+.scroll-slider-H:hover,
+.scroll-top:hover,
+.scroll-bottom:hover,
+.scroll-left:hover,
+.scroll-right:hover  {
+	background: #f6f6f6;
+}
+.scroll-slider-H{
+	top:1px;
+	height: 8px;
+}
+
+.scroll-slider-V{
+	left: 1px;
+	width: 8px;
+}

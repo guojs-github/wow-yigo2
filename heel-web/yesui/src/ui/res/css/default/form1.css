@@ -1,0 +1,34 @@
+.form1 button.ui-btn {
+	background: #1078b0;
+	background: -webkit-gradient(linear, left top, left bottom, from(#68c0f0), to(#1078b0));
+	background: -moz-linear-gradient(top, #68c0f0, #1078b0);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#68c0f0', endColorstr='#1078b0');
+	border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+	box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    -webkit-border-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    -moz-border-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+	border: 0;
+}
+.form1 button.ui-btn:active {
+	background: -webkit-gradient(linear, left top, left bottom, from(#40a0d0), to(#1078b0));
+	background: -moz-linear-gradient(top, #68c0f0, #1078b0);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#68c0f0', endColorstr='#1078b0');
+}
+.form1 button.ui-btn span {
+	color: #fff;
+	font-size: 20px;
+}
+
+
+.dialog .dialog-content-inner, .dialog .dialog-content {
+	height: auto !important;
+}
+.ui-dlg .dialog-content-inner .ui-lbl label, .ui-dlg .dialog-content-inner .ui-btn span {
+	font-size: 24px;
+}
+.dialog_btns div, .dialog_btns .ui-btn {
+	width: 80px !important;
+	height: 36px !important;
+}

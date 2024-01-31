@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Key="HomePage" Caption="首页" TransitionAnim="ROTATE" Version="14">
+    <DataSource>
+        <DataObject Key="HomePage" Caption="首页" PrimaryTableKey="HomePage">
+            <TableCollection>
+                <Table Key="HomePage" Caption="首页">
+                    <Column Key="OID" Caption="对象标识" DataType="Long"/>
+                    <Column Key="SOID" Caption="主对象标识" DataType="Long"/>
+                    <Column Key="POID" Caption="父对象标识" DataType="Long"/>
+                    <Column Key="VERID" Caption="对象版本" DataType="Integer"/>
+                    <Column Key="DVERID" Caption="对象明细版本" DataType="Integer"/>
+                    <Column Key="WebBrowser1" Caption="WebBrowser1" DataType="Varchar"/>
+                </Table>
+            </TableCollection>
+        </DataObject>
+    </DataSource>
+    <Body>
+        <Block>
+            <FlexFlowLayoutPanel Key="main" Caption="根面板">
+                <FlexFlowLayoutPanel Key="FlexFlowLayoutPanel1" Caption="FlexFlowLayoutPanel1" Height="pref" Width="pref">
+                    <WebBrowser Caption="home_page_browser" Height="pref" Key="home_page_browser" Width="100%">
+                        <DataBinding TableKey="HomePage" ColumnKey="WebBrowser1"/>
+                    </WebBrowser>
+                </FlexFlowLayoutPanel>
+            </FlexFlowLayoutPanel>
+        </Block>
+    </Body>
+    <OnLoad>
+        <![CDATA[var url = "customize/home-page.jsp";
+SetValue("home_page_browser",url);]]>
+    </OnLoad>
+</Form>

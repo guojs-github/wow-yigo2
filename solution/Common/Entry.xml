@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry Caption="根" Key="root">
+    <Entry Caption="系统设置" Key="System">
+        <EntryItem Caption="首页" FormKey="HomePage" Key="HomePage" Type="Form"/>
+        <EntryItem Caption="全局搜索" FormKey="GlobalSearchView" Key="GlobalSearchView" Type="Form"/>
+        <EntryItem Caption="操作员" FormKey="DictEdit" Key="Operator" Parameters="FormKey=Operator" Type="Form"/>
+        <EntryItem Caption="角色" FormKey="DictEdit" Key="Role" Parameters="FormKey=Role" Type="Form"/>
+        <EntryItem Caption="操作员权限设置" FormKey="OperatorRightsSet" Key="OperatorRightsSet" Type="Form"/>
+        <EntryItem Caption="角色权限设置" FormKey="RoleRightsSet" Key="RoleRightsSet" Type="Form"/>
+        <EntryItem Caption="体验中心" FormKey="TestView" Key="TestView" Type="Form"/>
+        <EntryItem Caption="体验中心-列表" FormKey="TestViewListView" Key="TestViewListView" Type="Form"/>
+    </Entry>
+    <Entry Caption="工作流" Icon="Bill.png" Key="workflow" Visible="false">
+        <EntryItem Caption="待办事宜" FormKey="ToDoList" Key="ToDoList" Type="Form"/>
+        <EntryItem Caption="代理设置" FormKey="Delegate" Key="NewItem" Type="Form"/>
+    </Entry>
+</Entry>

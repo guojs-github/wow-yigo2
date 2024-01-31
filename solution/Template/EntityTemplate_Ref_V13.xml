@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Key="#FormKey#" Caption="#FormCaption#" FormType="Entity" ViewKey="">
+    <DataSource RefObjectKey="#RefObjectKey#"/>
+    <OperationCollection>
+        <Operation Key="WORKITEM" Caption="WORKITEM" Tag="WORKITEM"/>
+        <Operation Key="BPM" Caption="BPM" Tag="BPM"/>
+        <Operation Key="Save" Caption="保存" Visible="!ReadOnly()">
+            <Action>
+                <![CDATA[SaveData(); UpdateView();]]>
+            </Action>
+        </Operation>
+        <Operation Key="New" Caption="新增" Visible="ReadOnly()">
+            <Action>
+                <![CDATA[New('#FormKey#', 'self');]]>
+            </Action>
+        </Operation>
+        <Operation Key="Delete" Caption="删除" Visible="ReadOnly()">
+            <Action>
+                <![CDATA[DeleteData();UpdateView();Close();]]>
+            </Action>
+        </Operation>
+        <Operation Key="Edit" Caption="编辑" Visible="ReadOnly()">
+            <Action>
+                <![CDATA[Edit();]]>
+            </Action>
+        </Operation>
+        <Operation Key="Cancel" Caption="取消" Visible="!ReadOnly()">
+            <Action>
+                <![CDATA[Cancel();]]>
+            </Action>
+        </Operation>
+        <Operation Key="Close" Caption="关闭" Visible="ReadOnly()">
+            <Action>
+                <![CDATA[Close()]]>
+            </Action>
+        </Operation>
+    </OperationCollection>
+    <ScriptCollection>
+        <Script Key="Load" Caption="载入" Range="Action" Verb="Load">
+            <![CDATA[LoadData();]]>
+        </Script>
+    </ScriptCollection>
+    <Body>
+        <Block>
+            <FlexFlowLayoutPanel Key="root" Caption="根面板">
+                <ToolBar Key="ToolBar1" Height="pref" Caption="ToolBar1" IsDefault="true">
+                    <ToolBarItemCollection/>
+                </ToolBar>
+                <SplitPanel Key="main" Orientation="Vertical" Height="100%" Caption="主面板">
+                    <GridLayoutPanel Key="first_head" Height="pref" Padding="5px" Caption="基本信息">
+                        <RowDefCollection RowHeight="30" RowGap="6">
+                            <RowDef/>
+                            <RowDef/>
+                            <RowDef/>
+                        </RowDefCollection>
+                        <ColumnDefCollection ColumnGap="20">
+                            <ColumnDef Width="60px"/>
+                            <ColumnDef Width="33%"/>
+                            <ColumnDef Width="60px"/>
+                            <ColumnDef Width="33%"/>
+                            <ColumnDef Width="60px"/>
+                            <ColumnDef Width="34%"/>
+                        </ColumnDefCollection>
+                    </GridLayoutPanel>
+                    <TabPanel Height="100%" Key="DetailTab"/>
+                    <GridLayoutPanel Key="second_head" Height="pref" Padding="5px" Caption="其他信息">
+                        <RowDefCollection RowHeight="30" RowGap="6">
+                            <RowDef/>
+                            <RowDef/>
+                        </RowDefCollection>
+                        <ColumnDefCollection ColumnGap="20">
+                            <ColumnDef Width="60px"/>
+                            <ColumnDef Width="50%"/>
+                            <ColumnDef Width="60px"/>
+                            <ColumnDef Width="50%"/>
+                        </ColumnDefCollection>
+                    </GridLayoutPanel>
+                    <SplitSize Size="100px"/>
+                    <SplitSize Size="100%"/>
+                    <SplitSize Size="100px"/>
+                </SplitPanel>
+            </FlexFlowLayoutPanel>
+        </Block>
+    </Body>
+</Form>

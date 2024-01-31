@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Key="TS_ExamQuestionView" Caption="题库视图" FormType="View" Version="300">
+    <DataSource>
+        <DataObject Key="TS_ExamQuestionView" Caption="题库视图" PrimaryTableKey="TS_ExamQuestionView" SecondaryType="">
+            <TableCollection>
+                <Table Key="TS_ExamQuestionView" Caption="题库视图" SourceType="Query" TableMode="Detail">
+                    <Column Key="OID" Caption="对象标识" DataType="Long"/>
+                    <Column Key="SOID" Caption="主对象标识" DataType="Long"/>
+                    <Column Key="POID" Caption="父对象标识" DataType="Long"/>
+                    <Column Key="VERID" Caption="对象版本" DataType="Integer"/>
+                    <Column Key="DVERID" Caption="对象明细版本" DataType="Integer"/>
+                    <Column Key="Status" Caption="状态" DataType="Long"/>
+                    <Column Key="Type" Caption="题型" DataType="Long"/>
+                    <Column Key="Category" Caption="考题类别" DataType="Long"/>
+                    <Column Key="Department" Caption="发布部门" DataType="Long"/>
+                    <Column Key="Creator" Caption="出题者" DataType="Long"/>
+                    <Column Key="CreatorName" Caption="出题者姓名" DataType="Varchar"/>
+                    <Column Key="CreateTime" Caption="创建时间" DataType="DateTime"/>
+                    <Column Key="No" Caption="题目编号" DataType="Varchar" Length="20"/>
+                    <Column Key="Question" Caption="题目内容" DataType="Varchar" Length="1000"/>
+                    <Column Key="Options" Caption="备选项" DataType="Varchar" Length="1000"/>
+                    <Column Key="Answer" Caption="答案" DataType="Varchar" Length="1000"/>
+                    <Column Key="IsMandatory" Caption="是否必考" DataType="Integer"/>
+                    <Column Key="Remark" Caption="备注" DataType="Varchar" Length="1000" DefaultValue=""/>
+                    <Column Key="Modifier" Caption="修改人" DataType="Long"/>
+                    <Column Key="ModifierName" Caption="修改人姓名" DataType="Varchar" Length="20"/>
+                    <Column Key="ModifyTime" Caption="修改时间" DataType="DateTime"/>
+                    <Column Key="ConditionStatus" Caption="ConditionStatus" DataType="Varchar"/>
+                    <Statement>
+                        <![CDATA[select * from (
+	select
+	    header.OID,
+	    header.Status,
+	    header.No,
+	    header.Category,
+	    header.Department,
+	    header.Type,
+	    header.IsMandatory,
+	    header.Question,
+	    header.Answer,
+	    header.options,
+	    header.Creator,
+	    creator.Name as CreatorName,
+	    header.CREATETIME,
+	    header.Modifier,
+	    modifier.Name as ModifierName,
+	    header.ModifyTime,
+	    header.Remark
+	from
+	    ts_exam_question_header header
+	    left join (select oid, name from sys_operator) creator on creator.oid = header.creator
+	    left join (select oid, name from sys_operator) modifier on modifier.oid = header.Modifier
+        where
+            header.isdeleted = 0
+) a  ]]>
+                    </Statement>
+                </Table>
+            </TableCollection>
+        </DataObject>
+    </DataSource>
+    <OperationCollection>
+        <Operation Key="New" Caption="新增">
+            <Action>
+                <![CDATA[New("TS_ExamQuestionDetail");]]>
+            </Action>
+        </Operation>
+        <Operation Key="Delete" Caption="删除">
+            <Action>
+                <![CDATA[// 删除
+var count = 0;
+var row = 0;
+var selected = 0;
+var id = 0;
+var idList = "";
+loop "GridResult"(true) {
+    selected = GetCellValue("GridResult", row, "select"); // Confirm("selected="&selected);
+    id = GetCellValue("GridResult", row, "OID"); // Confirm("id="&id);    
+    if (selected) { // 选中？
+        // 计数
+        count = count + 1;
+        // 拼接选中的id
+        idList = IIF(idList == "", id, idList + "," + id);
+    }
+    
+    row = row + 1; // 下一行
+}
+
+if (Length(idList) <= 0) {
+    Confirm("请勾选【已输入】、【已停用】试题，再执行【删除】操作");
+} else {
+    // Confirm("删除试题:"&idList);
+    SetPara("idList", idList);
+    Confirm("您要删除选中的"&count&"条试题？",
+        "YES_NO",
+        {
+            YES:{
+                InvokeService("QuestionDelete", false, false, GetPara("idList"));
+                query();
+            },
+            NO:{
+                // 取消选择
+                // selectAll("GridResult", false);
+            }
+        });
+}
+
+]]>
+            </Action>
+        </Operation>
+        <Operation Key="Enable" Caption="启用">
+            <Action>
+                <![CDATA[// 批量启用
+// Confirm(InvokeService("Hello", false, false)); // 测试二开
+var count = 0;
+var row = 0;
+var selected = 0;
+var statusId = 0;
+var id = 0;
+var idList = "";
+loop "GridResult"(true) {
+    selected = GetCellValue("GridResult", row, "select"); // Confirm("selected="&selected);
+    statusId = GetCellValue("GridResult", row, "Status"); // Confirm("status="&statusId);
+    id = GetCellValue("GridResult", row, "OID"); // Confirm("id="&id);    
+    if (selected) { // 选中？
+        // 计数
+        count = count + 1;
+        // 拼接选中的id
+        idList = IIF(idList == "", id, idList + "," + id);
+    }
+    
+    row = row + 1; // 下一行
+}
+
+if (Length(idList) <= 0) {
+    Confirm("请勾选【已输入】、【已停用】试题，再执行【启用】操作");
+} else {
+    // Confirm("启用试题:"&idList);
+    SetPara("idList", idList);
+    Confirm("您要启用选中的"&count&"条试题？",
+        "YES_NO",
+        {
+            YES:{
+                InvokeService("QuestionSetStatus", false, false, GetPara("idList"), true);
+                query();
+            },
+            NO:{
+            }
+        });
+}]]>
+            </Action>
+        </Operation>
+        <Operation Key="Disable" Caption="停用">
+            <Action>
+                <![CDATA[// 批量禁用
+var count = 0;
+var row = 0;
+var selected = 0;
+var statusId = 0;
+var id = 0;
+var idList = "";
+loop "GridResult"(true) {
+    selected = GetCellValue("GridResult", row, "select"); // Confirm("selected="&selected);
+    statusId = GetCellValue("GridResult", row, "Status"); // Confirm("status="&statusId);
+    id = GetCellValue("GridResult", row, "OID"); // Confirm("id="&id);    
+    if (selected) { // 选中？
+        // 计数
+        count = count + 1;
+        // 拼接选中的id
+        idList = IIF(idList == "", id, idList + "," + id);
+    }
+    
+    row = row + 1; // 下一行
+}
+
+if (Length(idList) <= 0) {
+    Confirm("请勾选【已启用】试题，再执行【停用】操作");
+} else {
+    // Confirm("停用试题:"&idList);
+    SetPara("idList", idList);
+    Confirm("您要停用选中的"&count&"条试题？",
+        "YES_NO",
+        {
+            YES:{
+                InvokeService("QuestionSetStatus", false, false, GetPara("idList"), false);
+                query();
+            },
+            NO:{
+            }
+        });
+}
+]]>
+            </Action>
+        </Operation>
+        <Operation Key="Import" Caption="导入">
+            <Action>
+                <![CDATA[Confirm('建设中......');]]>
+            </Action>
+        </Operation>
+        <Operation Key="Export" Caption="导出">
+            <Action>
+                <![CDATA[Confirm('建设中......');]]>
+            </Action>
+        </Operation>
+        <Operation Key="Rules" Caption="试卷生成规则">
+            <Action>
+                <![CDATA[OpenEntry("TransportSafety/TransportSafety/TS_TrainingAndTest/TS_TestManagement/TS_ExamRuleView");]]>
+            </Action>
+        </Operation>
+        <Operation Key="Generate" Caption="生成试卷">
+            <Action>
+                <![CDATA[OpenEntry("TransportSafety/TransportSafety/TS_TrainingAndTest/TS_TestManagement/TS_ExamPaperView");]]>
+            </Action>
+        </Operation>
+    </OperationCollection>
+    <Body>
+        <Block>
+            <SplitPanel Key="panel_main" Orientation="Vertical" Caption="panel_main">
+                <FlexFlowLayoutPanel Key="panel_top" Caption="panel_top">
+                    <ToolBar Key="top_toolbar" Height="pref" Caption="top_toolbar">
+                        <ToolBarItemCollection/>
+                    </ToolBar>
+                    <GridLayoutPanel Key="panel_condition" Height="pref" Caption="panel_condition" Class="user-condition">
+                        <Button Key="Query" Caption="查询" X="9" Y="1">
+                            <OnClick>
+                                <![CDATA[query();]]>
+                            </OnClick>
+                        </Button>
+                        <Button Key="Reset" Caption="重置" X="9" Y="3">
+                            <OnClick>
+                                <![CDATA[ResetCondition()]]>
+                            </OnClick>
+                        </Button>
+                        <Dict Key="ConditionType" Caption="题型" BuddyKey="Lab_ConditionType" X="1" Y="1" ItemKey="MD_Enum">
+                            <Condition ColumnKey="Type" TableKey="TS_ExamQuestionView" CondSign="="/>
+                            <ItemFilter>
+                                <Filter Query="select oid from md_enum where type = '题型'" Type="DataSet"/>
+                            </ItemFilter>
+                        </Dict>
+                        <Label Key="Lab_ConditionType" Caption="题型" X="0" Y="1">
+                            <Format HAlign="Right"/>
+                        </Label>
+                        <Dict Key="ConditionCategory" Caption="考题类别" BuddyKey="Lab_ConditionCategory" X="3" Y="1" ItemKey="MD_Enum">
+                            <Condition ColumnKey="Category" TableKey="TS_ExamQuestionView" CondSign="="/>
+                            <ItemFilter>
+                                <Filter Query="select oid from md_enum where type = '考题类别'" Type="DataSet"/>
+                            </ItemFilter>
+                        </Dict>
+                        <Label Key="Lab_ConditionCategory" Caption="类别" X="2" Y="1">
+                            <Format HAlign="Right"/>
+                        </Label>
+                        <Dict Key="ConditionDepartment" Caption="发布部门" BuddyKey="Lab_ConditionDepartment" X="5" Y="1" ItemKey="MD_Enum">
+                            <Condition ColumnKey="Department" TableKey="TS_ExamQuestionView" CondSign="="/>
+                            <ItemFilter>
+                                <Filter Query="select oid from md_enum where type = '发布部门'" Type="DataSet"/>
+                            </ItemFilter>
+                        </Dict>
+                        <Label Key="Lab_ConditionDepartment" Caption="发布部门" X="4" Y="1">
+                            <Format HAlign="Right"/>
+                        </Label>
+                        <TextEditor Key="ConditionCreatorName" Caption="出题人" BuddyKey="Lab_ConditionCreatorName" X="1" Y="3">
+                            <Condition ColumnKey="CreatorName" TableKey="TS_ExamQuestionView" CondSign="like"/>
+                        </TextEditor>
+                        <Label Key="Lab_ConditionCreatorName" Caption="创建人" X="0" Y="3">
+                            <Format HAlign="Right"/>
+                        </Label>
+                        <DatePicker Key="ConditionCreateTime" Caption="创建日期" BuddyKey="Lab_ConditionCreateTime" X="3" Y="3">
+                            <Condition ColumnKey="CreateTime" TableKey="TS_ExamQuestionView" CondSign="="/>
+                        </DatePicker>
+                        <Label Key="Lab_ConditionCreateTime" Caption="创建时间" X="2" Y="3">
+                            <Format HAlign="Right"/>
+                        </Label>
+                        <ComboBox Key="ConditionStatus" Caption="状态" BuddyKey="Lab_ConditionStatus" X="7" Y="1" SourceType="Status">
+                            <Condition ColumnKey="Status" TableKey="TS_ExamQuestionView" CondSign="="/>
+                        </ComboBox>
+                        <Label Key="Lab_ConditionStatus" Caption="状态" X="6" Y="1">
+                            <Format HAlign="Right"/>
+                        </Label>
+                        <RowDefCollection RowGap="5">
+                            <RowDef Height="5px"/>
+                            <RowDef Height="30px"/>
+                            <RowDef Height="5px"/>
+                            <RowDef Height="30px"/>
+                            <RowDef Height="5px"/>
+                        </RowDefCollection>
+                        <ColumnDefCollection ColumnGap="5">
+                            <ColumnDef Width="100px"/>
+                            <ColumnDef MinWidth="100px"/>
+                            <ColumnDef Width="100px"/>
+                            <ColumnDef MinWidth="100px"/>
+                            <ColumnDef Width="100px"/>
+                            <ColumnDef MinWidth="100px"/>
+                            <ColumnDef Width="100px"/>
+                            <ColumnDef MinWidth="100px"/>
+                            <ColumnDef Width="100px"/>
+                            <ColumnDef Width="100px"/>
+                            <ColumnDef Width="20px"/>
+                        </ColumnDefCollection>
+                    </GridLayoutPanel>
+                </FlexFlowLayoutPanel>
+                <ListView Caption="result" Key="result" PageLoadType="DB" TableKey="TS_ExamQuestionView" PageRowCount="10">
+                    <ListViewColumnCollection>
+                        <ListViewColumn Key="select_flag" Caption="选择" ColumnType="CheckBox" Width="80px"/>
+                        <ListViewColumn Key="status" Caption="状态" ColumnType="ComboBox" DataColumnKey="Status" Width="100px" SourceType="Status"/>
+                        <ListViewColumn Key="oid" Caption="OID" DataColumnKey="OID" Width="200px" Visible="False"/>
+                        <ListViewColumn Key="no" Caption="编号" ColumnType="HyperLink" DataColumnKey="No" Width="200px"/>
+                        <ListViewColumn Key="category" Caption="类别" ColumnType="Dict" DataColumnKey="Category" Width="150px" ItemKey="MD_Enum"/>
+                        <ListViewColumn Key="department" Caption="发布部门" ColumnType="Dict" DataColumnKey="Department" Width="200px" ItemKey="MD_Enum"/>
+                        <ListViewColumn Key="type" Caption="题型" ColumnType="Dict" DataColumnKey="Type" Width="150px" ItemKey="MD_Enum"/>
+                        <ListViewColumn Key="options" Caption="备选项" DataColumnKey="Options" Width="300px"/>
+                        <ListViewColumn Key="answer" Caption="答案" DataColumnKey="Answer" Width="200px"/>
+                        <ListViewColumn Key="is_mandatory" Caption="是否必考" ColumnType="ComboBox" DataColumnKey="IsMandatory" Width="100px">
+                            <Item Caption="是" Key="YES" Value="1"/>
+                            <Item Caption="否" Key="NO" Value="0"/>
+                        </ListViewColumn>
+                        <ListViewColumn Key="creator" Caption="创建人" DataColumnKey="CreatorName" Width="150px"/>
+                        <ListViewColumn Key="create_time" Caption="创建时间" ColumnType="DatePicker" Width="150px" DataColumnKey="CreateTime" Format="yyyy-MM-dd HH:mm"/>
+                        <ListViewColumn Key="modifier" Caption="修改人" DataColumnKey="ModifierName" Width="150px"/>
+                        <ListViewColumn Key="modifiy_time" Caption="修改时间" ColumnType="DatePicker" DataColumnKey="ModifyTime" Width="150px" Format="yyyy-MM-dd HH:mm"/>
+                        <ListViewColumn Key="remark" Caption="备注" DataColumnKey="Remark" Width="250px"/>
+                    </ListViewColumnCollection>
+                    <RowDblClick>
+                        <![CDATA[// Open('TS_ExamQuestionDetail', oid, "TSEQD-" + oid)
+var id = GetCellValue("result", -1, "oid");
+// Confirm("OID=" & id);
+Open('TS_ExamQuestionDetail', id, "TSEQD-" + id)
+]]>
+                    </RowDblClick>
+                </ListView>
+                <SplitSize Size="150px"/>
+                <SplitSize Size="100%"/>
+            </SplitPanel>
+        </Block>
+    </Body>
+    <MacroCollection>
+        <Macro Key="query">
+            <![CDATA[// 执行查询操作
+DealCondition();
+LoadData();
+ShowData();]]>
+        </Macro>
+        <Macro Key="openDetail">
+            <![CDATA[// 打开详情界面
+var isDeleted = false;
+isDeleted = InvokeService("QuestionIsDeleted", false, false, OID); 
+if (!isDeleted) {
+    Open("TS_ExamQuestionDetail", OID);
+}]]>
+        </Macro>
+    </MacroCollection>
+</Form>

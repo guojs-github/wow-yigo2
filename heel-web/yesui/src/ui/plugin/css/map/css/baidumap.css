@@ -1,0 +1,120 @@
+.bd_map .BMap_noprint.search_box .search_txt {
+	height: 30px;
+	line-height: 30px;
+	width: 200px;
+	display: inline;
+	/*position: relative;*/
+	padding: 0;
+    margin: 0;
+    border: none;
+    outline: 0;
+    /*margin-left: 50px;*/
+    float: left;
+    padding-left: 10px;
+}
+.bd_map .BMap_noprint.search_box .select_type {
+	float: left;
+	height: 30px;
+    border: none;
+    outline: 0;
+	border-right: 1px solid #dadada;
+}
+.bd_map .BMap_noprint.search_box .select_opt {
+    border: none;
+    outline: 0;
+}
+.bd_map .BMap_noprint.search_box .search_btn {
+	height: 30px;
+	width: 45px;
+	display: inline;
+	/*position: absolute;*/
+    border: none;
+    background: url('http://webmap0.map.bdstatic.com/wolfman/static/common/images/new/searchbox_f175577.png') no-repeat -6px -79px #3385ff;
+    /*margin-left: 5px;*/
+    float: left;
+}
+.bd_map .BMap_noprint.search_box {
+	cursor: pointer;
+	border: none;
+    height: 30px;
+    padding-left: 10px;
+    margin-left: 50px;
+}
+.bd_map .BMapLib_Drawing .BMapLib_Drawing_panel {
+	border: none;
+	height: 37px;
+}
+.bd_map .BMapLib_Drawing .BMapLib_box {
+	width: 45px;
+	height: 100%;
+	display: inline-block;
+    background-image: url('../images/bg_drawing_tool1.png');
+}
+.bd_map .BMapLib_Drawing .BMapLib_box.BMapLib_rectangle {
+	display: none;
+}
+.bd_map .BMapLib_Drawing .BMapLib_hander {
+    background-position: -9px -5px;
+}
+.bd_map .BMapLib_Drawing .BMapLib_hander_hover {
+    background-position: -9px -57px;
+}
+.bd_map .BMapLib_Drawing .BMapLib_marker {
+	background-position: -74px -5px;
+}
+.bd_map .BMapLib_Drawing .BMapLib_marker_hover {
+    background-position: -74px -57px;
+}
+.bd_map .BMapLib_Drawing .BMapLib_polyline {
+    background-position: -204px -5px;
+}
+.bd_map .BMapLib_Drawing .BMapLib_polyline_hover {
+    background-position: -204px -57px;
+}
+.bd_map .BMapLib_Drawing .BMapLib_polygon {
+    background-position: -269px -5px;
+}
+.bd_map .BMapLib_Drawing .BMapLib_polygon_hover {
+    background-position: -269px -57px;
+}
+.bd_map .BMapLib_Drawing .BMapLib_circle {
+    background-position: -139px -5px;
+}
+.bd_map .BMapLib_Drawing .BMapLib_circle_hover {
+    background-position: -139px -57px;
+}
+
+.bd_map .BMapLib_Drawing .BMapLib_clear {
+    background-image: url('../images/bg_drawing_tool1.png');
+    background-position: -460px -5px;
+}
+.bd_map .BMapLib_Drawing .BMapLib_clear_hover {
+    background-position: -460px -57px;
+}
+.bd_map .BMapLib_Drawing .BMapLib_boundary {
+    background-image: url('../images/bg_drawing_tool1.png');
+	background-position: -398px -5px;
+}
+.bd_map .BMapLib_Drawing .BMapLib_boundary_hover {
+    background-position: -398px -57px;
+}
+.Boundary_Box {
+	height: 30px;
+}
+.Boundary_Box .txt {
+	border: none;
+	outline: 0;
+	height: 30px;
+	float: left;
+	padding: 0 0 0 10px;
+}
+.Boundary_Box .btn {
+    border: none;
+    outline: 0;
+    width: 45px;
+    height: 30px;/*
+    background: url('http://webmap0.map.bdstatic.com/wolfman/static/common/images/new/searchbox_f175577.png') no-repeat -13px -79px #3385ff;*/
+    float: right;
+    background-color: #2279B5;
+    color: #ffffff;
+}

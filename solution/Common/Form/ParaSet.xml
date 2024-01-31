@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Caption="参数表" Key="ParaSet" FormType="Entity">
+	<DataSource>
+		<DataObject Key="ParaTable" Caption="参数表" PrimaryTableKey="CUST_StaticObj" PrimaryType="Entity" SecondaryType="Normal">
+			<TableCollection>
+				<Table Key="CUST_StaticObj" Caption="头表" TableMode="Head" SourceType="Table" Persist="True">
+					<Column Key="OID" Caption="对象标识" Persist="True" DataType="Long"/>
+					<Column Key="POID" Caption="父对象标识" Persist="True" DataType="Long"/>
+					<Column Key="SOID" Caption="主对象标识" Persist="True" DataType="Long"/>
+					<Column Key="VERID" Caption="对象版本" Persist="True" DataType="Integer"/>
+					<Column Key="DVERID" Caption="对象明细版本" Persist="True" DataType="Integer"/>
+				</Table>
+				<Table Key="CUST_Para" Caption="参数列表" TableMode="Detail" SourceType="Table" Persist="True">
+					<Column Key="OID" Caption="对象标识" Persist="True" DataType="Long"/>
+					<Column Key="POID" Caption="父对象标识" Persist="True" DataType="Long"/>
+					<Column Key="SOID" Caption="主对象标识" Persist="True" DataType="Long"/>
+					<Column Key="VERID" Caption="对象版本" Persist="True" DataType="Integer"/>
+					<Column Key="DVERID" Caption="对象明细版本" Persist="True" DataType="Integer"/>
+					<Column Key="ParaKey" Caption="参数标识" Persist="True" DataType="Varchar" Length="64"/>
+					<Column Key="ParentKey" Caption="父标识" Persist="True" DataType="Varchar" Length="64"/>
+					<Column Key="ParaValue" Caption="参数值" Persist="True" DataType="Long"/>
+					<Column Key="NodeType" Caption="节点类型" Persist="True" DataType="Integer"/>
+				</Table>
+			</TableCollection>
+		</DataObject>
+	</DataSource>
+	<Body> 
+		<Block>
+			<FlexFlowLayoutPanel Key="main">
+				<ToolBar Key="main_toolbar" Height="pref" IsDefault="True"/>
+			</FlexFlowLayoutPanel>
+		</Block>
+	</Body>
+</Form>

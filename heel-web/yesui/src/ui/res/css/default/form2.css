@@ -1,0 +1,22 @@
+.form2 button.ui-btn {
+	background: #1078b0;
+	background: -webkit-gradient(linear, left top, left bottom, from(#68c0f0), to(#1078b0));
+	background: -moz-linear-gradient(top, #68c0f0, #1078b0);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#68c0f0', endColorstr='#1078b0');
+	border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+	box-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    -webkit-border-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    -moz-border-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+	border: 0;
+}
+.form2 button.ui-btn:active {
+	background: -webkit-gradient(linear, left top, left bottom, from(#40a0d0), to(#1078b0));
+	background: -moz-linear-gradient(top, #68c0f0, #1078b0);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#68c0f0', endColorstr='#1078b0');
+}
+.form2 button.ui-btn span {
+	color: #fff;
+	font-size: 20px;
+}

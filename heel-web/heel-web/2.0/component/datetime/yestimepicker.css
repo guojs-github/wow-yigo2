@@ -1,0 +1,58 @@
+/**
+ * New style yes time picker component.
+ *
+ * 2023.8.18 created by guojs.
+ */
+
+.heel-web .ui-tp {
+   position: relative;
+}
+
+.heel-web .ui-tp > .arrow
+{
+   margin-right: 2px;
+
+   width: 10px;
+
+   background-size: contain;
+   cursor: pointer;
+}
+
+.heel-web .ui-tp > .clear {
+   position: absolute;
+   right: 15px;
+   top: 0;
+   text-align: center;
+
+   width: 15px;
+   height: inherit;
+
+   color: #aaaaaa;
+   background-color: transparent;
+
+   font-size: 10px;
+
+   cursor: pointer;
+
+   display: flex;
+   flex-direction: row;
+   align-items: center;
+   justify-content: center;
+}
+
+.heel-web .ui-tp > .clear:hover
+{
+    color: #40a8e8;
+}
+
+.heel-web .tp-vw {
+   z-index: 100;
+ }
+
+.heel-web .tp-vw span[class$='-title'] {
+   color: #aaaaaa;
+}
+
+.heel-web .tp-vw > .tp-btn > span {
+   width: auto;
+ }

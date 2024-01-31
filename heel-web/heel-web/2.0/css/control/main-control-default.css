@@ -1,0 +1,116 @@
+/**
+	Yigo2.0 main control default style
+	2023.2.8 GuoJS created
+**/
+
+.heel-web .ui-txted.ui-readonly input
+,.heel-web .ui-txted.ui-readonly input:hover
+,.heel-web .ui-dict.ui-readonly input
+,.heel-web .ui-dict.ui-readonly input:hover
+,.heel-web .ui-dp.ui-readonly input
+,.heel-web .ui-dp.ui-readonly input:hover
+,.heel-web .ui-tp.ui-readonly input
+,.heel-web .ui-tp.ui-readonly input:hover
+,.heel-web .ui-mp.ui-readonly input
+,.heel-web .ui-mp.ui-readonly input:hover
+,.heel-web .ui-cmb.ui-readonly input
+,.heel-web .ui-cmb.ui-readonly input:hover
+,.heel-web .ui-numed.ui-readonly input
+,.heel-web .ui-numed.ui-readonly input:hover
+,.heel-web .ui-txta.ui-readonly textarea
+,.heel-web .ui-txta.ui-readonly textarea:hover
+{
+	border: 0;
+	color: #444444;
+	font-weight: bold;
+	background-color: transparent !important;
+}
+
+.heel-web .ui-dict.ui-readonly .arrow
+,.heel-web .ui-dict.ui-readonly .clear
+,.heel-web .ui-dp.ui-readonly .arrow
+,.heel-web .ui-dp.ui-readonly .clear
+,.heel-web .ui-tp.ui-readonly .arrow
+,.heel-web .ui-tp.ui-readonly .clear
+,.heel-web .ui-mp.ui-readonly .arrow
+,.heel-web .ui-mp.ui-readonly .clear
+,.heel-web .ui-cmb.ui-readonly .arrow
+,.heel-web .ui-cmb.ui-readonly .clear
+,.heel-web .ui-numed.ui-readonly .clear
+{
+	display: none;
+}
+
+.heel-web .ui-txted input
+,.heel-web .ui-dict input
+,.heel-web .ui-dp input
+,.heel-web .ui-tp input
+,.heel-web .ui-mp input
+,.heel-web .ui-cmb input
+,.heel-web .ui-numed input
+{	
+	border-left: 0;
+	border-right: 0;
+	border-top: 0;
+	border-color: lightgray;
+}
+
+.heel-web .ui-txta textarea {	
+	padding: 0 8px;
+	border-color: 1px solid lightgray;
+}
+
+.heel-web .ui-txted:not(.ui-readonly) input:hover
+,.heel-web .ui-dict:not(.ui-readonly) input:hover
+,.heel-web .ui-dp:not(.ui-readonly) input:hover
+,.heel-web .ui-tp:not(.ui-readonly) input:hover
+,.heel-web .ui-mp:not(.ui-readonly) input:hover
+,.heel-web .ui-cmb:not(.ui-readonly) input:hover
+,.heel-web .ui-numed:not(.ui-readonly) input:hover
+,.heel-web .ui-txta:not(.ui-readonly) textarea:hover
+{
+	border: 1px solid #0c8eff;
+}
+
+.heel-web .ui-txted input:focus
+,.heel-web .ui-dict input:focus
+,.heel-web .ui-dp input:focus
+,.heel-web .ui-tp input:focus
+,.heel-web .ui-mp input:focus
+,.heel-web .ui-cmb input:focus
+,.heel-web .ui-numed input:focus
+,.heel-web .ui-txta textarea:focus
+{
+	border: 1px solid #0c8eff;
+}
+
+@media screen and (max-height: 600px) {
+    .heel-web .ui-spl .resizer-h {
+        font-size: 13px !important;
+    }
+}
+
+@media screen and (min-height: 600px) {
+    .heel-web .ui-spl .resizer-h {
+        font-size: 1.8vh !important;
+    }
+}
+
+.heel-web .ui-spl .resizer-h {
+	margin: 0 0 0.07875em 0;
+
+	height: 0.315em;
+
+	background: none;
+	background-color: transparent; 
+	border: 0;
+	border-bottom: 0.1575em solid #C7E0F4;
+}
+
+.heel-web .ui-spl .resizer-h:hover {
+	border-color: #5CACEE;
+
+	transition: transform 0.25s; 
+	transform: scaleY(2);
+}
+

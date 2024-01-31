@@ -1,0 +1,41 @@
+/**
+	heel-web component message-box Style.
+	2023.3.30 created by guojs.
+**/
+.heel-web .hw-dialog.hw-msgbox .hw-msg {
+	align-items: flex-start;
+}
+
+.heel-web .hw-dialog.hw-msgbox .hw-msg > .hw-msg-icon {
+	width: 60px;
+	height: 60px;
+	line-height: 60px;
+}
+
+.heel-web .hw-dialog.hw-msgbox .hw-msg > .hw-msg-icon > svg {
+	vertical-align: middle;
+}
+
+.heel-web .hw-dialog.hw-msgbox .hw-msg > .hw-msg-icon > i {
+	color: #ED6D15;
+	font-size: 16px;
+}
+
+.heel-web .hw-dialog.hw-msgbox .hw-msg > .hw-msg-text {
+	padding: 15px 10px 10px 10px;
+	width: calc(100% - 60px);
+	text-align: left;
+	line-height: 25px;
+}
+
+.heel-web .hw-dialog.hw-msgbox .hw-msg-toolbar {
+	height: 44px;
+	line-height: 44px;
+}
+
+.heel-web .hw-dialog.hw-msgbox .hw-msg-toolbar button.hw-button {
+	width: calc(100% - 4px);
+    height: 40px;
+    letter-spacing: 5px;
+}
+

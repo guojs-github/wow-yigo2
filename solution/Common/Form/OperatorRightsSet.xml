@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Caption="操作员权限设置" Key="OperatorRightsSet" FormType="Entity">
+    <Body> 
+        <Block>
+            <FlexFlowLayoutPanel Key="main">
+                <Custom Key="RightsSet" Caption="权限设置" Tag="OperatorRights" UserData="Operator">          
+                </Custom>
+            </FlexFlowLayoutPanel>
+        </Block>
+    </Body>
+</Form>

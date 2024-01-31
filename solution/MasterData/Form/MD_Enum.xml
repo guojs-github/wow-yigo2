@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Key="MD_Enum" Caption="枚举字典" FormType="Dict" Version="47">
+    <DataSource RefObjectKey="MD_Enum"/>
+    <ScriptCollection>
+        <Script Key="Load" Caption="载入" Description="载入事件" Range="Action" Verb="Load">
+            <![CDATA[LoadData()]]>
+        </Script>
+    </ScriptCollection>
+    <Body>
+        <Block>
+            <SplitPanel Key="MainSplit" Orientation="Vertical" Height="100%">
+                <TabPanel Caption="TabPanel1" Key="TabPanel1">
+                    <GridLayoutPanel Key="BasicPanel" Caption="基本信息">
+                        <TextEditor Key="Code" Caption="编码" BuddyKey="Lab_Code" X="1" Y="1" MaxLength="50" Tip="【编码】不能为空">
+                            <DataBinding TableKey="MD_Enum" ColumnKey="Code" Required="true">
+                                <ValueChanged>
+                                    <![CDATA[UpdateDisplayName();]]>
+                                </ValueChanged>
+                            </DataBinding>
+                        </TextEditor>
+                        <Label Key="Lab_Code" Caption="编码" X="0" Y="1">
+                            <Format HAlign="Right"/>
+                        </Label>
+                        <TextEditor Key="Name" Caption="名称" BuddyKey="Lab_Name" X="3" Y="1" Tip="【名称】不能为空" MaxLength="50">
+                            <DataBinding TableKey="MD_Enum" ColumnKey="Name" Required="true">
+                                <ValueChanged>
+                                    <![CDATA[UpdateDisplayName();]]>
+                                </ValueChanged>
+                            </DataBinding>
+                        </TextEditor>
+                        <Label Key="Lab_Name" Caption="名称" X="2" Y="1">
+                            <Format HAlign="Right"/>
+                        </Label>
+                        <ComboBox Key="Status" Caption="状态" BuddyKey="Lab_Status" X="5" Y="1" Enable="false">
+                            <DataBinding TableKey="MD_Enum" ColumnKey="Enable"/>
+                            <Item Caption="已停用" Key="0" Value="0"/>
+                            <Item Caption="已启用" Key="1" Value="1"/>
+                            <Item Caption="已作废" Key="-1" Value="-1"/>
+                        </ComboBox>
+                        <Label Key="Lab_Status" Caption="状态" X="4" Y="1">
+                            <Format HAlign="Right"/>
+                        </Label>
+                        <TextEditor Key="Type" Caption="枚举类型" BuddyKey="Lab_Type" X="1" Y="2" MaxLength="50" Tip="【枚举类型】不能为空">
+                            <DataBinding TableKey="MD_Enum" ColumnKey="Type" Required="true">
+                                <ValueChanged>
+                                    <![CDATA[UpdateDisplayName();]]>
+                                </ValueChanged>
+                            </DataBinding>
+                        </TextEditor>
+                        <Label Key="Lab_Type" Caption="枚举类型" X="0" Y="2">
+                            <Format HAlign="Right"/>
+                        </Label>
+                        <TextEditor Key="Value" Caption="值" BuddyKey="Lab_Value" X="3" Y="2" MaxLength="100" XSpan="3">
+                            <DataBinding TableKey="MD_Enum" ColumnKey="Value"/>
+                        </TextEditor>
+                        <Label Key="Lab_Value" Caption="值" X="2" Y="2">
+                            <Format HAlign="Right"/>
+                        </Label>
+                        <TextEditor Key="Remark" Caption="备注" BuddyKey="Lab_Remark" X="1" Y="3" MaxLength="1000" XSpan="5">
+                            <DataBinding TableKey="MD_Enum" ColumnKey="Remark"/>
+                        </TextEditor>
+                        <Label Key="Lab_Remark" Caption="备注" X="0" Y="3">
+                            <Format HAlign="Right"/>
+                        </Label>
+                        <TextEditor Key="DisplayName" Caption="显示名称" BuddyKey="Lab_DisplayName" X="1" Y="4" Enable="false" Visible="false" MaxLength="1000" XSpan="5">
+                            <DataBinding TableKey="MD_Enum" ColumnKey="DisplayName"/>
+                        </TextEditor>
+                        <Label Key="Lab_DisplayName" Caption="显示名称" X="0" Y="4">
+                            <Format HAlign="Right"/>
+                        </Label>
+                        <RowDefCollection RowGap="5">
+                            <RowDef Height="5px"/>
+                            <RowDef Height="30px"/>
+                            <RowDef Height="30px"/>
+                            <RowDef Height="30px"/>
+                            <RowDef Height="30px"/>
+                            <RowDef Height="30px"/>
+                        </RowDefCollection>
+                        <ColumnDefCollection ColumnGap="5">
+                            <ColumnDef Width="100px"/>
+                            <ColumnDef Width="30%"/>
+                            <ColumnDef Width="100px"/>
+                            <ColumnDef Width="30%"/>
+                            <ColumnDef Width="100px"/>
+                            <ColumnDef Width="30%"/>
+                        </ColumnDefCollection>
+                    </GridLayoutPanel>
+                    <GridLayoutPanel Key="SystemPanel" Caption="系统信息">
+                        <Dict Key="CREATOR" Caption="创建人" BuddyKey="Lab_CREATOR" X="1" Y="0" Enable="false" ItemKey="Operator">
+                            <DataBinding TableKey="MD_Enum" ColumnKey="CREATOR" DefaultFormulaValue="GetOperator()"/>
+                        </Dict>
+                        <Label Key="Lab_CREATOR" Caption="创建人" X="0" Y="0">
+                            <Format HAlign="Right"/>
+                        </Label>
+                        <DatePicker Key="CREATETIME" Caption="创建时间" BuddyKey="Lab_CREATETIME" X="3" Y="0" Enable="false">
+                            <DataBinding TableKey="MD_Enum" ColumnKey="CREATETIME" DefaultFormulaValue="ServerDate()"/>
+                        </DatePicker>
+                        <Label Key="Lab_CREATETIME" Caption="创建时间" X="2" Y="0">
+                            <Format HAlign="Right"/>
+                        </Label>
+                        <Dict Key="MODIFIER" Caption="修改人" BuddyKey="Lab_MODIFIER" X="1" Y="1" Enable="false" ItemKey="Operator">
+                            <DataBinding TableKey="MD_Enum" ColumnKey="MODIFIER"/>
+                        </Dict>
+                        <Label Key="Lab_MODIFIER" Caption="修改人" X="0" Y="1">
+                            <Format HAlign="Right"/>
+                        </Label>
+                        <DatePicker Key="MODIFYTIME" Caption="修改时间" BuddyKey="Lab_MODIFYTIME" X="3" Y="1" Enable="false">
+                            <DataBinding TableKey="MD_Enum" ColumnKey="MODIFYTIME"/>
+                        </DatePicker>
+                        <Label Key="Lab_MODIFYTIME" Caption="修改时间" X="2" Y="1">
+                            <Format HAlign="Right"/>
+                        </Label>
+                        <RowDefCollection RowGap="5">
+                            <RowDef Height="30px"/>
+                            <RowDef Height="30px"/>
+                            <RowDef Height="30px"/>
+                            <RowDef Height="30px"/>
+                            <RowDef Height="30px"/>
+                        </RowDefCollection>
+                        <ColumnDefCollection ColumnGap="5">
+                            <ColumnDef Width="100px"/>
+                            <ColumnDef Width="50%"/>
+                            <ColumnDef Width="100px"/>
+                            <ColumnDef Width="50%"/>
+                        </ColumnDefCollection>
+                    </GridLayoutPanel>
+                </TabPanel>
+                <SplitSize Size="100%"/>
+            </SplitPanel>
+        </Block>
+    </Body>
+    <MacroCollection>
+        <Macro Key="UpdateDisplayName">
+            <![CDATA[var type = GetValue("Type");
+var code = GetValue("Code");
+var name = GetValue("Name");
+// Confirm("类型:" + type + "; 编码:" + code + "; 名称:" + name);
+var temp =  "【" + type + "】 " + name;
+SetValue("DisplayName", temp);
+]]>
+        </Macro>
+    </MacroCollection>
+</Form>

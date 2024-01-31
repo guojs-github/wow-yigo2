@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Key="TS_ExamRuleDetail" Caption="试卷生成规则详情" FormType="Entity" Version="184">
+    <DataSource RefObjectKey="TS_ExamRule"/>
+    <OperationCollection>
+        <Operation Key="New" Caption="新增" Visible="ReadOnly()">
+            <Action>
+                <![CDATA[New('TS_ExamRuleDetail', 'self');]]>
+            </Action>
+        </Operation>
+        <Operation Key="CopyNew" Caption="复制新增" Visible="ReadOnly()">
+            <Action>
+                <![CDATA[CopyNew();]]>
+            </Action>
+        </Operation>
+        <Operation Key="Delete" Caption="删除" Visible="ReadOnly()&amp;&amp;(Status==StatusValue('PREPARED') || Status==StatusValue('DISABLED'))">
+            <Action>
+                <![CDATA[SetPara("id", GetOID());
+Confirm(
+    "是否删除当前规则？",
+    'YES_NO',
+    {
+        YES:{
+            InvokeService("RuleDelete", false, false, ""&GetPara("id"));
+            UpdateView(); // 更新关联列表视图
+            Close();
+        },
+        NO:{}
+    }
+);]]>
+            </Action>
+        </Operation>
+        <Operation Key="Save" Caption="保存" Visible="!ReadOnly()&amp;&amp;Status==StatusValue('PREPARED')">
+            <Action>
+                <![CDATA[if (!IsNew() && isDeleted()) { return false;};
+generateSeq();
+generateScore();
+generateDescription();
+if (!checkData()) { return false;}
+SaveData();
+UpdateView();]]>
+            </Action>
+        </Operation>
+        <Operation Key="Cancel" Caption="取消" Visible="!ReadOnly()">
+            <Action>
+                <![CDATA[Confirm('您要放弃保存吗？','YES_NO',{YES:{Cancel();},NO:{}});]]>
+            </Action>
+        </Operation>
+        <Operation Key="Edit" Caption="修改" Visible="ReadOnly()&amp;&amp;Status==StatusValue('PREPARED')">
+            <Action>
+                <![CDATA[Edit();]]>
+            </Action>
+        </Operation>
+        <Operation Key="Enable" Caption="启用" Visible="ReadOnly()&amp;&amp;(Status==StatusValue('PREPARED') || Status==StatusValue('DISABLED'))">
+            <Action>
+                <![CDATA[if (isDeleted()) { return false;};
+SetValue("Status", StatusValue("ENABLED"));
+SaveData();]]>
+            </Action>
+        </Operation>
+        <Operation Key="Disable" Caption="停用" Visible="ReadOnly()&amp;&amp;Status==StatusValue('ENABLED')">
+            <Action>
+                <![CDATA[if (isDeleted()) { return false;};
+SetValue("Status", StatusValue("DISABLED"));
+SaveData();]]>
+            </Action>
+        </Operation>
+    </OperationCollection>
+    <ScriptCollection>
+        <Script Key="Load" Caption="载入" Range="Action" Verb="Load">
+            <![CDATA[LoadData();]]>
+        </Script>
+    </ScriptCollection>
+    <Body>
+        <Block>
+            <FlexFlowLayoutPanel Key="panel_main" Caption="panel_main">
+                <ToolBar Key="ToolBar1" Height="pref" Caption="ToolBar1">
+                    <ToolBarItemCollection/>
+                </ToolBar>
+                <SplitPanel Key="panel_content" Orientation="Vertical" Height="100%" Caption="panel_content">
+                    <TabPanel Caption="TabPanel1" Key="TabPanel1">
+                        <GridLayoutPanel Key="BasicInfo" Caption="基本信息">
+                            <ComboBox Key="Status" Caption="状态" BuddyKey="Lab_Status" X="7" Y="1" Enable="false" SourceType="Status" CopyNew="false">
+                                <DataBinding ColumnKey="Status" TableKey="TS_EXAM_RULE_HEADER" DefaultFormulaValue="StatusValue('PREPARED')"/>
+                            </ComboBox>
+                            <Label Key="Lab_Status" Caption="状态" X="6" Y="1">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <TextEditor Key="No" Caption="规则编号" BuddyKey="Lab_No" X="1" Y="1" Enable="false" CopyNew="false">
+                                <DataBinding ColumnKey="No" TableKey="TS_EXAM_RULE_HEADER"/>
+                            </TextEditor>
+                            <Label Key="Lab_No" Caption="规则编号" X="0" Y="1">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <Dict Key="Category" Caption="类别" BuddyKey="Lab_Category" X="3" Y="1" ItemKey="MD_Enum">
+                                <DataBinding ColumnKey="Category" TableKey="TS_EXAM_RULE_HEADER" Required="true"/>
+                                <ItemFilter>
+                                    <Filter Query="select oid from md_enum where type = '考题类别'" Type="DataSet"/>
+                                </ItemFilter>
+                            </Dict>
+                            <Label Key="Lab_Category" Caption="类别" X="2" Y="1">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <Dict Key="Department" Caption="发布部门" BuddyKey="Lab_Department" X="5" Y="1" ItemKey="MD_Enum">
+                                <DataBinding ColumnKey="Department" TableKey="TS_EXAM_RULE_HEADER" Required="true"/>
+                                <ItemFilter>
+                                    <Filter Query="select oid from md_enum where type = '发布部门'" Type="DataSet"/>
+                                </ItemFilter>
+                            </Dict>
+                            <Label Key="Lab_Department" Caption="发布部门" X="4" Y="1">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <NumberEditor Key="PassingScore" Caption="合格分" BuddyKey="Lab_PassingScore" X="3" Y="3" Scale="1">
+                                <DataBinding ColumnKey="PassingScore" TableKey="TS_EXAM_RULE_HEADER" CheckRule="(PassingScore &gt; 0) &amp;&amp; (PassingScore &lt;= TotalScore)" DefaultValue="0" ErrorInfo="【合格分】需大于零，且小于等于总分" Required="true"/>
+                            </NumberEditor>
+                            <Label Key="Lab_PassingScore" Caption="合格分" X="2" Y="3">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <NumberEditor Key="TotalScore" Caption="总分" BuddyKey="Lab_TotalScore" X="1" Y="3" Enable="false" Scale="1">
+                                <DataBinding ColumnKey="TotalScore" TableKey="TS_EXAM_RULE_HEADER" CheckRule="TotalScore &gt; 0" DefaultValue="0" ErrorInfo="【总分】需要大于0" Required="true"/>
+                            </NumberEditor>
+                            <Label Key="Lab_TotalScore" Caption="总分" X="0" Y="3">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <NumberEditor Key="Duration" Caption="时长(分钟)" BuddyKey="Lab_Duration" X="5" Y="3" Scale="0">
+                                <DataBinding ColumnKey="Duration" TableKey="TS_EXAM_RULE_HEADER" CheckRule="Duration &gt; 0" DefaultValue="0" ErrorInfo="【考试时长】需大于0" Required="true"/>
+                            </NumberEditor>
+                            <Label Key="Lab_Duration" Caption="时长(分钟)" X="4" Y="3">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <TextEditor Key="Description" Caption="描述" BuddyKey="Lab_Description" X="1" Y="5" Enable="false" XSpan="7">
+                                <DataBinding ColumnKey="Description" TableKey="TS_EXAM_RULE_HEADER"/>
+                            </TextEditor>
+                            <Label Key="Lab_Description" Caption="描述" X="0" Y="5">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <RowDefCollection RowGap="5">
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="10px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                            </RowDefCollection>
+                            <ColumnDefCollection ColumnGap="5">
+                                <ColumnDef Width="100px"/>
+                                <ColumnDef MinWidth="100px"/>
+                                <ColumnDef Width="100px"/>
+                                <ColumnDef MinWidth="100px"/>
+                                <ColumnDef Width="100px"/>
+                                <ColumnDef MinWidth="100px"/>
+                                <ColumnDef Width="100px"/>
+                                <ColumnDef MinWidth="100px"/>
+                                <ColumnDef Width="100px"/>
+                            </ColumnDefCollection>
+                        </GridLayoutPanel>
+                        <Grid Key="Rules" Caption="试题规则">
+                            <GridColumnCollection>
+                                <GridColumn Key="column1" Caption="选择" Width="80px"/>
+                                <GridColumn Key="Type" Caption="题型" Width="200px"/>
+                                <GridColumn Key="Count" Caption="数量" Width="80px"/>
+                                <GridColumn Key="Score" Caption="每题分数" Width="80px"/>
+                                <GridColumn Key="Seq" Caption="Seq" Width="80px" Visible="false"/>
+                            </GridColumnCollection>
+                            <GridRowCollection>
+                                <GridRow Key="row1" TableKey="TS_EXAM_RULE_DETAIL">
+                                    <GridCell Key="select" Caption="选择" CellType="CheckBox" IsSelect="true" CellSortType="None"/>
+                                    <GridCell Key="Type" Caption="题型" CellType="Dict" CellSortType="None" ItemKey="MD_Enum">
+                                        <DataBinding ColumnKey="Type" Required="true"/>
+                                        <ItemFilter>
+                                            <Filter Query="select oid from md_enum where type = '题型'" Type="DataSet"/>
+                                        </ItemFilter>
+                                    </GridCell>
+                                    <GridCell Key="Count" Caption="数量" CellType="NumberEditor" CellSortType="None" Scale="0">
+                                        <DataBinding ColumnKey="Count" DefaultValue="0" Required="true">
+                                            <ValueChanged>
+                                                <![CDATA[generateScore();]]>
+                                            </ValueChanged>
+                                        </DataBinding>
+                                    </GridCell>
+                                    <GridCell Key="Score" Caption="每题分数" CellType="NumberEditor" CellSortType="None" Scale="1">
+                                        <DataBinding ColumnKey="Score" DefaultValue="0" Required="true">
+                                            <ValueChanged>
+                                                <![CDATA[generateScore();]]>
+                                            </ValueChanged>
+                                        </DataBinding>
+                                    </GridCell>
+                                    <GridCell Key="Seq" CellSortType="None">
+                                        <DataBinding ColumnKey="Seq"/>
+                                    </GridCell>
+                                </GridRow>
+                            </GridRowCollection>
+                        </Grid>
+                        <GridLayoutPanel Key="SystemInfo" Caption="系统信息">
+                            <Dict Key="Creator" Caption="创建人" BuddyKey="Lab_Creator" X="1" Y="1" Enable="false" ItemKey="Operator" StateMask="Enable|Disable|Discard" CopyNew="false">
+                                <DataBinding ColumnKey="CREATOR" TableKey="TS_EXAM_RULE_HEADER" DefaultFormulaValue="GetOperator()"/>
+                            </Dict>
+                            <Label Key="Lab_Creator" Caption="创建人" X="0" Y="1">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <Dict Key="Modifier" Caption="修改人" BuddyKey="Lab_Modifier" X="1" Y="3" Enable="false" ItemKey="Operator" StateMask="Enable|Disable|Discard" CopyNew="false">
+                                <DataBinding ColumnKey="MODIFIER" TableKey="TS_EXAM_RULE_HEADER" DefaultFormulaValue="GetOperator()"/>
+                            </Dict>
+                            <Label Key="Lab_Modifier" Caption="修改人" X="0" Y="3">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <DatePicker Key="CreateTime" Caption="创建时间" BuddyKey="Lab_CreateTime" X="3" Y="1" Enable="false" CopyNew="false">
+                                <DataBinding ColumnKey="CREATETIME" TableKey="TS_EXAM_RULE_HEADER" DefaultFormulaValue="ServerDate()"/>
+                            </DatePicker>
+                            <Label Key="Lab_CreateTime" Caption="创建时间" X="2" Y="1">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <DatePicker Key="ModifyTime" Caption="修改时间" BuddyKey="Lab_ModifyTime" X="3" Y="3" Enable="false" CopyNew="false">
+                                <DataBinding ColumnKey="MODIFYTIME" TableKey="TS_EXAM_RULE_HEADER" DefaultFormulaValue="ServerDate()"/>
+                            </DatePicker>
+                            <Label Key="Lab_ModifyTime" Caption="修改时间" X="2" Y="3">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <RowDefCollection RowGap="5">
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                            </RowDefCollection>
+                            <ColumnDefCollection ColumnGap="5">
+                                <ColumnDef Width="100px"/>
+                                <ColumnDef MinWidth="100px"/>
+                                <ColumnDef Width="100px"/>
+                                <ColumnDef MinWidth="100px"/>
+                                <ColumnDef Width="100px"/>
+                                <ColumnDef MinWidth="100px"/>
+                                <ColumnDef Width="100px"/>
+                                <ColumnDef MinWidth="100px"/>
+                            </ColumnDefCollection>
+                        </GridLayoutPanel>
+                    </TabPanel>
+                    <SplitSize Size="100%"/>
+                </SplitPanel>
+            </FlexFlowLayoutPanel>
+        </Block>
+    </Body>
+    <MacroCollection>
+        <Macro Key="generateScore">
+            <![CDATA[// 合计总分
+var totalScore = 0;
+var score = 0;
+var count = 0;
+var row = 0;
+
+loop 'Rules'(true){
+    // 数量
+    count = GetCellValue("Rules", row, "Count"); 
+    // 每题得分
+    score = GetCellValue("Rules", row, "Score");
+    // 合计
+    totalScore = totalScore + score * count;
+    // Confirm("Row="&row&";Count="&count&";Score="&score);
+    // 下一行
+    row = row + 1;
+}
+
+// 更新合计控件的取值
+SetValue("TotalScore", totalScore);]]>
+        </Macro>
+        <Macro Key="checkData">
+            <![CDATA[// 试题规则
+var row = 0;
+var count = 0;
+var score = 0;
+loop 'Rules'(true){
+    // 数量
+    count = GetCellValue("Rules", row, "Count");
+    if (count <= 0) {
+        Confirm("【试题规则】,第" & (row + 1) & "条记录，数量需大于0");
+        return false;
+    }
+
+    // 每题分数
+    score = GetCellValue("Rules", row, "Score");
+    if (score <= 0) {
+        Confirm("【试题规则】,第" & (row + 1) & "条记录，每题分数需大于0");
+        return false;
+    }
+
+    // 下一条
+    row = row + 1;
+}
+
+if (row <= 0) {
+    Confirm("【试题规则】,至少需要一条规则");
+    return false;
+}
+
+// 试题规则是否重复？
+var type = 0;
+var type1 = 0;
+var rows = row;
+var row1 = 0;
+row = 0;
+while ((row + 1) < rows) { // 当前记录不是最后一条记录
+    // 题型
+    type = GetCellValue("Rules", row, "Type");
+
+    row1 = row + 1;
+    while (row1 < rows) {
+        // 题型
+        type1 = GetCellValue("Rules", row1, "Type");
+        
+        // 重复?
+        if (type == type1) {
+            Confirm("【试题规则】,第"&(row + 1)&"条规则与第"&(row1 + 1)&"条规则题型重复。特定题型的规则只能出现一次。");
+            return false;
+        }
+
+        // 下一条
+        row1 = row1 + 1;
+    }
+
+    // 下一条
+    row = row + 1;
+}
+
+return true;]]>
+        </Macro>
+        <Macro Key="isDeleted">
+            <![CDATA[// 判断记录是否已经被删除
+var isDeleted = false;
+isDeleted = InvokeService("RuleIsDeleted", false, false, ""&GetOID()); 
+if (isDeleted) {
+    Confirm("生成规则已被删除,不能继续进行编辑。");
+}
+
+return isDeleted;]]>
+        </Macro>
+        <Macro Key="generateDescription">
+            <![CDATA[// 生成规则描述信息
+var description = "";
+var typeId = 0;
+var typeName = "";
+var count = 0;
+var score = 0;
+var row = 0;
+
+loop 'Rules'(true){
+    // 类型
+    typeId = GetCellValue("Rules", row, "Type"); 
+    typeName = InvokeService("GetById", false, false, ""&typeId, "md_enum", "Name");
+    // 数量
+    count = GetCellValue("Rules", row, "Count"); 
+    // 每题得分
+    score = GetCellValue("Rules", row, "Score");
+    // 更新消息
+    if (description <> "") {
+        description = description + ";";
+    }
+    description = description & "【" + typeName + "】" & count & "题，每题" & score & "分";
+    
+    // 下一行
+    row = row + 1;
+}
+description = description & "。"; // Confirm("Description=" & description);
+
+// 更新字段
+SetValue("Description", description);]]>
+        </Macro>
+        <Macro Key="generateSeq">
+            <![CDATA[// 生成规则序列号，方便后期使用
+var row = 0;
+
+loop 'Rules'(true){
+    // 设置序列号
+    SetCellValue("Rules", row, "Seq", row);
+    // Confirm(row);
+    
+    // 下一行
+    row = row + 1;
+}]]>
+        </Macro>
+    </MacroCollection>
+</Form>

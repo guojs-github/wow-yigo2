@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Key="TestViewListView" Caption="体验中心-列表" Version="25">
+    <DataSource>
+        <DataObject Key="test_data" Caption="体验中心" PrimaryTableKey="test_data" SecondaryType="">
+            <TableCollection>
+                <Table Key="test_data" Caption="测试数据" TableMode="Detail" SourceType="Query">
+                    <Column Key="OID" Caption="对象标识" DataType="Long"/>
+                    <Column Key="Status" Caption="状态" DataType="Integer"/>
+                    <Column Key="No" Caption="编号" DataType="Varchar" Length="50"/>
+                    <Column Key="FileName" Caption="文件名" DataType="Varchar" Length="100"/>
+                    <Column Key="url" Caption="文件路径" DataType="Varchar" Length="1000"/>
+                    <Column Key="creator_id" Caption="创建者ID" DataType="Long"/>
+                    <Statement>
+                        <![CDATA[select * from (
+	select
+	    ma.OID,
+	    ma.Status,
+	    ma.No,
+	    ma.FileName,
+	    ma.url,
+	    ma.RefType,
+	    ma.RefId,
+	    ma.creator as creator_id,
+	    creator.name as creator_name
+	from
+	    md_attachment ma
+	    left join (select oid, name from sys_operator) creator on creator.oid = ma.creator
+) a  ]]>
+                    </Statement>
+                </Table>
+            </TableCollection>
+        </DataObject>
+    </DataSource>
+    <OperationCollection>
+        <Operation Key="RefreshData" Caption="刷新数据">
+            <Action>
+                <![CDATA[LoadData();]]>
+            </Action>
+        </Operation>
+    </OperationCollection>
+    <Body>
+        <Block>
+            <SplitPanel Key="frame_split" Orientation="Vertical" Caption="frame_split">
+                <FlexFlowLayoutPanel Key="frame_split_flex" Caption="frame_split_flex">
+                    <ToolBar Key="toolbar" Height="pref" Caption="toolbar">
+                        <ToolBarItemCollection/>
+                    </ToolBar>
+                    <TabPanel Caption="frame_split_flex_tab" Height="pref" Key="frame_split_flex_tab">
+                        <ListView Caption="视图" Key="panel_list_view" TableKey="test_data" class="allow-user-style" PageRowCount="7" PageLoadType="DB">
+                            <ListViewColumnCollection>
+                                <ListViewColumn Key="Status" Caption="状态" ColumnType="ComboBox" Width="100px" DataColumnKey="Status" SourceType="Status"/>
+                                <ListViewColumn Key="No" Caption="编号" ColumnType="HyperLink" DataColumnKey="No" Width="200px" Sortable="true"/>
+                                <ListViewColumn Key="file_name" Caption="文件名" DataColumnKey="FileName" Width="150px"/>
+                                <ListViewColumn Key="file_path" Caption="文件路径" DataColumnKey="url" Width="300px"/>
+                                <ListViewColumn Key="creater" Caption="创建者" ColumnType="Dict" DataColumnKey="creator_id" Width="150px" ItemKey="Operator"/>
+                            </ListViewColumnCollection>
+                        </ListView>
+                    </TabPanel>
+                </FlexFlowLayoutPanel>
+                <SplitSize Size="100%"/>
+            </SplitPanel>
+        </Block>
+    </Body>
+    <OnLoad>
+        <![CDATA[LoadData();]]>
+    </OnLoad>
+</Form>

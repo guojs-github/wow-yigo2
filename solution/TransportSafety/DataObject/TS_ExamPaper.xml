@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<DataObject Key="TS_ExamPaper" Caption="试卷" NoPrefix="TSEP" PrimaryTableKey="TS_EXAM_PAPER_HEADER" PrimaryType="Entity" Version="13">
+    <TableCollection>
+        <Table Key="TS_EXAM_PAPER_HEADER" Caption="试卷">
+            <Column Key="OID" Caption="对象标识" DataType="Long"/>
+            <Column Key="SOID" Caption="主对象标识" DataType="Long"/>
+            <Column Key="POID" Caption="父对象标识" DataType="Long"/>
+            <Column Key="VERID" Caption="对象版本" DataType="Integer"/>
+            <Column Key="DVERID" Caption="对象明细版本" DataType="Integer"/>
+            <Column Key="Status" Caption="状态" DataType="Integer"/>
+            <Column Key="No" Caption="编码" DataType="Varchar" Length="100"/>
+            <Column Key="CREATOR" Caption="创建人" DataType="Long"/>
+            <Column Key="CREATETIME" Caption="创建时间" DataType="DateTime"/>
+            <Column Key="MODIFIER" Caption="修改人" DataType="Long"/>
+            <Column Key="MODIFYTIME" Caption="修改时间" DataType="DateTime"/>
+            <Column Key="Category" Caption="类别" DataType="Long"/>
+            <Column Key="Department" Caption="发布部门" DataType="Long"/>
+            <Column Key="Remark" Caption="备注" DataType="Varchar" Length="1000"/>
+            <Column Key="RuleId" Caption="生成规则ID" DataType="Long"/>
+            <Column Key="IsDeleted" Caption="是否删除" DataType="Integer" DefaultValue="0"/>
+            <Column Key="RuleDescription" Caption="生成规则描述" DataType="Varchar" Length="1000"/>
+            <Column Key="TotalScore" Caption="总分" DataType="Numeric" Precision="16" Scale="2"/>
+            <Column Key="PassingScore" Caption="及格分" DataType="Numeric" Precision="16" Scale="2"/>
+            <Column Key="Duration" Caption="时长(分钟)" DataType="Integer"/>
+            <Column Key="RuleCode" Caption="生成规则编码" DataType="Varchar" Length="100"/>
+            <Column Key="IsQuestionsGenerated" Caption="试题是否已经生成" DataType="Integer" DefaultValue="0"/>
+        </Table>
+        <Table Key="TS_EXAM_PAPER_DETAIL" Caption="试卷详情">
+            <Column Key="OID" Caption="对象标识" DataType="Long"/>
+            <Column Key="SOID" Caption="主对象标识" DataType="Long"/>
+            <Column Key="POID" Caption="父对象标识" DataType="Long"/>
+            <Column Key="VERID" Caption="对象版本" DataType="Integer"/>
+            <Column Key="DVERID" Caption="对象明细版本" DataType="Integer"/>
+            <Column Key="Seq" Caption="题目顺序" DataType="Long"/>
+            <Column Key="QuestionId" Caption="题目ID" DataType="Long"/>
+            <Column Key="QuestionCode" Caption="题目编码" DataType="Varchar" Length="50"/>
+            <Column Key="Question" Caption="题目内容" DataType="Varchar" Length="1000"/>
+            <Column Key="QuestionOptions" Caption="题目备选项清单" DataType="Varchar" Length="1000"/>
+            <Column Key="QuestionAnswer" Caption="题目答案" DataType="Varchar" Length="1000"/>
+            <Column Key="QuestionType" Caption="题目题型" DataType="Long"/>
+        </Table>
+    </TableCollection>
+</DataObject>

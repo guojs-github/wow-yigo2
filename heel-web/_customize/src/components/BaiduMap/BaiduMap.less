@@ -1,0 +1,66 @@
+/*
+	Baidu map style
+*/
+@import '/src/assets/style/index.less';
+
+@sub-titlle-height: 50px;
+
+.baidu-map {
+    .title {
+        .-row();
+        .-box-shadow-routine(10, .5);
+        padding: 0 10px;
+    
+        width: calc(100% - 20px);
+        font-size: @font-size-big;
+        font-weight: bold;
+        color: white;
+        background-color: @color-dark-blue;
+    }
+
+    .sub-title {
+        height: @sub-titlle-height;
+        line-height: @sub-titlle-height;
+
+        color: @color-black;
+        font-size: @font-size-big;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    .button {
+        .-inline();
+        .-select-text-none();
+        padding: 0 10px;
+        margin: 0 10px 0 0;
+
+        min-width: 100px;
+        height: 30px;
+        line-height: 30px;
+        color: @color-black;        
+        font-size: @font-size-default;
+        text-align: center;
+        .-box-shadow-routine(4, 0.5);
+    }
+
+    .button:hover {
+        background-color: @color-light-light-gray;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    #baidu-map-container {
+        width: 100%;
+        height: 450px;
+    }
+
+    .functions {
+        .-scroll-y();
+
+        height: calc(100vh - 620px);
+
+        & > .-section {
+            width: calc(100% - 10px);
+        }
+    }
+}

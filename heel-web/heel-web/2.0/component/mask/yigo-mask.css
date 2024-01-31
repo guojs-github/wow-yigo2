@@ -1,0 +1,13 @@
+/**
+	yigo mask style
+	2023.10.25 created by guojs 
+**/
+.heel-web .loading.image {
+	font-size: inherit;
+}
+
+.heel-web .loading.image > img {
+    font-size: inherit;
+    width: 5.028em;
+    height: 5.028em;
+}

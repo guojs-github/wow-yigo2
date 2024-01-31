@@ -1,0 +1,21 @@
+/*
+    heel-web component user condition style.
+    2023.11.1 ceated by guojs.
+*/
+
+.heel-web .user-condition-settings {
+    position: absolute;
+    left: 0;
+    top: 0;
+
+    transform: scale(0.75);
+}
+
+.heel-web .user-condition-settings > .setting {
+    height: 16px;
+    line-height: 16px;
+}
+
+.heel-web .user-condition-settings > .setting.ui-chk.enabled > label {
+    color: #40a8e8;
+}

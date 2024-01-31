@@ -1,0 +1,239 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 24px;
+    width: 100%;
+    min-width: 1000px;
+    overflow: auto;
+}
+body * {
+    font-size: 1em;
+    box-sizing: border-box; /* border和padding包含在width/height中  */
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+input {
+    outline: none;
+    font-family: "Microsoft Yahei", Verdana, Simsun, "Segoe UI Web Light", "Segoe UI Light", "Segoe UI Web Regular", "Segoe UI", "Segoe UI Symbol", "Helvetica Neue", Arial
+}
+input[type="text"]::-ms-clear {
+    display: none;
+}
+.warpper {
+    margin: 0 auto;
+    width: 89.5834%;
+    min-width: 1000px;
+    height: 100%;
+    font-size: 0;
+}
+.header {
+    width: 100%;
+    line-height: 2.5em;
+    background: #eee;
+}
+.login-logo {
+    display: inline-block;
+    width: 2.90625em;
+    font-size: 24px;
+    vertical-align: middle;
+}
+.login-logo-text {
+    display: inline-block;
+    margin-left: 1em;
+    font-size: 21px;
+    color: #4d5e80;
+    line-height: 1.4286em;
+    vertical-align: middle;
+}
+.login-main {
+    width: 100%;
+    height: 22.1875em;
+    background: url(images/login_bg.jpg) no-repeat center;
+    background-size: cover;
+    line-height: 22.1875em;
+}
+.login_img {
+    display: inline-block;
+    margin-left: 5.8139%;
+    width: 40.4166%;
+    font-size: 24px;
+    vertical-align: middle;
+}
+.login-loginbox {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 13.9534%;
+    padding: .6875em 1.25em 1.25em;
+    width: 14.375em;
+    font-size: 24px;
+    color: #717a88;
+    background: #fff;
+    border-radius: 6px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+.login-title {
+    margin: 0;
+    color: #0c8eff;
+    font-size: .9375em;
+    line-height: 3.2em;
+}
+.login-strip {
+    margin-top: 0;
+    margin-bottom: 1.5em;
+    height: 2.18182em;
+    line-height: 2.18182em;
+    font-size: .6875em;
+    color: #717a88;
+}
+
+.login-strip span {
+    display: inline-block;
+    width: 5em;
+    white-space: nowrap;
+}
+.login-strip input {
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    -o-box-sizing:border-box;
+    padding-right:1.6em;
+    line-height: 2.18182em;
+    width: 10em;
+    height: 2.18182em;
+    border: none;
+    border-bottom: 1px solid #717a88;
+    color: #717a88;
+
+    text-indent: 0.36364em;
+    vertical-align:bottom;
+}
+
+.login-valid input {
+    width: 6em;
+}
+
+.login_valid_img {
+    padding-left: 10px;
+    vertical-align: bottom;
+}
+
+.login-password-rows{
+    position:relative;
+}
+
+.login-valid {
+    line-height: 2.18182em;
+    font-size: 0.6875em;
+}
+
+:root .login-password-btn{
+    position:absolute;
+    right:0.3em;
+    bottom:0.136363em;
+    width:1.818182em;
+    height:1.36363em;
+    cursor:pointer;
+}
+.login-password-btn-close{
+    background:url(images/password_close.png) no-repeat right center;
+}
+.login-password-btn-open{
+    background:url(images/password_open.png) no-repeat right top;
+}
+.login-combox {
+    margin-bottom: 1.5em;
+    font-size: .6875em;
+    line-height: 2.18182em;
+    overflow: hidden;
+}
+.login-combox-name {
+    width: 5em;
+    float: left;
+    white-space: nowrap;
+}
+.login-combox-content,.locale-combox-content {
+    float: left;
+    width: 10em;
+    height: 2.18182em;
+    text-indent: 0.36364em;
+    border-bottom: 1px solid #717a88;
+}
+.login-combox-content p {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.dropDown-button,.dropDown-locale {
+    float: right;
+    margin-top: .8em;
+    width: 1.0909em;
+    height: .5909em;
+    background: url(images/dropDown_icon.png) no-repeat center;
+    background-size: cover;
+    cursor: pointer;
+}
+.login-button {
+    margin: 1.76924em auto 0;
+    width: 14.61539em;
+    line-height: 2em;
+    font-size: .8125em;
+    color: #fff;
+    text-align: center;
+    background: #0c8eff;
+    border-radius: 6px;
+    cursor: pointer;
+}
+.login_sel_vw,.login_locale_vw {
+    display: none;
+    position: absolute;
+    max-height: 300px;
+	overflow: auto;
+	color: #717a88;
+    border: 1px solid #e2e5ec;
+}
+.login-combox-list,.locale-combox-list {
+    border-radius: 0 0 3px 3px;
+    width: 100%;
+    box-sizing: border-box;
+    background: #fff;
+    z-index: 10;
+}
+.login-combox-item {
+    font-size: 0.6875em;
+    line-height: 2.09091em;
+    text-indent: 1em;
+    cursor: pointer;
+    width: 100%;
+}
+.login-combox-item:hover {
+    background: #e2e5ec;
+}
+.login-combox-checked {
+    background: #a7b8d1;
+    color: #fff;
+}
+.half-word {
+    display: inline-block;
+    width: 0.5em;
+}
+.two-word {
+    display: inline-block;
+    width: 2em;
+}
+@media screen and (min-width: 1440px) {
+    body,
+    .login-loginbox,
+    .login_img,
+    .login-logo {
+        font-size: 32px;
+    }
+    .login-logo-text {
+        font-size: 28px;
+    }
+    .login-password-btn-open{
+        background-position: right 0.2em;
+    }
+}

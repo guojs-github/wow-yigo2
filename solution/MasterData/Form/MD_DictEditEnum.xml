@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Caption="枚举字典编辑" Key="MD_DictEditEnum" FormulaCaption="Para('EntryCaption')" FormulaAbbrCaption="Para('EntryCaption')" Version="2">
+    <OperationCollection>
+        <Operation Key="NewDict" Caption="新增(N)" ShortCuts="Ctrl+N" Visible="!Container.IsNewOrEdit()">
+            <Action>
+                <![CDATA[NewDict(Para('FormKey'));SetEnable('DictView',false);ClearSelection('DictView')]]>
+            </Action>
+        </Operation>
+        <Operation Key="Modify" Caption="修改(M)" ShortCuts="Ctrl+M" Enable="GetSelectedValue('DictView','OID') &gt; 0 &amp;&amp; GetSelectedValue('DictView','Enable') == 0" Visible="!Container.IsNewOrEdit()">
+            <Action>
+                <![CDATA[Container.Edit();SetEnable('DictView',false)]]>
+            </Action>
+        </Operation>
+        <Operation Key="Save" Caption="保存(S)" ShortCuts="Ctrl+S" Visible="Container.IsNewOrEdit()">
+            <Action>
+                <![CDATA[Container.Save();RefreshDictView('DictView',Container.GetDataObjectKey(),Container.GetOID(),Container.GetInitOperationState());SetEnable('DictView',true)]]>
+            </Action>
+        </Operation>
+        <Operation Key="Cancel" Caption="取消(Z)" ShortCuts="Ctrl+Z" Visible="Container.IsNewOrEdit()">
+            <Action>
+                <![CDATA[Container.Cancel();SetEnable('DictView',true)]]>
+            </Action>
+        </Operation>
+        <Operation Key="EnabledDict" Caption="启用" Enable="IsEnable('DictView') &amp;&amp; GetSelectedValue('DictView','Enable') &lt;&gt; 1">
+            <Action>
+                <![CDATA[
+					Container.EnabledDict(Container.GetDataObjectKey(),Container.GetOID());
+					RefreshDictView('DictView',Container.GetDataObjectKey(),Container.GetOID(),Container.GetInitOperationState());
+				]]>
+            </Action>
+        </Operation>
+        <Operation Key="DisabledDict" Caption="停用" Enable="IsEnable('DictView') &amp;&amp; GetSelectedValue('DictView','Enable') == 1">
+            <Action>
+                <![CDATA[
+					Container.EnabledDict(Container.GetDataObjectKey(),Container.GetOID(),0);
+					RefreshDictView('DictView',Container.GetDataObjectKey(),Container.GetOID(),Container.GetInitOperationState());
+				]]>
+            </Action>
+        </Operation>
+        <Operation Key="InvalidDict" Caption="作废" Enable="IsEnable('DictView') &amp;&amp; GetSelectedValue('DictView','Enable') == 0">
+            <Action>
+                <![CDATA[
+					Container.EnabledDict(Container.GetDataObjectKey(),Container.GetOID(),-1);
+					RefreshDictView('DictView',Container.GetDataObjectKey(),Container.GetOID(),Container.GetInitOperationState());
+				]]>
+            </Action>
+        </Operation>
+        <Operation Key="DeleteDict" Caption="删除" Enable="IsEnable('DictView') &amp;&amp; GetSelectedValue('DictView','Enable') == -1">
+            <Action>
+                <![CDATA[
+				Confirm('确定要删除吗？','YES_NO',{
+					YES:{
+						Container.DeleteData();
+						RefreshDictView('DictView',Container.GetDataObjectKey(),Container.GetOID(),Container.GetInitOperationState());
+						Container.Close();
+					},
+					NO:{
+					}
+				})
+				
+				
+				]]>
+            </Action>
+        </Operation>
+    </OperationCollection>
+    <Body>
+        <Block>
+            <FlexFlowLayoutPanel Key="main">
+                <ToolBar Key="main_toolbar" Height="pref">
+                    <ToolBarItemCollection/>
+                </ToolBar>
+                <SplitPanel Key="Split" Height="100%">
+                    <DictView Key="DictView" FormulaItemKey="GetDataObjectKey(Para('FormKey'))">
+                        <!--<RowClick>
+						<![CDATA[openDict(GetSelectedValue('DictView','ItemKey'),GetSelectedValue('DictView','oid'),'Container')]]>	
+					</RowClick>-->
+                        <FocusRowChanged>
+                            <![CDATA[
+							OpenDict(Para('FormKey'),GetSelectedValue('DictView','OID'),'Container')
+						]]>
+                        </FocusRowChanged>
+                    </DictView>
+                    <Container Key="Container" Style="Stack"/>
+                    <!--<Container Key="Container" Style="Stack" DefaultFormKey="" FormulaFormKey="">-->
+                    <SplitSize Size="30%"/>
+                    <SplitSize Size="70%"/>
+                </SplitPanel>
+            </FlexFlowLayoutPanel>
+        </Block>
+    </Body>
+</Form>

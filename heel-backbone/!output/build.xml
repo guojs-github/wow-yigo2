@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="GB2312"?> 
+<!--default 是默认执行的任务-->
+<project name="MyProject" default="releaseHeelSample" basedir=".">
+  <description>
+	heel-backbone自动编译打包
+  </description>
+  <!-- 文件目录定义 -->
+  <property name="src" location="src"/>
+  <property name="srcHeelSample" location="../heel-sample/src"/>
+  <property name="classes" location="classes"/>
+  <property name="release" location="release"/>
+
+  <target name="clean" description="1、删除原有数据">
+  <!-- 清除上次发布的数据 -->
+    <delete dir="${src}"/>
+    <delete dir="${classes}"/>
+    <delete dir="${release}"/>
+  </target>
+ 
+  <target name="init" depends="clean" description="2、初始化">
+    <!-- Create the time stamp -->
+    <tstamp/>
+	<!-- 初始化目录 -->
+    <mkdir dir="${src}"/>
+    <mkdir dir="${classes}/heel-sample"/>
+    <mkdir dir="${release}"/>
+    <!-- 复制源代码 -->
+	<copy toDir="${src}/heel-sample">
+		<fileset dir="${srcHeelSample}"/>
+    </copy>
+  </target>
+
+  <target name="compileHeelSample" depends="init" description="编译heel-sample">
+    <!-- 编译heel-sample includeAntRuntime="false"是为了去掉用ant新版本导致的一些警告-->
+    <javac srcdir="${src}/heel-sample" destdir="${classes}/heel-sample" includeAntRuntime="false" debug="true" debugLevel="lines,vars,source">
+		<!--给编译器指定编码，防止出现："警告： 编码 GBK 的不可映射字符"-->
+		<compilerarg line="-encoding UTF-8"/>
+		<classpath>
+			<fileset dir="../heel-sample/lib"/>
+		</classpath>		
+	</javac>
+  </target>
+
+  <target name="releaseHeelSample" depends="compileHeelSample" description="打包heel-sample">
+    <!-- 打包Heel -->
+    <jar jarfile="${release}\heel-sample.jar" basedir="${classes}\heel-sample"/>
+  </target>
+ </project>

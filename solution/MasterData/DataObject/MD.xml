@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<DataObject Key="MD_Enum" Caption="枚举字典数据" PrimaryTableKey="MD_Enum" SecondaryType="Dict" Version="21" PrimaryType="Entity" DisplayFields="DisplayName">
+    <TableCollection>
+        <Table Key="MD_Enum" Caption="枚举字典">
+            <Column Key="OID" Caption="对象标识" DataType="Long"/>
+            <Column Key="SOID" Caption="主对象标识" DataType="Long"/>
+            <Column Key="POID" Caption="父对象标识" DataType="Long"/>
+            <Column Key="VERID" Caption="对象版本" DataType="Integer"/>
+            <Column Key="DVERID" Caption="对象明细版本" DataType="Integer"/>
+            <Column Key="Status" Caption="状态" DataType="Integer"/>
+            <Column Key="Code" Caption="代码" DataType="Varchar" Length="50"/>
+            <Column Key="Name" Caption="名称" DataType="Varchar" Length="100"/>
+            <Column Key="Enable" Caption="启用标记" DataType="Integer"/>
+            <Column Key="ParentID" Caption="父节点" DataType="Long"/>
+            <Column Key="NodeType" Caption="节点类型" DataType="Integer"/>
+            <Column Key="TLeft" Caption="TLeft" DataType="Integer"/>
+            <Column Key="TRight" Caption="TRight" DataType="Integer"/>
+            <Column Key="CREATOR" Caption="创建人" DataType="Long"/>
+            <Column Key="CREATETIME" Caption="创建时间" DataType="DateTime"/>
+            <Column Key="MODIFIER" Caption="修改人" DataType="Long"/>
+            <Column Key="MODIFYTIME" Caption="修改时间" DataType="DateTime"/>
+            <Column Key="Type" Caption="枚举类型" DataType="Varchar" Length="50" SortType="Asc"/>
+            <Column Key="Value" Caption="值" DataType="Varchar" Length="100"/>
+            <Column Key="Remark" Caption="备注" DataType="Varchar" Length="1000"/>
+            <Column Key="DisplayName" Caption="名称" DataType="Varchar" Length="200" SortType="Asc"/>
+        </Table>
+    </TableCollection>
+</DataObject>

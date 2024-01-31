@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<DataObject Key="TS_ExamQuestion" Caption="题目" NoPrefix="TSEQ" PrimaryTableKey="TS_EXAM_QUESTION_HEADER" PrimaryType="Entity" Version="33">
+    <TableCollection>
+        <Table Key="TS_EXAM_QUESTION_HEADER" Caption="题目">
+            <Column Key="OID" Caption="对象标识" DataType="Long"/>
+            <Column Key="SOID" Caption="主对象标识" DataType="Long"/>
+            <Column Key="POID" Caption="父对象标识" DataType="Long"/>
+            <Column Key="VERID" Caption="对象版本" DataType="Integer"/>
+            <Column Key="DVERID" Caption="对象明细版本" DataType="Integer"/>
+            <Column Key="Status" Caption="状态" DataType="Integer"/>
+            <Column Key="No" Caption="编码" DataType="Varchar" Length="100"/>
+            <Column Key="CREATOR" Caption="创建人" DataType="Long"/>
+            <Column Key="CREATETIME" Caption="创建时间" DataType="DateTime"/>
+            <Column Key="MODIFIER" Caption="修改人" DataType="Long"/>
+            <Column Key="MODIFYTIME" Caption="修改时间" DataType="DateTime"/>
+            <Column Key="Category" Caption="类别" DataType="Long"/>
+            <Column Key="Department" Caption="发布部门" DataType="Long"/>
+            <Column Key="Type" Caption="题型" DataType="Long"/>
+            <Column Key="IsMandatory" Caption="是否必考" DataType="Integer"/>
+            <Column Key="Question" Caption="题目" DataType="Varchar" Length="1000"/>
+            <Column Key="Answer" Caption="答案" DataType="Varchar" Length="1000"/>
+            <Column Key="Remark" Caption="备注" DataType="Varchar" Length="1000"/>
+            <Column Key="Options" Caption="选择题，选项清单" DataType="Varchar" Length="1000"/>
+            <Column Key="AnswerTrueOrFalse" Caption="判断题答案" DataType="Integer"/>
+            <Column Key="IsDeleted" DataType="Integer" Caption="是否删除" DefaultValue="0"/>
+        </Table>
+        <Table Key="TS_EXAM_QUESTION_OPTION" Caption="题目选项" TableMode="Detail">
+            <Column Key="OID" Caption="对象标识" DataType="Long"/>
+            <Column Key="SOID" Caption="主对象标识" DataType="Long"/>
+            <Column Key="POID" Caption="父对象标识" DataType="Long"/>
+            <Column Key="VERID" Caption="对象版本" DataType="Integer"/>
+            <Column Key="DVERID" Caption="对象明细版本" DataType="Integer"/>
+            <Column Key="Seq" Caption="顺序号" DataType="Varchar" Length="10" SortType="Asc"/>
+            <Column Key="IsAnswer" Caption="是否答案" DataType="Integer"/>
+            <Column Key="Title" Caption="选项文字" DataType="Varchar" Length="100"/>
+            <Column Key="Picture" Caption="图片名称" DataType="Varchar" Length="100"/>
+            <Column Key="PictureUrl" Caption="图片位置信息" DataType="Varchar" Length="1000"/>
+            <Column Key="PictureId" Caption="图片附件ID" DataType="Long"/>
+        </Table>
+    </TableCollection>
+</DataObject>

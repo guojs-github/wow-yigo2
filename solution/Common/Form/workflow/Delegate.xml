@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Caption="我的代理授权" FormType="View" Key="Delegate">
+    <DataSource>
+        <DataObject Caption="我的代理授权" Key="Delegate">
+            <TableCollection>
+                <Table Caption="代理授权" DBTableName="WF_Delegate" Key="Delegate" Persist="false" SourceType="Query" TableMode="Detail">
+                    <Column Caption="代理编号" DataType="Long" Key="DelegateID"/>
+                    <Column Caption="代理类型" DataType="Integer" Key="DelegateType"/>
+                    <Column Caption="目标操作员" DataType="Long" Key="TgtOperatorID"/>
+                    <Column Caption="源操作员" DataType="Long" Key="SrcOperatorID"/>
+                    <Column Caption="代理类型" DataType="Integer" Key="ObjectType"/>
+                    <Column Caption="标识" DataType="Varchar" Key="ObjectKey"/>
+                    <Column Caption="结点" DataType="Varchar" Key="NodeKey"/>
+                    <Column Caption="起始时间" DataType="DateTime" Key="StartTime"/>
+                    <Column Caption="结束时间" DataType="DateTime" Key="EndTime"/>
+                    <Column Caption="永久有效" DataType="Boolean" Key="AlwaysValid"/>
+                    <Column Caption="删除" DataType="Varchar" Key="deleteitem"/>
+                    <Column Key="enable" Caption="onuse" DataType="Integer"/>
+                    <ParameterCollection>
+                        <Parameter Formula="GetOperator()"/>
+                    </ParameterCollection>
+                    <Statement>
+                        <![CDATA[select DelegateID,DelegateType,TgtOperatorID,SrcOperatorID,ObjectType,ObjectKey,NodeKey,StartTime,EndTime,AlwaysValid,'删除' as deleteitem,enable from WF_Delegate where SrcOperatorID=?]]>
+                    </Statement>
+                </Table>
+            </TableCollection>
+            <OIDFilter/>
+        </DataObject>
+    </DataSource>
+    <OperationCollection>
+        <Operation Key="Save" Caption="添加代理信息" Visible="!ReadOnly()">
+            <Action>
+                <![CDATA[
+				ShowModal('AddDelegate')
+					]]>
+            </Action>
+        </Operation>
+    </OperationCollection>
+    <Body>
+        <Block>
+            <FlexFlowLayoutPanel Key="main">
+                <ToolBar Height="pref" Key="main_toolbar">
+                    <ToolBarItemCollection/>
+                </ToolBar>
+                <ListView Height="100%" Key="list" TableKey="Delegate">
+                    <ListViewColumnCollection>
+                        <ListViewColumn Caption="代理编号" DataColumnKey="DelegateID" Key="DelegateID" Width="100px"/>
+                        <ListViewColumn Caption="代理类型" ColumnType="ComboBox" DataColumnKey="DelegateType" Key="delegateType">
+                            <Item Caption="授权" Key="AUTHORIZE" Value="1"/>
+                            <Item Caption="代理" Key="DELEGATE" Value="2"/>
+                        </ListViewColumn>
+                        <ListViewColumn Caption="目标操作员" ColumnType="Dict" DataColumnKey="TgtOperatorID" ItemKey="Operator" Key="TgtOperatorID" Width="200px"/>
+                        <ListViewColumn Caption="源操作员" ColumnType="Dict" DataColumnKey="SrcOperatorID" ItemKey="Operator" Key="SrcOperatorID" Width="200px"/>
+                        <ListViewColumn Caption="起始时间" ColumnType="DatePicker" DataColumnKey="StartTime" Key="StartTime" Width="150px"/>
+                        <ListViewColumn Caption="结束时间" ColumnType="DatePicker" DataColumnKey="EndTime" Key="EndTime" Width="150px"/>
+                        <ListViewColumn Caption="永久有效" ColumnType="CheckBox" DataColumnKey="AlwaysValid" Enable="false" Key="AlwaysValid" Width="100px"/>
+                        <ListViewColumn Caption="删除" ColumnType="Button" DataColumnKey="deleteitem" DefaultValue="删除" Key="delete">
+                            <OnClick>
+                                <![CDATA[ DeleteDelegateData(DelegateID);LoadData();
+]]>
+                            </OnClick>
+                        </ListViewColumn>
+                        <ListViewColumn Caption="启用状态" ColumnType="CheckBox" Enable="false" Key="onuse" Width="80px" DataColumnKey="enable"/>
+                        <ListViewColumn Caption="操作" ColumnType="Button" Key="opt" Width="80px" DefaultFormulaValue="IIF(onuse==1, '停用', '启用')">
+                            <OnClick>
+                                <![CDATA[IIF(onuse==1, DisableDelegateData(DelegateID), SetDelegateDataInUse(DelegateID));
+LoadData();]]>
+                            </OnClick>
+                        </ListViewColumn>
+                    </ListViewColumnCollection>
+                </ListView>
+            </FlexFlowLayoutPanel>
+        </Block>
+    </Body>
+    <OnLoad type="Formula">
+        <![CDATA[LoadData();]]>
+    </OnLoad>
+</Form>

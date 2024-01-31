@@ -1,0 +1,40 @@
+/**
+ * number editor control style.
+ * 
+ * 2023.8.28 created by guojs.
+ */
+.heel-web .ui-numed {
+    position: relative;
+}
+
+.heel-web .ui-numed > input {
+    padding-right: 30px;
+}
+
+.heel-web .ui-numed > .clear {
+    position: absolute;
+    right: 0px;
+    top: 0;
+    text-align: center;
+
+    width: 30px;
+    height: inherit;
+
+    color: #aaaaaa;
+    background-color: transparent;
+
+    font-size: 10px;
+
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.heel-web .ui-numed > .clear:hover
+{
+    color: #40a8e8;
+}

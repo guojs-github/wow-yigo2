@@ -1,0 +1,288 @@
+@font-face {
+    font-family: 'TeamworkRegular';
+    src: url('teamwork-regular-webfont.eot');
+    src: url('teamwork-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('teamwork-regular-webfont.woff') format('woff'),
+         url('teamwork-regular-webfont.ttf') format('truetype'),
+         url('teamwork-regular-webfont.otf') format('opentype'),
+         url('teamwork-regular-webfont.svg#TeamworkRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.gantt *{
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing:border-box;
+  box-sizing: border-box;
+}
+
+  /*
+  -------------------------------------------------------
+  body styles
+  -------------------------------------------------------
+  */
+.gantt #savingMessage{
+  background-color:#E3EDED;
+  display:none;
+  color:#617777;
+  font-weight:bolder;
+  position:fixed;
+  top:0;
+  left:50%;
+  width:200px;
+  text-align:center;
+  margin-left:-100px;
+  padding:5px 0;
+  z-index:1000000;
+  box-shadow:0 3px 2px rgba(0,0,0,0.4);
+  -moz-box-shadow:0 3px 2px rgba(0,0,0,0.4);
+  -webkit-box-shadow:0 3px 2px rgba(0,0,0,0.4);
+  -o-box-shadow:0 3px 2px rgba(0,0,0,0.4);
+}
+
+.gantt  .waiting{
+  cursor:progress;
+}
+
+/*
+  -------------------------------------------------------
+  teamwork icon
+  -------------------------------------------------------
+  */
+
+
+.gantt .teamworkIcon {
+  font-family: 'TeamworkRegular', arial, sans-serif;
+  color:#617777;
+  font-weight:normal;
+  font-size:120%
+}
+
+.gantt .teamworkIcon.withLabel {
+  padding-right:5px;
+}
+
+
+.gantt .button:hover .teamworkIcon {
+  opacity: 0.8
+}
+
+.gantt .teamworkIcon.alert {
+  color:#B61E2D;
+}
+
+.gantt .cvcColorSquare{
+  display:inline-block;
+  text-align:left;
+  border:#fff 0px solid;
+  box-shadow:0px 0px 5px #999;
+  -moz-box-shadow:2px 2px 2px #999;
+  -webkit-box-shadow:0px 0px 5px #999;
+  -o-box-shadow:0px 0px 5px #999;
+  text-indent:10px;
+  border-radius:5px;
+  cursor: pointer;
+}
+
+.gantt .cvcColorSquare:hover{
+  opacity:.7;
+}
+
+.gantt .unselectable {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.gantt .ui-resizable { position: relative;}
+.gantt .ui-resizable-handle { position: absolute;font-size: 0.1px;z-index: 99999; display: block; }
+.gantt .ui-resizable-disabled .ui-resizable-handle, .ui-resizable-autohide .ui-resizable-handle { display: none; }
+.gantt .ui-resizable-n { cursor: n-resize; height: 7px; width: 100%; top: -5px; left: 0; }
+.gantt .ui-resizable-s { cursor: s-resize; height: 7px; width: 100%; bottom: -5px; left: 0; }
+.gantt .ui-resizable-e { cursor: e-resize; width: 7px; right: -5px; top: 0; height: 100%; }
+.gantt .ui-resizable-w { cursor: w-resize; width: 7px; left: -5px; top: 0; height: 100%; }
+.gantt .ui-resizable-se { cursor: se-resize; width: 12px; height: 12px; right: 1px; bottom: 1px; }
+.gantt .ui-resizable-sw { cursor: sw-resize; width: 9px; height: 9px; left: -5px; bottom: -5px; }
+.gantt .ui-resizable-nw { cursor: nw-resize; width: 9px; height: 9px; left: -5px; top: -5px; }
+.gantt .ui-resizable-ne { cursor: ne-resize; width: 9px; height: 9px; right: -5px; top: -5px;}
+
+
+  /*
+  -------------------------------------------------------
+  table styles
+  -------------------------------------------------------
+  */
+
+.gantt .table {
+  width: 100%;
+}
+
+.gantt TH,.gantt  .tableHeader {
+  font-weight: normal;
+  color: #FFFFFF;
+  border: none;
+  background-color: #91B4B7;
+  padding:2px
+}
+
+.gantt TH a {
+  color: #FFFFFF;
+}
+
+  /*
+  -------------------------------------------------------
+  Buttons
+  -------------------------------------------------------
+  */
+
+.gantt .button {
+  display:inline-block;
+  font-size:110%;
+  font-family:Arial, sans-serif;
+  color:#fff;
+  cursor:pointer;
+  background-color:#373737;
+   -moz-box-shadow:2px 2px 2px #999;
+   -webkit-box-shadow:2px 2px 2px #999;
+   -o-box-shadow:2px 2px 2px #999;
+   box-shadow:2px 2px 2px #999;
+   -moz-border-radius:5px;
+   -webkit-border-radius:5px;
+   -o-border-radius:5px;
+   border-radius:5px;
+   border:none;
+   padding:7px 10px;
+   margin-bottom:10px;
+   margin-right:10px;
+  text-align: center
+}
+
+
+.gantt .button.first {
+    background-color:#FEA730;
+    font-weight: bold;
+}
+.gantt .button.first:hover {
+    background-color:#D98E2A;
+}
+
+
+
+.gantt .button[disabled] {
+  cursor: default;
+  opacity:0.4
+}
+
+
+.gantt .button:hover[disabled] {
+  background-color:#BABABA
+}
+
+.gantt .button.textual,.gantt  .button.buttonImg {
+  border: none;
+  background-color: transparent;
+  color:#68979B;
+  -moz-box-shadow:0 0 0 #999;
+   -webkit-box-shadow:0 0 0 #999;
+   -o-box-shadow:0 0 0 #999;
+   box-shadow:0 0 0 #999;
+  -moz-border-radius:0;
+   -webkit-border-radius:0;
+   -o-border-radius:0;
+   border-radius:0;
+  padding:0;
+  margin:0;
+  text-align: left
+}
+
+
+
+.gantt .button.edit {
+  color:#009E94;
+  padding:0;
+  margin:0
+}
+
+.gantt .button.delete {
+  color:#B61E2D;
+  padding:0;
+  margin:0
+}
+
+.gantt .button:hover {
+  background-color: #4C4C4C;
+}
+.gantt .button.textual:hover, .button.buttonImg:hover {
+  background-color: transparent;
+}
+
+.gantt span.separator {
+  display: inline-block;
+}
+
+.gantt .button.add {
+  color:#009E94;
+}
+
+.gantt .button.add .teamworkIcon {
+  color:#009E94;
+}
+
+
+.gantt form {
+  margin: 0;
+  padding: 0;
+}
+
+.gantt select {
+  border:1px solid #91B4B7;
+  padding: 4px;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.gantt .formElements {
+  background-color: white;
+  padding: 4px;
+  font-size: 16px;
+  border:1px solid #91B4B7;
+  -moz-border-radius:3px;
+  -webkit-border-radius:3px;
+  -o-border-radius:3px;
+  border-radius:3px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.gantt .formElementsError {
+  border: 1px solid #ff0000;
+}
+
+.gantt .formElementExclamation {
+  width: 15px;
+  height: 25px;
+  mmmargin-left: -20px;
+  mmmposition: absolute;
+  background: url("res/alert.gif") no-repeat;
+}
+
+
+.gantt span#FLD_LOGIN_NAMEerror, span#FLD_PWDerror {
+  margin-left: -23px;
+  margin-top: 2px;
+}
+
+
+.gantt input {
+    background-color: white;
+    padding: 4px;
+    font-size: 16px;
+    border:1px solid #91B4B7;
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    -o-border-radius:3px;
+    border-radius:3px;
+    font-family: Arial, Helvetica, sans-serif;
+}

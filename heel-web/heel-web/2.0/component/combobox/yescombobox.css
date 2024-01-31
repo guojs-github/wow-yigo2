@@ -1,0 +1,93 @@
+/*
+    Updated yes combobox component style
+
+    2023.8.25 created by guojs
+*/
+.heel-web .ui-cmb {
+    position: relative;
+}
+
+.heel-web .ui-cmb > .arrow
+,.heel-web .ui-cmb > .arrowgif 
+{
+    width: 15px;
+    cursor: pointer;
+}
+
+.heel-web .ui-cmb > .clear {
+    position: absolute;
+    right: 15px;
+    top: 0;
+    text-align: center;
+
+    width: 15px;
+    height: inherit;
+
+    color: #aaaaaa;
+    background-color: transparent;
+
+    font-size: 10px;
+
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.heel-web .ui-cmb > .clear:hover
+{
+    color: #40a8e8;
+}
+
+.heel-web .ui-cmb > .arrow:hover {
+    background-image: url("../../image/combobox-arrow-down-blue.png");
+}
+
+.heel-web .cmb-vw .chainmean > span.hw-def-button {
+    float: right;
+    margin: 8px 2px;
+
+    height: 24px;
+    line-height: 24px;
+    width: auto;
+}
+
+/* recent object */
+.heel-web .cmb-vw > .combobox-recent {
+    position: absolute;
+    bottom: -30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 10px;    
+
+    width: 100%;
+    height: auto;
+
+    font-size: 10px;
+    color: #66b6e8;
+    background-color: white;
+    border: 1px solid #40a8e8;
+    box-shadow: 2px 2px 7px #c7c7c7;
+}
+
+.heel-web .cmb-vw > .combobox-recent:hover {
+    background-color: #f2f2f2;
+}
+
+.heel-web .cmb-vw > .combobox-recent > div {
+    height: 25px;
+    line-height: 25px
+}
+
+.heel-web .cmb-vw > .combobox-recent > div.prompt {
+    width: 100px;
+}
+
+.heel-web .cmb-vw > .combobox-recent > div.recent {
+    width: 100%;
+}

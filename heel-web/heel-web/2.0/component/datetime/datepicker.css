@@ -1,0 +1,323 @@
+div.datepicker {
+	position: relative;
+	font-size: 12px;
+	/* position: absolute; */
+	cursor: default;
+	/* top: 0;
+	left: 0; */
+	display: none;
+}
+
+.datepickerContainer {
+	position: relative;
+	top: 0;
+	left: 0;
+
+	background: #121212;
+}
+
+.datepickerBorderT {
+	display: none;
+	position: absolute;
+	left: 10px;
+	top: 0;
+	right: 10px;
+	height: 10px;
+	background: url(../images/datepicker_t.png);
+}
+
+.datepickerBorderB {
+	display: none;
+	position: absolute;
+	left: 10px;
+	bottom: 0;
+	right: 10px;
+	height: 10px;
+	background: url(../images/datepicker_b.png);
+}
+
+.datepickerBorderL {
+	display: none;
+	position: absolute;
+	left: 0;
+	bottom: 10px;
+	top: 10px;
+	width: 10px;
+	background: url(../images/datepicker_l.png);
+}
+
+.datepickerBorderR {
+	display: none;
+	position: absolute;
+	right: 0;
+	bottom: 10px;
+	top: 10px;
+	width: 10px;
+	background: url(../images/datepicker_r.png);
+}
+
+.datepickerBorderTL {
+	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 10px;
+	height: 10px;
+	background: url(../images/datepicker_tl.png);
+}
+
+.datepickerBorderTR {
+	display: none;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 10px;
+	height: 10px;
+	background: url(../images/datepicker_tr.png);
+}
+
+.datepickerBorderBL {
+	display: none;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 10px;
+	height: 10px;
+	background: url(../images/datepicker_bl.png);
+}
+
+.datepickerBorderBR {
+	display: none;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 10px;
+	height: 10px;
+	background: url(../images/datepicker_br.png);
+}
+
+.datepickerHidden {
+	display: none;
+}
+div.datepicker table {
+	border-collapse:collapse;
+}
+div.datepicker a {
+	color: #333333;
+	text-decoration: none;
+	cursor: default;
+	outline: none;
+	text-align: center;
+}
+div.datepicker table td {
+	text-align: right;
+	padding:3px;
+	margin: 0;
+	vertical-align: top;
+}
+div.datepicker th {
+	text-align: center;
+	color: #000;
+	font-weight: normal;
+}
+
+div.datepicker tbody a {
+	display: block;
+}
+.datepickerDays a {
+	width: 25px;
+	line-height: 20px;
+	height: 20px;
+}
+.datepickerYears a,
+.datepickerMonths a{
+/*	width: 44px;
+	line-height: 36px;
+	height: 36px;*/
+	width: 52px;
+	line-height: 28px;
+	height: 28px;
+	text-align: center;
+}
+.datepickerYears span,
+.datepickerMonths span{
+	/*width: 44px;*/
+	display: block;
+	border-radius:2px;
+}
+td.datepickerNotInMonth a {
+	color: #cccccc;
+}
+
+
+.datepickerDays .selected span { /* 当前日期 */
+	color:#40a8e8;
+}
+
+.datepickerDays .datepickerSelected span { /* 已经选中的日期 */
+	color: white;    
+}
+
+.datepickerDays .datepickerSelected a {
+	border-radius: 2px;
+	background-color:#40a8e8;
+}
+
+.datepickerDays .datepickerSelected a:hover {
+	background-color: #40a8e8;
+}
+
+.datepickerDays .datepickerSelected.no-user-input.selected span { /* 默认值选中日期，与现在时间匹配 */
+	color:#40a8e8;
+}
+
+.datepickerDays .datepickerSelected.no-user-input.selected a { /* 默认值选中日期，与现在时间匹配 */
+	background-color: transparent;
+}
+
+.datepickerDays .datepickerSelected.no-user-input.selected a:hover { /* 默认值选中日期，与现在时间匹配 */
+	background-color: #ecf6fd;
+}
+
+td.datepickerNotInMonth.datepickerSelected a,
+tbody.datepickerDays td.datepickerNotInMonth.datepickerSelected a:hover{
+	background: #40a8e8;
+}
+tbody.datepickerYears td.datepickerSelected,
+tbody.datepickerMonths td.datepickerSelected{
+	background: #17384d;
+}
+div.datepicker td.datepickerNotInMonth a:hover {
+	color: #999;
+	background-color: #ecf6fd;
+}
+div.datepicker tbody th {
+	text-align: center;
+}
+.datepickerSpace div {
+	width: 20px;
+}
+.datepickerGoNext a,
+.datepickerGoPrev a,
+.datepickerMonth a {
+	text-align: center;
+	height: 20px;
+	line-height: 20px;
+	margin-bottom: 8px;
+}
+.datepickerGoNext a {
+	float: right;
+	width: 20px;
+	margin-right: 4px;
+}
+.datepickerGoPrev a {
+	width: 20px;
+	float: left;
+	margin-left: 5px;
+}
+table.datepickerViewDays tbody.datepickerMonths,
+table.datepickerViewDays tbody.datepickerYears {
+	display: none;
+}
+table.datepickerViewMonths tbody.datepickerDays,
+table.datepickerViewMonths tbody.datepickerYears,
+table.datepickerViewMonths tr.datepickerDoW {
+	display: none;
+}
+table.datepickerViewYears tbody.datepickerDays,
+table.datepickerViewYears tbody.datepickerMonths,
+table.datepickerViewYears tr.datepickerDoW {
+	display: none;
+}
+td.datepickerDisabled a,
+td.datepickerDisabled.datepickerNotInMonth a{
+	color: #333;
+}
+td.datepickerDisabled a:hover {
+	color: #333;
+}
+td.datepickerSpecial a {
+	background: #700;
+}
+td.datepickerSpecial.datepickerSelected a {
+	background: #a00;
+}
+
+/* 新增的年月选择抬头 */
+.datepicker > .datepickerContainer .date-picker-year-month {
+	text-align: left;
+	overflow: hidden;
+
+	height: 22px;
+}
+
+.datepicker > .datepickerContainer .date-picker-year-month > .date-picker-year {
+	display: inline-block;
+
+	width: 50px;
+	height: 20px;
+	line-height: 20px;
+	vertical-align: middle;
+}
+
+.datepicker > .datepickerContainer .date-picker-year-month > .date-picker-year select {
+	outline: 0;
+	border: 0;
+
+	font-weight: bold;
+}
+
+.datepicker > .datepickerContainer .date-picker-year-month > .date-picker-year span {
+	font-weight: bold;
+}
+
+.datepicker > .datepickerContainer .date-picker-year-month > .date-picker-month {
+	display: inline-block;
+
+	width: calc(100% - 50px);
+	height: 20px;
+	line-height: 20px;
+	vertical-align: middle;
+}
+
+.datepicker > .datepickerContainer .date-picker-year-month > .date-picker-month > a {
+	display: inline-block;
+	/* margin-left: 4.5px; */
+	padding: 0 1.2px;
+
+	border: 1px solid transparent;
+}
+
+.datepicker > .datepickerContainer .date-picker-year-month > .date-picker-month .selected span { /* 当前月份 */
+	color:#40a8e8;
+}
+
+.datepicker > .datepickerContainer .date-picker-year-month > .date-picker-month .datepickerSelected span { /* 用户选择的月份 */
+	color: white;    
+}
+
+.datepicker > .datepickerContainer .date-picker-year-month > .date-picker-month .datepickerSelected { /* 用户选择的月份 */
+	border-radius: 2px;
+	background-color:#40a8e8;
+}
+
+.datepicker > .datepickerContainer .date-picker-year-month > .date-picker-month .datepickerSelected:hover { /* 用户选择的月份 */
+	background-color: #40a8e8;
+}
+
+.datepicker > .datepickerContainer .date-picker-year-month > .date-picker-month .datepickerSelected.no-user-input { /* 用户没有做出任何选择，默认值匹配项样式 */
+	background-color: transparent;
+	border: 1px solid #40a8e8;
+}
+
+.datepicker > .datepickerContainer .date-picker-year-month > .date-picker-month .datepickerSelected.no-user-input > span { /* 用户没有做出任何选择，默认值匹配项样式 */
+	color:#333333;
+}
+
+.datepicker > .datepickerContainer .date-picker-year-month > .date-picker-month .datepickerSelected.no-user-input.selected > span { /* 用户没有做出任何选择，默认值匹配项样式 */
+	color:#40a8e8;
+}
+
+.datepicker > .datepickerContainer tr.datepickerDoW span {
+	color: #aaaaaa;
+}

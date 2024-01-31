@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Entry Caption="根" Key="root">
+    <Entry Caption="运输安全" Key="TransportSafety">
+        <Entry Caption="培训考试" Key="TS_TrainingAndTest">
+            <Entry Caption="考试管理" Key="TS_TestManagement">
+                <EntryItem Caption="题库" FormKey="TS_ExamQuestionView" Key="TS_ExamQuestionView" Type="Form"/>
+                <EntryItem Caption="试卷生成规则" FormKey="TS_ExamRuleView" Key="TS_ExamRuleView" Type="Form"/>
+                <EntryItem Caption="试卷" FormKey="TS_ExamPaperView" Key="TS_ExamPaperView" Type="Form"/>
+                <EntryItem Caption="培训资料" Key="TS_TrainingMaterial" Type="Form" Visible="false"/>
+                <EntryItem Caption="考试安排" Key="ArrangeTests" Type="Form" Visible="false"/>
+            </Entry>
+            <EntryItem Caption="培训" Key="TS_Training" Type="Form"/>
+            <EntryItem Caption="评分" Key="TS_TestMark" Type="Form"/>
+            <EntryItem Caption="考试记录查询" Key="TS_QueryTestRecord" Type="Form"/>
+            <EntryItem Caption="成绩综合查询" Key="TS_QueryTestStatus" Type="Form"/>
+        </Entry>
+    </Entry>
+</Entry>

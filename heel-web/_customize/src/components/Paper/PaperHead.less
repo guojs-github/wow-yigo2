@@ -1,0 +1,31 @@
+/*
+	paper head style
+*/
+@import '/src/assets/style/index.less';
+
+@paper-head-row-height: 30px;
+@paper-head-warning-height: 20px;
+
+div.paper-head {   
+    &.-content.-section {
+        width: calc(100% - 40px);
+    }
+
+    .-row {
+        height: @paper-head-row-height;
+        line-height: @paper-head-row-height;
+    }
+
+    .warnning {
+        margin-bottom: 20px;
+        
+        height: @paper-head-warning-height;
+        line-height: @paper-head-warning-height;
+
+        color: red;
+        background-color: lightyellow;
+        font-size: 12px;
+        font-weight: bold;
+        text-align: center;
+    }
+}

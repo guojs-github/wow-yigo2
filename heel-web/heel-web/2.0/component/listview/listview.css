@@ -1,0 +1,157 @@
+/**
+ * List view control style.
+ * 
+ * 2023.9.26 created by guojs
+ */
+.heel-web .ui-lv {
+    position: relative;
+}
+
+/* 表头 */
+.heel-web .ui-lv .paginationjs-content .head th > label {
+    color: #666;
+}
+
+/* 调整字段宽度分割线 */
+.heel-web .ui-lv .paginationjs-content .rc-handle {
+    transition: transform 0.25s ease;
+}
+
+.heel-web .ui-lv .paginationjs-content .rc-handle:hover {
+    transform: scaleX(1.05);
+    background-color: #5cacee !important;   
+    border-right-color: #5cacee !important;
+}
+
+/* 自定义显示相关样式 */
+.heel-web .ui-lv > .listview-customize-menu {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    z-index: 10;
+}
+
+.heel-web .ui-lv > .listview-customize-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.heel-web .ui-lv > .listview-customize-menu > .icon > svg {
+    margin: 5px 10px 5px 5px;
+
+    color: #ed6d15;
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+.heel-web .ui-lv > .listview-customize-menu > .menu-container {
+    display: none;
+    overflow: hidden;
+
+    width: 100px;
+    height: 80px;
+}
+
+.heel-web .ui-lv > .listview-customize-menu > .menu-container > .menu {
+    margin: 5px;
+
+    background-color: white;
+    border: 0;
+    box-shadow: -2px 2px 10px 0px #ccc;
+
+    color: #323232;
+    font-size: 10px;
+}
+
+.heel-web .ui-lv > .listview-customize-menu > .menu-container > .menu.show-listview-customize-menu {
+	animation: -show-listview-customize-menu; 
+	animation-duration: 0.2s;
+	-webkit-animation: -show-listview-customize-menu 0.2s;
+    animation-timing-function: ease-out;
+}
+
+.heel-web .ui-lv > .listview-customize-menu > .menu-container > .menu > .menu-item > svg {
+    color: #ed6d15;
+}
+
+/*show listview customize menu**********************/
+@keyframes -show-listview-customize-menu {  
+    0% {
+		transform: translateX(100px);
+	}  
+    100% {
+		transform: translateX(0);
+	}  
+}  
+
+@-webkit-keyframes -show-listview-customize-menu {
+    0% {
+		transform: translateX(100px);
+	}  
+    100% {
+		transform: translateX(0);
+	}  
+} 
+
+.heel-web .ui-lv > .listview-customize-menu > .menu-container > .menu.hide-listview-customize-menu {
+	animation: -hide-listview-customize-menu; 
+	animation-duration: 0.2s;
+	-webkit-animation: -hide-listview-customize-menu 0.2s;
+    animation-timing-function: ease-out;
+}
+
+/*hide listview customize menu**********************/
+@keyframes -hide-listview-customize-menu {  
+    0% {
+		transform: translateX(0);
+	}  
+    100% {
+		transform: translateX(100px);
+	}  
+}  
+
+@-webkit-keyframes -hide-listview-customize-menu {
+    0% {
+		transform: translateX(0);
+	}  
+    100% {
+		transform: translateX(100px);
+	}  
+} 
+
+.heel-web .ui-lv > .listview-customize-menu > .menu-container > .menu > .menu-item  {
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+
+    cursor: pointer;
+}
+
+.heel-web .ui-lv > .listview-customize-menu > .menu-container > .menu > .menu-item > .menu-item-icon {
+    position: absolute;
+    top: 10px;
+    left: -12px;
+
+    font-size: 10px;
+
+    transition: transform 0.3s ease-in;
+}
+
+.heel-web .ui-lv > .listview-customize-menu > .menu-container > .menu > .menu-item > .menu-item-text {
+    display: inline-block;
+}
+
+.heel-web .ui-lv > .listview-customize-menu > .menu-container > .menu > .menu-item:hover  {
+    background-color: #c7e0f4;
+}
+
+.heel-web .ui-lv > .listview-customize-menu > .menu-container > .menu > .menu-item:hover > .menu-item-icon  {
+    transform: translateX(17px);
+}

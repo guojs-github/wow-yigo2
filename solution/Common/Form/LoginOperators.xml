@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Key="LoginOperators" Caption="登陆用户信息">
+    <DataSource>
+        <DataObject Key="LoginOperators" PrimaryTableKey="LoginOperators">
+            <TableCollection>
+                <Table Key="LoginOperators" Caption="登陆用户信息" SourceType="Interface" TableMode="Detail" Persist="false" Impl="com.bokesoft.yigo.mid.process.GetLoginOperatorsProcess">
+                    <Column Key="OID" Caption="对象标识" DataType="Long"/>
+                    <Column Key="SOID" Caption="主对象标识" DataType="Long"/>
+                    <Column Key="POID" Caption="父对象标识" DataType="Long"/>
+                    <Column Key="VERID" Caption="对象版本" DataType="Integer"/>
+                    <Column Key="DVERID" Caption="对象明细版本" DataType="Integer"/>
+                    <Column Key="IP" Caption="客户端IP" DataType="Varchar"/>
+                    <Column Key="Mode" Caption="登陆模式" DataType="Varchar"/>
+					<Column Key="ClientID" Caption="客户端标识" DataType="Varchar"/>
+                    <Column Key="OperatorID" Caption="操作员ID" DataType="Long"/>
+                    <Column Key="LoginTime" Caption="登陆时间" DataType="DateTime"/>
+                    <Column Key="LastActiveTime" Caption="最后活动" DataType="DateTime"/>
+                    <Column Key="ClusterID" Caption="数据集标识" DataType="Long"/>
+                </Table>
+            </TableCollection>
+        </DataObject>
+    </DataSource>
+    <Body PopHeight="800px" PopWidth="1040px" LeftMargin="50px" TopMargin="20px">
+        <Block>
+            <FlexFlowLayoutPanel Key="INFO" Caption="登陆人员信息" Height="pref">
+                <Grid Key="LIST" Caption="人员列表" Height="95%" NewEmptyRow="false" CanInsert="false" CanDelete="false" CanShift="false" PageLoadType="DB" PageRowCount="20">
+                    <GridColumnCollection>
+                        <GridColumn Key="OperatorID" Caption="操作员" Width="120px" Sortable="true"/>
+						<GridColumn Key="ClientID" Caption="客户端标识" Width="120px" Sortable="false" Visible="false"/>
+                        <GridColumn Key="IP" Caption="客户端IP" Width="80px" Sortable="true"/>
+                        <GridColumn Key="Mode" Caption="登陆方式" Width="80px" Sortable="true"/>
+                        <GridColumn Key="LoginTime" Caption="登陆时间" Width="130px" Sortable="true"/>
+                        <GridColumn Key="LastActiveTime" Caption="最后活动" Width="130px" Sortable="true"/>
+                        <GridColumn Key="Kick" Caption="踢人" Width="80px" Sortable="true"/>
+                    </GridColumnCollection>
+                    <GridRowCollection>
+                        <GridRow Key="row" RowHeight="35" TableKey="LoginOperators">
+                            <GridCell Key="OperatorID" CellType="Dict" ItemKey="Operator" Caption="操作员" Enable="false">
+                                <DataBinding ColumnKey="OperatorID"/>
+                            </GridCell>
+							<GridCell Key="ClientID" Caption="客户端标识" Enable="false">
+                                <DataBinding ColumnKey="ClientID"/>
+                            </GridCell>
+                            <GridCell Key="IP" CellType="TextEditor" Caption="客户端IP" Enable="false">
+                                <DataBinding ColumnKey="IP"/>
+                            </GridCell>
+                            <GridCell Key="Mode" CellType="ComboBox" Caption="登陆方式" Enable="false">
+                                <DataBinding ColumnKey="Mode"/>
+                                <Item Caption="电脑端" Key="PC" Value="1"/>
+                                <Item Caption="手机端" Key="MOBILE" Value="2"/>
+                            </GridCell>
+                            <GridCell Key="LoginTime" Caption="登陆时间" CellType="DatePicker" Enable="false">
+                                <DataBinding ColumnKey="LoginTime"/>
+                            </GridCell>
+                            <GridCell Key="LastActiveTime" Caption="最后活动" CellType="DatePicker" Enable="false">
+                                <DataBinding ColumnKey="LastActiveTime"/>
+                            </GridCell>
+                            <GridCell Key="Kick" Icon="User.png" CellType="Button" >
+                                <OnClick>
+                                    <![CDATA[
+									Confirm('确定让当前用户下线？','YES_NO',{
+										YES:{
+											KickOffOperator(Mode,ClientID);
+											DeleteRow("LIST",-1);
+										},
+										NO:{
+										}
+									})
+									]]>
+                                </OnClick>
+                            </GridCell>
+                        </GridRow>
+                    </GridRowCollection>
+                    <RowDelete>
+                        <![CDATA[SetValue("AMOUNT",GetRowCount("LIST"));]]>
+                    </RowDelete>
+                </Grid>
+                <GridLayoutPanel Key="operate" Height="70px" Caption="operate">
+                    <Button Key="REFRESH" Caption="刷新" X="2" Y="1">
+                        <OnClick>
+                            <![CDATA[
+		
+							LoadData();
+							
+						]]>
+                        </OnClick>
+                    </Button>
+                    <Label Key="TOTAL" X="3" Y="1" Caption="当前登陆人数 ：">
+                        <Format HAlign="Right"/>
+                    </Label>
+                    <Label Key="AMOUNT" X="4" Y="1"/>
+                    <RowDefCollection RowGap="5">
+                        <RowDef Height="30px"/>
+                        <RowDef Height="30px"/>
+                    </RowDefCollection>
+                    <ColumnDefCollection ColumnGap="5">
+                        <ColumnDef Width="184px"/>
+                        <ColumnDef Width="409px"/>
+                        <ColumnDef Width="134px"/>
+                        <ColumnDef Width="127px"/>
+                        <ColumnDef Width="31px"/>
+                    </ColumnDefCollection>
+                </GridLayoutPanel>
+            </FlexFlowLayoutPanel>
+        </Block>
+    </Body>
+    <OnLoad>
+        <![CDATA[
+			LoadData();
+		]]>
+    </OnLoad>
+    <OnPostShow>
+        <![CDATA[
+			SetValue("AMOUNT",GetRowCount("LIST"));
+		]]>
+    </OnPostShow>
+</Form>

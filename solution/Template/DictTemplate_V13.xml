@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Key="#FormKey#" Caption="#FormCaption#" FormType="Dict">
+    <DataSource>
+        <DataObject Key="#FormKey#" Caption="#FormCaption#" PrimaryTableKey="#FormKey#" SecondaryType="Dict" PrimaryType="Entity">
+            <TableCollection>
+                <Table Key="#FormKey#" Caption="#FormCaption#">
+                    <Column Key="OID" Caption="对象标识" DataType="Long"/>
+                    <Column Key="SOID" Caption="主对象标识" DataType="Long"/>
+                    <Column Key="POID" Caption="父对象标识" DataType="Long"/>
+                    <Column Key="VERID" Caption="对象版本" DataType="Integer"/>
+                    <Column Key="DVERID" Caption="对象明细版本" DataType="Integer"/>
+                    <Column Key="Code" Caption="代码" DataType="Varchar" Length="255"/>
+                    <Column Key="Name" Caption="名称" DataType="Varchar" Length="255"/>
+                    <Column Key="NodeType" Caption="节点类型" DataType="Integer"/>
+                    <Column Key="ParentID" Caption="父节点" DataType="Long"/>
+                    <Column Key="Status" Caption="状态" DataType="Integer"/>
+                    <Column Key="Enable" Caption="启用标记" DataType="Integer"/>
+                    <Column Key="TLeft" Caption="TLeft" DataType="Integer"/>
+                    <Column Key="TRight" Caption="TRight" DataType="Integer"/>
+                    <TableSourceCollection/>
+                </Table>
+            </TableCollection>
+        </DataObject>
+    </DataSource>
+    <ScriptCollection>
+        <Script Key="Load" Caption="载入" Description="载入事件" Range="Action" Verb="Load">
+            <![CDATA[LoadData()]]>
+        </Script>
+    </ScriptCollection>
+    <Body>
+        <Block>
+            <GridLayoutPanel Key="GridLayoutPanel1" Padding="5px" Caption="GridLayoutPanel1">
+                <TextEditor Key="Code" Caption="代码" BuddyKey="L_Code" X="1" Y="0" Case="Upper" CopyNew="false">
+                    <DataBinding TableKey="#FormKey#" ColumnKey="Code"/>
+                </TextEditor>
+                <Label Key="L_Code" Caption="代码" X="0" Y="0"/>
+                <TextEditor Key="Name" Caption="名称" BuddyKey="L_Name" X="1" Y="1">
+                    <DataBinding TableKey="#FormKey#" ColumnKey="Name"/>
+                </TextEditor>
+                <Label Key="L_Name" Caption="名称" X="0" Y="1"/>
+                <ComboBox Key="NodeType" Caption="节点类型" BuddyKey="L_NodeType" X="1" Y="2">
+                    <DataBinding TableKey="#FormKey#" ColumnKey="NodeType"/>
+                    <Item Caption="汇总节点" Key="1" Value="1"/>
+                    <Item Caption="明细节点" Key="0" Value="0"/>
+                </ComboBox>
+                <Label Key="L_NodeType" Caption="节点类型" X="0" Y="2"/>
+                <Dict Key="ParentID" Caption="上级节点" BuddyKey="L_ParentID" X="1" Y="3" ItemKey="#FormKey#">
+                    <ItemFilter>
+                        <Filter Type="FieldValue">
+                            <FilterValue FieldKey="NodeType" RefValue="1" Type="Formula"/>
+                        </Filter>
+                    </ItemFilter>
+                    <DataBinding TableKey="#FormKey#" ColumnKey="ParentID"/>
+                </Dict>
+                <Label Key="L_ParentID" Caption="上级节点" X="0" Y="3"/>
+                <RowDefCollection RowHeight="30" RowGap="6">
+                    <RowDef/>
+                    <RowDef/>
+                    <RowDef/>
+                    <RowDef/>
+                </RowDefCollection>
+                <ColumnDefCollection ColumnGap="20">
+                    <ColumnDef Width="50%"/>
+                    <ColumnDef Width="50%"/>
+                </ColumnDefCollection>
+            </GridLayoutPanel>
+        </Block>
+    </Body>
+</Form>

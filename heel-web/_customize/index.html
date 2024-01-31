@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+	  <link rel="shortcut icon" href="./yigo.png"/>	
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="pragma" content="no-cache"/>
+    <meta http-equiv="Cache-Control" content="no-cache, must-revalidate"/>
+    <meta http-equiv="expires" content="-1"/>
+    <title>2.0最佳实践</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+    <!--插件-->
+    <script type="text/javascript" src="./plugin/jquery-3.6.4.min.js"></script>
+    <script>
+      function add_ref_baidu_map_api() {
+        let api_ref = document.createElement('script'); 
+        api_ref.type = 'text/javascript';
+        api_ref.src = 'https://api.map.baidu.com/api?v=1.0&type=webgl&ak=bxrk9NvT5ORyGv21aVUzSVrcn39DLpz6&callback=initialize';
+        api_ref.async = true;
+        let root_s = document.getElementsByTagName('script')[0];
+        if (root_s.parentNode) {
+            root_s.parentNode.insertBefore(api_ref, root_s);
+        }
+      }
+
+      add_ref_baidu_map_api();
+    </script>
+  </body>
+</html>

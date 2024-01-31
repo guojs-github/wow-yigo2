@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Key="TestView" Caption="体验中心" FormType="View" Version="183">
+    <DataSource>
+        <DataObject Key="test_data" Caption="体验中心" PrimaryTableKey="test_data" SecondaryType="">
+            <TableCollection>
+                <Table Key="test_data" Caption="测试数据" TableMode="Detail" SourceType="Query">
+                    <Column Key="OID" Caption="对象标识" DataType="Long"/>
+                    <Column Key="Status" Caption="状态" DataType="Integer"/>
+                    <Column Key="No" Caption="编号" DataType="Varchar" Length="50"/>
+                    <Column Key="FileName" Caption="文件名" DataType="Varchar" Length="100"/>
+                    <Column Key="url" Caption="文件路径" DataType="Varchar" Length="1000"/>
+                    <Column Key="creator_id" Caption="创建者ID" DataType="Long"/>
+                    <Column Key="text_editor" Caption="text_editor" DataType="Varchar"/>
+                    <Column Key="NumberEditor" Caption="NumberEditor" DataType="Numeric" Precision="16" Scale="2"/>
+                    <Column Key="time_picker" Caption="time_picker" DataType="Integer"/>
+                    <Statement>
+                        <![CDATA[select * from (
+	select
+	    ma.OID,
+	    ma.Status,
+	    ma.No,
+	    ma.FileName,
+	    ma.url,
+	    ma.RefType,
+	    ma.RefId,
+	    ma.creator as creator_id,
+	    creator.name as creator_name
+	from
+	    md_attachment ma
+	    left join (select oid, name from sys_operator) creator on creator.oid = ma.creator
+) a  ]]>
+                    </Statement>
+                </Table>
+            </TableCollection>
+        </DataObject>
+    </DataSource>
+    <OperationCollection>
+        <Operation Key="edit" Caption="编辑" Visible="return !GetPara(&quot;editable&quot;);">
+            <Action>
+                <![CDATA[SetPara("editable", true);
+RefreshUIStatus();
+
+]]>
+            </Action>
+        </Operation>
+        <Operation Key="read_only" Caption="只读" Visible="return GetPara(&quot;editable&quot;);">
+            <Action>
+                <![CDATA[SetPara("editable", false);
+RefreshUIStatus();
+
+]]>
+            </Action>
+        </Operation>
+        <Operation Key="refresh" Caption="刷新">
+            <Action>
+                <![CDATA[LoadData()]]>
+            </Action>
+        </Operation>
+    </OperationCollection>
+    <Body>
+        <Block>
+            <SplitPanel Key="frame_split" Orientation="Vertical" Caption="frame_split">
+                <FlexFlowLayoutPanel Key="frame_split_flex" Caption="frame_split_flex">
+                    <ToolBar Key="main_toolbar" Height="pref" Caption="main_toolbar">
+                        <ToolBarItemCollection/>
+                    </ToolBar>
+                    <TabPanel Caption="frame_split_flex_tab" Height="pref" Key="frame_split_flex_tab">
+                        <GridLayoutPanel Key="panel_default" Caption="通用">
+                            <ComboBox Key="cb_status" Caption="状态" BuddyKey="Lab_cb_status" X="1" Y="1" SourceType="Status" Enable="return GetPara(&quot;editable&quot;);"/>
+                            <Label Key="Lab_cb_status" Caption="状态" X="0" Y="1">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <CheckListBox BuddyKey="Lab_clb_status" Caption="状态(多选)" Key="clb_status" X="3" Y="1" SourceType="Status" Enable="return GetPara(&quot;editable&quot;);"/>
+                            <Label Key="Lab_clb_status" Caption="状态(多选)" X="2" Y="1">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <Dict Key="dict_depart" Caption="发布部门" BuddyKey="Lab_dict_depart" X="5" Y="1" Enable="return GetPara(&quot;editable&quot;);" ItemKey="MD_Enum">
+                                <ItemFilter>
+                                    <Filter Query="select oid from md_enum where type = '发布部门'" Type="DataSet"/>
+                                </ItemFilter>
+                            </Dict>
+                            <Label Key="Lab_dict_depart" Caption="部门" X="4" Y="1">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <Dict Key="dict_multi_depart" Caption="发布部门(多选)" BuddyKey="Lab_dict_multi_depart" X="7" Y="1" Enable="return GetPara(&quot;editable&quot;);" AllowMultiSelection="true" ItemKey="MD_Enum">
+                                <ItemFilter>
+                                    <Filter Query="select oid from md_enum where type = '发布部门'" Type="DataSet"/>
+                                </ItemFilter>
+                            </Dict>
+                            <Label Key="Lab_dict_multi_depart" Caption="部门(多选)" X="6" Y="1">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <NumberEditor Key="number_editor" Caption="数字编辑" BuddyKey="Lab_number_editor" X="1" Y="3" Enable="return GetPara(&quot;editable&quot;);" Precision="5"/>
+                            <Label Key="Lab_number_editor" Caption="数字编辑" X="0" Y="3">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <CheckBox Caption="复选框" Key="check_box" X="2" Y="3" Enable="return GetPara(&quot;editable&quot;);"/>
+                            <RowDefCollection RowGap="5">
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                            </RowDefCollection>
+                            <ColumnDefCollection ColumnGap="5">
+                                <ColumnDef Width="80px"/>
+                                <ColumnDef Width="25%"/>
+                                <ColumnDef Width="80px"/>
+                                <ColumnDef Width="25%"/>
+                                <ColumnDef Width="80px"/>
+                                <ColumnDef Width="25%"/>
+                                <ColumnDef Width="80px"/>
+                                <ColumnDef Width="25%"/>
+                                <ColumnDef Width="10px"/>
+                            </ColumnDefCollection>
+                        </GridLayoutPanel>
+                        <GridLayoutPanel Key="panel_datetime" Caption="日期时间">
+                            <DatePicker Key="DateTimePicker" Caption="DateTimePicker" BuddyKey="Lab_DateTimePicker" X="1" Y="1" Enable="return GetPara(&quot;editable&quot;);"/>
+                            <Label Key="Lab_DateTimePicker" Caption="日期时间" X="0" Y="1">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <DatePicker Key="DatePicker" Caption="DatePicker" BuddyKey="Lab_DatePicker" X="3" Y="1" Enable="return GetPara(&quot;editable&quot;);" OnlyDate="true"/>
+                            <Label Key="Lab_DatePicker" Caption="日期" X="2" Y="1">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <UTCDatePicker BuddyKey="Lab_UTCDateTimePicker" Caption="UTC日期时间" Format="yyyy-MM-dd" Key="UTCDateTimePicker" OnlyDate="false" X="5" Y="1" Enable="return GetPara(&quot;editable&quot;);"/>
+                            <Label Key="Lab_UTCDateTimePicker" Caption="UTC日期时间" X="4" Y="1">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <UTCDatePicker BuddyKey="Lab_UTCDatePicker" Caption="UTC日期" Format="yyyy-MM-dd" Key="UTCDatePicker" X="7" Y="1" Enable="return GetPara(&quot;editable&quot;);"/>
+                            <Label Key="Lab_UTCDatePicker" Caption="UTC日期" X="6" Y="1">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <MonthPicker BuddyKey="Lab_MonthPicker" Caption="年月" Key="MonthPicker" X="1" Y="3" Enable="return GetPara(&quot;editable&quot;);"/>
+                            <Label Key="Lab_MonthPicker" Caption="年月" X="0" Y="3">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <TimePicker BuddyKey="Lab_TimePickerWithSecond" Caption="时分秒" Key="TimePickerWithSecond" Second="true" X="3" Y="3" Enable="return GetPara(&quot;editable&quot;);"/>
+                            <Label Key="Lab_TimePickerWithSecond" Caption="时分秒" X="2" Y="3">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <TimePicker BuddyKey="Lab_TimePickerNoSecond" Caption="时分" Format="HH:mm" Key="TimePickerNoSecond" X="5" Y="3" Enable="return GetPara(&quot;editable&quot;);"/>
+                            <Label Key="Lab_TimePickerNoSecond" Caption="时分" X="4" Y="3">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <RowDefCollection RowGap="5">
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                            </RowDefCollection>
+                            <ColumnDefCollection ColumnGap="5">
+                                <ColumnDef Width="80px"/>
+                                <ColumnDef Width="25%"/>
+                                <ColumnDef Width="80px"/>
+                                <ColumnDef Width="25%"/>
+                                <ColumnDef Width="80px"/>
+                                <ColumnDef Width="25%"/>
+                                <ColumnDef Width="80px"/>
+                                <ColumnDef Width="25%"/>
+                                <ColumnDef Width="10px"/>
+                            </ColumnDefCollection>
+                        </GridLayoutPanel>
+                        <Grid Key="panel_grid" Caption="表格" Enable="return GetPara(&quot;editable&quot;);" PageRowCount="5" Class="allow-user-style" PageLoadType="UI">
+                            <GridColumnCollection>
+                                <GridColumn Key="delete" Caption="选择" Width="100px" Freeze="true"/>
+                                <GridColumn Key="del" Caption="删除" Width="100px" Freeze="true"/>
+                                <GridColumn Key="Status" Caption="状态" Width="100px" Freeze="true"/>
+                                <GridColumn Key="No" Caption="编号" Width="200px"/>
+                                <GridColumn Key="file_name" Caption="文件名" Width="200px" Sortable="true"/>
+                                <GridColumn Key="fil_url" Caption="文件路径" Width="300px"/>
+                                <GridColumn Key="creator" Caption="创建者" Width="150px"/>
+                            </GridColumnCollection>
+                            <GridRowCollection>
+                                <GridRow Key="row1" TableKey="test_data">
+                                    <GridCell Key="select" Caption="选择" CellType="CheckBox" CellSortType="None" IsSelect="true"/>
+                                    <GridCell Key="cell2" Caption="删除" CellType="Button" CellSortType="None"/>
+                                    <GridCell Key="cell4" CellType="ComboBox" CellSortType="None" SourceType="Status">
+                                        <DataBinding ColumnKey="Status"/>
+                                    </GridCell>
+                                    <GridCell Key="cell3" CellType="HyperLink">
+                                        <DataBinding ColumnKey="No"/>
+                                    </GridCell>
+                                    <GridCell Key="cell5" CellType="TextEditor" CellSortType="None">
+                                        <DataBinding ColumnKey="FileName"/>
+                                    </GridCell>
+                                    <GridCell Key="cell6" CellType="HyperLink" CellSortType="None">
+                                        <DataBinding ColumnKey="url"/>
+                                    </GridCell>
+                                    <GridCell Key="cell7" CellType="Dict" CellSortType="None" ItemKey="Operator">
+                                        <DataBinding ColumnKey="creator_id"/>
+                                    </GridCell>
+                                </GridRow>
+                            </GridRowCollection>
+                        </Grid>
+                        <GridLayoutPanel Key="panel_user_conditions" Caption="自定义查询条件" Class="user-condition">
+                            <TextEditor Key="text_editor" Caption="文本编辑器" BuddyKey="Lab_text_editor" X="1" Y="1">
+                                <DataBinding ColumnKey="text_editor" TableKey="test_data"/>
+                            </TextEditor>
+                            <Label Key="Lab_text_editor" Caption="文本编辑器" X="0" Y="1">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <ComboBox Key="combobox" Caption="下拉单选" BuddyKey="Lab_combobox" X="1" Y="3" SourceType="Status"/>
+                            <Label Key="combox" Caption="下拉单选" X="0" Y="3">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <CheckListBox BuddyKey="Lab_checklistbox" Caption="下拉多选" Key="checklistbox" SourceType="Status" X="3" Y="3">
+                                <Format HAlign="Right"/>
+                            </CheckListBox>
+                            <Label Key="Lab_checklistbox" Caption="下拉多选" X="2" Y="3">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <NumberEditor Key="number_editor_test" Caption="数字编辑器" BuddyKey="Lab_number_editor_test" X="3" Y="1" Precision="10">
+                                <DataBinding ColumnKey="NumberEditor" TableKey="test_data"/>
+                            </NumberEditor>
+                            <Label Key="Lab_number_editor_test" Caption="数字编辑器" X="2" Y="1">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <Dict Key="dict_test" Caption="字典单选" BuddyKey="Lab_dict_test" X="1" Y="5" ItemKey="MD_Enum">
+                                <ItemFilter>
+                                    <Filter Query="select oid from md_enum where type = '发布部门'" Type="DataSet"/>
+                                </ItemFilter>
+                            </Dict>
+                            <Label Key="Lab_dict_test" Caption="字典单选" X="0" Y="5">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <Dict Key="dict_test_multi" Caption="字典多选" BuddyKey="Lab_dict_test_multi" X="3" Y="5" ItemKey="MD_Enum" AllowMultiSelection="true">
+                                <ItemFilter>
+                                    <Filter Query="select oid from md_enum where type = '发布部门'" Type="DataSet"/>
+                                </ItemFilter>
+                            </Dict>
+                            <Label Key="Lab_dict_test_multi" Caption="字典多选" X="2" Y="5">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <CheckBox Caption="复选框" Key="check_box_test" X="5" Y="1"/>
+                            <DatePicker Key="date_picker" Caption="日期时间" BuddyKey="Lab_date_picker" X="1" Y="7"/>
+                            <Label Key="Lab_date_picker" Caption="日期时间" X="0" Y="7">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <UTCDatePicker BuddyKey="Lab_utc_date_picker" Caption="UTC日期时间" Format="yyyy-MM-dd" Key="utc_date_picker" X="3" Y="7"/>
+                            <Label Key="Lab_utc_date_picker" Caption="UTC日期" X="2" Y="7">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <MonthPicker BuddyKey="Lab_month_picker" Caption="年月" Key="month_picker" X="5" Y="7"/>
+                            <Label Key="Lab_month_picker" Caption="年月" X="4" Y="7">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <TimePicker BuddyKey="Lab_time_picker" Caption="时分秒" Format="HH:mm" Key="time_picker" X="7" Y="7"/>
+                            <Label Key="Lab_time_picker" Caption="时分秒" X="6" Y="7">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <TextArea Key="text_area_test" Caption="文本域" BuddyKey="Lab_text_area_test" X="1" Y="9" XSpan="7"/>
+                            <Label Key="Lab_text_area_test" Caption="文本域" X="0" Y="9">
+                                <Format HAlign="Right" VAlign="Top"/>
+                            </Label>
+                            <RowDefCollection RowGap="5">
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="100px"/>
+                            </RowDefCollection>
+                            <ColumnDefCollection ColumnGap="5">
+                                <ColumnDef Width="80px"/>
+                                <ColumnDef Width="25%"/>
+                                <ColumnDef Width="80px"/>
+                                <ColumnDef Width="25%"/>
+                                <ColumnDef Width="80px"/>
+                                <ColumnDef Width="25%"/>
+                                <ColumnDef Width="80px"/>
+                                <ColumnDef Width="25%"/>
+                                <ColumnDef Width="10px"/>
+                            </ColumnDefCollection>
+                        </GridLayoutPanel>
+                    </TabPanel>
+                </FlexFlowLayoutPanel>
+                <SplitSize Size="100%"/>
+            </SplitPanel>
+        </Block>
+    </Body>
+    <OnLoad>
+        <![CDATA[SetPara("editable", false);
+LoadData();]]>
+    </OnLoad>
+</Form>

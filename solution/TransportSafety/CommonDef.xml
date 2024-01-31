@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<CommonDef>
+    <MacroCollection>
+        <Macro Key="PreviewPaper" Args="oid">
+            <![CDATA[// 打开预览窗口
+var url = "/yigo/customize/index.html#/preview-paper";
+url = url & "?oid=" & oid;
+
+hw_open_url(url, oid);
+]]>
+        </Macro>
+    </MacroCollection>
+</CommonDef>

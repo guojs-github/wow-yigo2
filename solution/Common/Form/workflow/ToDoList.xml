@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Caption="我的待办事宜" Key="ToDoList" FormType="View">
+    <DataSource>
+        <DataObject Key="ToDoList" Caption="我的待办事宜" MainTableKey="ToDoList">
+            <TableCollection>
+                <Table Key="ToDoList" Caption="待办信息" DBTableName="WF_workitem" TableMode="Detail" SourceType="Query" Persist="false">
+                    <Column Key="workItemID" Caption="工作项标识" DataType="Long" DBColumnName="workItemID"/>
+                    <Column Key="workItemName" Caption="工作项名称" DataType="Varchar" DBColumnName="workItemName"/>
+                    <Column Key="creatTime" Caption="创建时间" DataType="DateTime" DBColumnName="creatTime"/>
+                    <Column Key="formkey" Caption="表单标志" DataType="Varchar" DBColumnName="formkey"/>
+                    <Column Key="oid" Caption="表单标识" DataType="Long" DBColumnName="oid"/>
+                    <ParameterCollection>
+                        <Parameter Formula="GetOperator()" DataType="Long"/>
+                    </ParameterCollection>
+                    <Statement>
+                        <![CDATA[select 
+						WF_Workitem.workItemID as workItemID,
+						WF_Workitem.workItemName as workItemName,
+						WF_Workitem.creatTime as creatTime,
+						BPM_Instance.formkey as formkey,
+						BPM_Instance.oid as oid
+						from WF_Workitem 
+						join WF_Participator on WF_Workitem.WorkitemID=WF_Participator.WorkitemID 
+						join BPM_Log on WF_Workitem.WorkitemID=BPM_Log.WorkitemID 
+						join BPM_Instance on  BPM_Log.instanceID=BPM_Instance.instanceID
+						where WF_Participator.OperatorID=? and WF_Workitem.workItemState=1]]>
+                    </Statement>
+                </Table>
+            </TableCollection>
+            <OIDFilter/>
+        </DataObject>
+    </DataSource>
+    <Body>
+        <Block>
+            <FlexFlowLayoutPanel Key="main">
+                <ToolBar Key="main_toolbar" Height="pref">
+                    <ToolBarItemCollection/>
+                </ToolBar>
+                <ListView Key="list" TableKey="ToDoList" Height="900px" PageLoadType="DB" PageRowCount="25">
+                    <ListViewColumnCollection>
+                        <ListViewColumn Key="Li_workItemID" Width="100px" Caption="工作项标识" DataColumnKey="workItemID"/>
+                        <ListViewColumn Key="Li_workItemName" Width="360px" Caption="工作项名称" DataColumnKey="workItemName"/>
+                        <ListViewColumn Key="Li_creatTime" Width="410px" Caption="创建时间" ColumnType="DatePicker" DataColumnKey="creatTime" OnlyDate="false"/>
+                        <ListViewColumn Key="Li_formkey" Width="360px" Caption="表单Key" DataColumnKey="formkey"/>
+                        <ListViewColumn Key="Li_oid" Width="360px" Caption="表单标志" DataColumnKey="oid"/>
+                    </ListViewColumnCollection>
+                    <RowDblClick>
+                        <![CDATA[
+OpenWorkitem(Li_workItemID)
+			]]>
+                    </RowDblClick>
+                </ListView>
+            </FlexFlowLayoutPanel>
+        </Block>
+    </Body>
+    <OnLoad type="Formula">
+        <![CDATA[LoadData();]]>
+    </OnLoad>
+</Form>

@@ -1,0 +1,16 @@
+/**
+ * label control style.
+ *
+ * 2023.8.30 created by guojs.
+ */
+
+.heel-web .ui-lbl {
+   margin-top: -1px;
+
+   color: #888888;
+}
+
+.heel-web .ui-chk > label {
+
+    color: #888888;
+}

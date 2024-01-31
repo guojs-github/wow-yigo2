@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Key="TS_ExamRuleView" Caption="试卷生成规则" FormType="View" Version="102">
+    <DataSource>
+        <DataObject Key="TS_ExamRuleView" Caption="试卷生成规则" PrimaryTableKey="TS_ExamRuleView">
+            <TableCollection>
+                <Table Key="TS_ExamRuleView" Caption="试卷生成规则" TableMode="Detail" SourceType="Query" Persist="false">
+                    <Column Key="OID" Caption="对象标识" DataType="Long"/>
+                    <Column Key="SOID" Caption="主对象标识" DataType="Long"/>
+                    <Column Key="POID" Caption="父对象标识" DataType="Long"/>
+                    <Column Key="VERID" Caption="对象版本" DataType="Integer"/>
+                    <Column Key="DVERID" Caption="对象明细版本" DataType="Integer"/>
+                    <Column Key="Status" Caption="状态" DataType="Long"/>
+                    <Column Key="No" Caption="规则编号" DataType="Varchar"/>
+                    <Column Key="Category" Caption="考题类别" DataType="Long"/>
+                    <Column Key="Department" Caption="发布部门" DataType="Long"/>
+                    <Column Key="TotalScore" Caption="总分" DataType="Varchar" Precision="16" Scale="2"/>
+                    <Column Key="PassingScore" Caption="及格分" DataType="Varchar" Precision="16" Scale="2"/>
+                    <Column Key="Creator" Caption="创建人" DataType="Long"/>
+                    <Column Key="CreatorName" Caption="创建人姓名" DataType="Varchar"/>
+                    <Column Key="CreateTime" Caption="创建时间" DataType="DateTime"/>
+                    <Column Key="Modifier" Caption="修改人" DataType="Long"/>
+                    <Column Key="ModifierName" Caption="修改人姓名" DataType="Varchar"/>
+                    <Column Key="ModifyTime" Caption="修改时间" DataType="DateTime" SortType="Desc"/>
+                    <Column Key="Description" Caption="Description" DataType="Varchar"/>
+                    <Column Key="Duration" Caption="Duration" DataType="Varchar"/>
+                    <Column Key="Remark" Caption="Remark" DataType="Varchar"/>
+                    <Statement>
+                        <![CDATA[select * from (
+	select
+	    header.OID,
+	    header.Status,
+	    header.No,
+	    header.Category,
+	    header.Department,
+	    header.TotalScore,
+	    header.PassingScore,
+            header.Duration,
+	    header.Description,
+	    header.Creator,
+	    creator.Name as CreatorName,
+	    header.CREATETIME,
+	    header.Modifier,
+	    modifier.Name as ModifierName,
+	    header.ModifyTime,
+	    header.Remark
+	from
+	    ts_exam_rule_header header
+	    left join (select oid, name from sys_operator) creator on creator.oid = header.creator
+	    left join (select oid, name from sys_operator) modifier on modifier.oid = header.Modifier
+	where
+    	header.isdeleted = 0
+	order by
+		header.ModifyTime desc
+) a   ]]>
+                    </Statement>
+                </Table>
+            </TableCollection>
+        </DataObject>
+    </DataSource>
+    <OperationCollection>
+        <Operation Key="Refresh" Caption="刷新">
+            <Action>
+                <![CDATA[query();]]>
+            </Action>
+        </Operation>
+        <Operation Key="New" Caption="新增">
+            <Action>
+                <![CDATA[New('TS_ExamRuleDetail');]]>
+            </Action>
+        </Operation>
+        <Operation Key="Delete" Caption="删除">
+            <Action>
+                <![CDATA[// 删除
+var count = 0;
+var row = 0;
+var selected = 0;
+var id = 0;
+var idList = "";
+loop "RulesList"(true) {
+    selected = GetCellValue("RulesList", row, "select"); // Confirm("selected="&selected);
+    id = GetCellValue("RulesList", row, "OID"); // Confirm("id="&id);    
+    if (selected) { // 选中？
+        // 计数
+        count = count + 1;
+        // 拼接选中的id
+        idList = IIF(idList == "", id, idList + "," + id);
+    }    
+
+    row = row + 1; // 下一行
+}
+
+if (Length(idList) <= 0) {
+    Confirm("请勾选【已输入】、【已停用】规则，再执行【删除】操作");
+} else {
+    // Confirm("删除规则:"&idList);
+    SetPara("idList", idList);
+    Confirm("您要删除选中的"&count&"条规则？",
+        "YES_NO",
+        {
+            YES:{
+                InvokeService("RuleDelete", false, false, GetPara("idList"));
+                query();
+            },
+            NO:{
+            }
+        });
+}
+
+]]>
+            </Action>
+        </Operation>
+        <Operation Key="Enable" Caption="启用">
+            <Action>
+                <![CDATA[// 批量启用
+var count = 0;
+var row = 0;
+var selected = 0;
+var statusId = 0;
+var id = 0;
+var idList = "";
+loop "RulesList"(true) {
+    selected = GetCellValue("RulesList", row, "select"); // Confirm("selected="&selected);
+    statusId = GetCellValue("RulesList", row, "Status"); // Confirm("status="&statusId);
+    id = GetCellValue("RulesList", row, "OID"); // Confirm("id="&id);    
+    if (selected) { // 选中？
+        // 计数
+        count = count + 1;
+        // 拼接选中的id
+        idList = IIF(idList == "", id, idList + "," + id);
+    }
+    
+    row = row + 1; // 下一行
+}
+
+if (Length(idList) <= 0) {
+    Confirm("请勾选【已输入】、【已停用】规则，再执行【启用】操作");
+} else {
+    // Confirm("启用规则:"&idList);
+    SetPara("idList", idList);
+    Confirm("您要启用选中的"&count&"条规则？",
+        "YES_NO",
+        {
+            YES:{
+                InvokeService("RuleSetStatus", false, false, GetPara("idList"), true);
+                query();
+            },
+            NO:{
+            }
+        });
+}]]>
+            </Action>
+        </Operation>
+        <Operation Key="Disable" Caption="停用">
+            <Action>
+                <![CDATA[// 批量停用
+var count = 0;
+var row = 0;
+var selected = 0;
+var statusId = 0;
+var id = 0;
+var idList = "";
+loop "RulesList"(true) {
+    selected = GetCellValue("RulesList", row, "select"); // Confirm("selected="&selected);
+    statusId = GetCellValue("RulesList", row, "Status"); // Confirm("status="&statusId);
+    id = GetCellValue("RulesList", row, "OID"); // Confirm("id="&id);    
+    if (selected) { // 选中？
+        // 计数
+        count = count + 1;
+        // 拼接选中的id
+        idList = IIF(idList == "", id, idList + "," + id);
+    }
+    
+    row = row + 1; // 下一行
+}
+
+if (Length(idList) <= 0) {
+    Confirm("请勾选【已启用】规则，再执行【停用】操作");
+} else {
+    // Confirm("停用规则:"&idList);
+    SetPara("idList", idList);
+    Confirm("您要停用选中的"&count&"条规则？",
+        "YES_NO",
+        {
+            YES:{
+                InvokeService("RuleSetStatus", false, false, GetPara("idList"), false);
+                query();
+            },
+            NO:{
+            }
+        });
+}
+]]>
+            </Action>
+        </Operation>
+    </OperationCollection>
+    <Body>
+        <Block>
+            <FlexFlowLayoutPanel Key="panel_main" Caption="panel_main">
+                <ToolBar Key="top_toolbar" Height="pref" Caption="top_toolbar">
+                    <ToolBarItemCollection/>
+                </ToolBar>
+                <Grid Key="RulesList" Caption="RulesList" NewEmptyRow="false" CanDelete="false" CanInsert="false" CanShift="false" Height="100%" Width="100%">
+                    <GridColumnCollection>
+                        <GridColumn Key="Select" Caption="选择" Width="80px"/>
+                        <GridColumn Key="Status" Caption="状态" Width="80px"/>
+                        <GridColumn Key="OID" Caption="OID" Width="80px" Visible="false"/>
+                        <GridColumn Key="No" Caption="编号" Width="180px"/>
+                        <GridColumn Key="Category" Caption="类别" Width="150px"/>
+                        <GridColumn Key="Department" Caption="发布部门" Width="150px"/>
+                        <GridColumn Key="Description" Caption="描述" Width="400px"/>
+                        <GridColumn Key="TotalScore" Caption="总分" Width="80px"/>
+                        <GridColumn Key="PassingScore" Caption="及格分" Width="80px"/>
+                        <GridColumn Key="Duration" Caption="时长(分钟)" Width="80px"/>
+                        <GridColumn Key="CreatorName" Caption="创建人" Width="100px"/>
+                        <GridColumn Key="CreateTime" Caption="创建时间" Width="150px"/>
+                        <GridColumn Key="ModifierName" Caption="修改人" Width="100px"/>
+                        <GridColumn Key="ModifyTime" Caption="修改时间" Width="150px"/>
+                        <GridColumn Key="Remark" Caption="备注" Width="200px"/>
+                    </GridColumnCollection>
+                    <GridRowCollection>
+                        <GridRow Key="row1" TableKey="TS_ExamRuleView">
+                            <GridCell Key="select" Caption="选择" CellType="CheckBox" IsSelect="true" CellSortType="None"/>
+                            <GridCell Key="Status" Caption="状态" CellType="ComboBox" Enable="false" CellSortType="None" SourceType="Status">
+                                <DataBinding ColumnKey="Status"/>
+                            </GridCell>
+                            <GridCell Key="OID" Caption="OID" CellSortType="None">
+                                <DataBinding ColumnKey="OID"/>
+                            </GridCell>
+                            <GridCell Key="No" Caption="编号" CellType="HyperLink" CellSortType="None">
+                                <DataBinding ColumnKey="No"/>
+                                <OnClick>
+                                    <![CDATA[openDetail();]]>
+                                </OnClick>
+                            </GridCell>
+                            <GridCell Key="Category" Caption="类别" CellType="Dict" Enable="false" CellSortType="None" ItemKey="MD_Enum">
+                                <DataBinding ColumnKey="Category"/>
+                            </GridCell>
+                            <GridCell Key="Department" Caption="发布部门" CellType="Dict" Enable="false" CellSortType="None" ItemKey="MD_Enum">
+                                <DataBinding ColumnKey="Department"/>
+                            </GridCell>
+                            <GridCell Key="Description" Caption="描述" CellSortType="None">
+                                <DataBinding ColumnKey="Description"/>
+                            </GridCell>
+                            <GridCell Key="TotalScore" Caption="总分" CellSortType="None">
+                                <DataBinding ColumnKey="TotalScore"/>
+                            </GridCell>
+                            <GridCell Key="PassingScore" Caption="及格分" CellSortType="None">
+                                <DataBinding ColumnKey="PassingScore"/>
+                            </GridCell>
+                            <GridCell Key="Duration" CellSortType="None">
+                                <DataBinding ColumnKey="Duration"/>
+                            </GridCell>
+                            <GridCell Key="CreatorName" Caption="创建人" CellType="TextEditor" CellSortType="None">
+                                <DataBinding ColumnKey="CreatorName"/>
+                            </GridCell>
+                            <GridCell Key="CreateTime" Caption="创建时间" CellType="DatePicker" Enable="false" CellSortType="None">
+                                <DataBinding ColumnKey="CreateTime"/>
+                            </GridCell>
+                            <GridCell Key="ModifierName" Caption="修改人" CellSortType="None">
+                                <DataBinding ColumnKey="ModifierName"/>
+                            </GridCell>
+                            <GridCell Key="ModifyTime" Caption="修改时间" CellType="DatePicker" Enable="false" CellSortType="Desc">
+                                <DataBinding ColumnKey="ModifyTime"/>
+                            </GridCell>
+                            <GridCell Key="Remark" CellSortType="None">
+                                <DataBinding ColumnKey="Remark"/>
+                            </GridCell>
+                        </GridRow>
+                    </GridRowCollection>
+                    <RowDblClick>
+                        <![CDATA[openDetail();]]>
+                    </RowDblClick>
+                </Grid>
+            </FlexFlowLayoutPanel>
+        </Block>
+    </Body>
+    <OnPostShow>
+        <![CDATA[// 打开后就加载数据
+var loaded = GetPara("LOADED");
+if (loaded <> true) {
+    SetPara("LOADED", true);
+    query();
+}]]>
+    </OnPostShow>
+    <MacroCollection>
+        <Macro Key="query">
+            <![CDATA[// 执行查询操作
+DealCondition();
+LoadData();
+ShowData();]]>
+        </Macro>
+        <Macro Key="openDetail">
+            <![CDATA[// 打开详情界面
+var isDeleted = false;
+isDeleted = InvokeService("RuleIsDeleted", false, false, OID); 
+if (!isDeleted) {
+    Open("TS_ExamRuleDetail", OID);
+}
+]]>
+        </Macro>
+    </MacroCollection>
+</Form>

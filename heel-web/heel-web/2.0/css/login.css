@@ -1,0 +1,220 @@
+/**
+	Yigo2.0 登录窗口样式
+	2022.10.24 GuoJS
+**/
+
+@media screen and (max-height: 600px) {
+    .heel-web .login-logo {
+        font-size: 13px !important;
+
+		width: 5em;
+    }
+}
+
+@media screen and (min-height: 600px) {
+    .heel-web .login-logo {
+        font-size: 1vh !important;
+
+		width: 8.5em;
+    }
+}
+
+.heel-web > .header {
+	height: 4.817em;
+	line-height: 4.817em;
+	background-color: white;
+	border-bottom: 1px solid lightgray;
+}
+
+/* .heel-web .login-logo {
+	animation: -rotate-y 3s ease-in-out infinite;
+} */
+
+.heel-web > .header > .warpper {
+	font-size: unset;
+}
+
+.heel-web > .header > .warpper > .login-logo-text {
+	margin-left: 0.5em;
+
+	font-size: 1.686em;
+}
+
+
+.heel-web > .login-main {
+	height: 45.93em;
+	min-height: 500px;
+	line-height: 45.93em;
+	
+	background: url(/yigo/heel-web/2.0/image/login_bg.png) no-repeat center;
+	background-size: cover;
+	border-bottom: 1px solid lightgray;
+}
+
+.heel-web > .login-main > .warpper {
+	font-size: unset;
+}
+
+.heel-web img.login_img {
+	width: 35%;
+	height: auto;
+}
+
+.heel-web .login-loginbox {
+	position: relative;
+	padding: 1.3245em 2.408em 2.408em;
+
+	font-size: 1em;
+	width: 24.678em;
+
+	border-radius: 0.3em;
+	transform-origin: top;
+
+	-moz-box-shadow: 0 0 0.3em 0 rgba(0, 0, 0, .8);
+	-webkit-box-shadow: 0 0 0.3em 0 rgba(0, 0, 0, .8);
+	box-shadow: 0 0 0.3em 0 rgba(0, 0, 0, .8);
+}
+
+/*Flip in 4 login dialog**********************/
+@keyframes -flip-in-login {  
+    0% {
+		transform: perspective(1000px) rotateX(-90deg) rotateZ(45deg);
+	}  
+    15% {
+		transform: perspective(1000px) rotateX(45deg) rotateZ(-22deg);
+	}  
+    30% {
+		transform: perspective(1000px) rotateX(-22deg) rotateZ(11deg);
+	}  
+    45% {
+		transform: perspective(1000px) rotateX(11deg) rotateZ(-5deg);
+	}  
+    60% {
+		transform: perspective(1000px) rotateX(-5deg) rotateZ(2deg);
+	}  
+    75% {
+		transform: perspective(1000px) rotateX(2deg) rotateZ(-1deg);
+	}  
+    90% {
+		transform: perspective(1000px) rotateX(-1deg) rotateZ(1deg);
+	}  
+    100% {
+		transform: perspective(1000px) rotateX(0) rotateZ(0);
+	}  
+}  
+
+.heel-web-flip-in-login {
+	animation: -flip-in-login; 
+	animation-duration: 1.2s;
+	-webkit-animation: -flip-in-login 1.2s;
+}
+
+.heel-web .login-loginbox > svg.nail {
+	position: absolute;
+	left: calc(50% - 0.7em);
+	top: -0.5em;
+
+	font-size: 1.204em;
+	color: #0c8eff;
+	border-radius: 50%;
+	box-shadow: 0 0 0.3em 0 black;
+}
+
+.heel-web p.login-title {
+	padding-right: 0.065em;
+	margin: 0.47em 0 1.25em 0;
+	text-align: center;
+
+	height: 0.7815em;
+	line-height: 0.7815em;
+
+	color: #999999;
+	font-size: 1.9265em;
+	letter-spacing: 0.05em;
+}
+
+.heel-web span.login-combox-name {
+	display: none;
+}
+
+.heel-web .login-loginbox > .login-strip {
+	margin-bottom: 3.4em;
+
+	height: 4.203em;
+	line-height: 4.203em;
+}
+
+.heel-web .login-loginbox > .login-strip > input {
+	font-size: 1.9em;
+	width: 15.2063em;
+	height: 2.2121em;
+	line-height: 2.2121em;
+}
+
+.heel-web .login-loginbox > .login-strip.login-password-rows > em.login-password-btn {
+	width: 2em;
+	height: 2.627em;
+
+	background-size: contain;
+}
+
+.heel-web input.login-username
+,.heel-web input.login-password
+{
+	border-bottom: 1px solid #cccccc;
+}	
+
+.heel-web input.login-username:focus
+,.heel-web input.login-password:focus
+{
+	border-bottom: 1px solid #0c8eff;
+}
+
+.heel-web div.login-button {
+    margin: 2.5em 0 0 0;
+    text-align: center;
+
+	width: 100%;
+	height: 2em;
+    line-height: 2em;
+
+	color: white;
+	background-color: #0c8eff;
+
+    font-size: 1.565em;
+
+	border-radius: 0;
+    cursor: pointer;
+}
+
+.heel-web div.login-button:hover {
+	transform: scale(1.05);
+	box-shadow: 0 0 0.1514em 0 rgba(0, 0, 0, 0.7);
+
+	animation: -login-button-hover 1s ease-in-out;
+	-webkit-animation: -login-button-hover 1s ease-in-out;
+}
+
+/* login button hover **********************/
+@keyframes -login-button-hover {
+	0% {
+		background: linear-gradient(to right, white 0%, #0c8eff 0.3785em, #0c8eff 100%); 
+		background-position: 0 50% ;
+	}
+	100% { 
+		background: linear-gradient(to right, white 0%, #0c8eff 0.3785em, #0c8eff 100%); 
+		background-position: 12.3em 50%;
+	}
+}  
+
+@-webkit-keyframes -login-button-hover {
+	0% {
+		background: linear-gradient(to right, white 0%, #0c8eff 0.3785em, #0c8eff 100%); 
+		background-position: 0 50% ;
+	}
+	100% { 
+		background: linear-gradient(to right, white 0%, #0c8eff 0.3785em, #0c8eff 100%); 
+		background-position: 12.3em 50%;
+	}
+} 
+

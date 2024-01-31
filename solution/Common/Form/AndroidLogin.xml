@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Caption="移动端登录" Key="AndroidLogin">
+	<Body> 
+		<Block>
+			<LinearLayoutPanel
+				Key="ll_login_outer"
+				Orientation="VERTICAL">
+				
+				<Image
+					Key="im_top"/>
+				
+				<LinearLayoutPanel
+					Key="ll_mainPanel"
+					Orientation="VERTICAL">
+					
+					<LinearLayoutPanel
+						Key="LinearLayout1"
+						Orientation="VERTICAL">
+					
+						<Label
+							Caption="用户"
+							Key="l_user"/>
+						<TextEditor
+							Key="te_user"
+							Caption="用户"/>
+					
+					</LinearLayoutPanel>
+					
+					<LinearLayoutPanel
+						Key="LinearLayout2"
+						Orientation="VERTICAL">
+						
+						<Label
+							Caption="密码"
+							Key="l_pass"/>
+						<PasswordEditor
+							Key="pe_pass"
+							Caption="密码"/>
+						
+					</LinearLayoutPanel>
+					<Button
+						Caption="登录"
+						Key="Button"
+						LeftMargin="90px">
+						<OnClick>
+							<![CDATA[ 
+								Login(te_user, pe_pass);
+							]]>
+						</OnClick>
+					</Button>
+					
+				</LinearLayoutPanel>
+				
+			</LinearLayoutPanel>
+		</Block>
+	</Body>
+</Form>

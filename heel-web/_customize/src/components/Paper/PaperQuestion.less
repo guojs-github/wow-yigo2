@@ -1,0 +1,35 @@
+/*
+	paper question style
+*/
+@import '/src/assets/style/index.less';
+
+@paper-question-height: 40px;
+
+div.paper-question {
+    width: calc(100% - 20px);
+
+    & > div {
+        height: @paper-question-height;
+        line-height: @paper-question-height;
+    }
+
+    & > .option {
+        margin: 0 20px;
+        height: auto;
+
+        &:hover {
+            background-color: @color-light-red;
+        }
+    }
+
+    & > .multi-line-input{
+        margin: 0 20px;
+        width: 100%;
+        height: 80px;
+        line-height: 25px;        
+    }
+
+    .question-part input{
+        margin: 0 5px;
+    }
+}

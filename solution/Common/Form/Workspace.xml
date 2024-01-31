@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Caption="工作台" Key="Workspace" Authenticate="True">
+	<Body HAlign="Center" VAlign="Top" Provider="Classic"> 
+		<Block>
+			<BorderLayoutPanel Key="rootPanel">
+				<Container Key="Container" Area="Center" Style="Tab" rightKey="db1">
+				</Container>
+			</BorderLayoutPanel>
+		</Block>
+	</Body>
+</Form>

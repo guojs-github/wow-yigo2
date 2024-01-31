@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Key="#FormKey#" Caption="#FormCaption#" FormType="Dict">
+    <DataSource RefObjectKey="#RefObjectKey#"/>
+    <ScriptCollection>
+        <Script Key="Load" Caption="载入" Description="载入事件" Range="Action" Verb="Load">
+            <![CDATA[LoadData()]]>
+        </Script>
+    </ScriptCollection>
+    <Body>
+        <Block>
+            <GridLayoutPanel Key="GridLayoutPanel1" Padding="5px" Caption="GridLayoutPanel1">
+                <RowDefCollection RowHeight="30" RowGap="6">
+                    <RowDef/>
+                    <RowDef/>
+                    <RowDef/>
+                    <RowDef/>
+                </RowDefCollection>
+                <ColumnDefCollection ColumnGap="20">
+                    <ColumnDef Width="50%"/>
+                    <ColumnDef Width="50%"/>
+                </ColumnDefCollection>
+            </GridLayoutPanel>
+        </Block>
+    </Body>
+</Form>

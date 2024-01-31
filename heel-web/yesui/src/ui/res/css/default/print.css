@@ -1,0 +1,7 @@
+.ui-lv .paginationjs-content, .ui-lv .lv-head {
+    overflow: visible;
+}
+
+.ui-lv {
+    overflow: visible;
+}

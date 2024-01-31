@@ -1,0 +1,54 @@
+/**
+	Yigo2.0 主窗口样式
+	2022.11.11 GuoJS 创建
+**/
+@import "main-tab.css";
+@import "main-head.css";
+@import "main-menu.css";
+@import "main-search.css";
+@import "main-toolbar.css";
+@import "control/main-control-default.css";
+
+.heel-web > .main {	
+	height: calc(100vh - 3.95em) !important;
+	background-color: #eeeeee;
+
+	font-size: inherit;
+}
+
+.heel-web .mainMiddle {	
+	width: 0.629em;
+	border: 0;
+
+	font-size: inherit;
+
+	background: none;
+	background-color: #eeeeee;
+	border-left: 0.15725em solid #C7E0F4;
+}
+
+.heel-web .mainMiddle:hover {	
+	border-left: 0.15725em solid #5CACEE;
+
+	transition: transform 0.25s; 
+	transform: scaleX(1.3);
+}
+
+.heel-web > .main > .mainLeft {
+	height: calc(100vh - 3.95em) !important;
+	background-color: white;
+
+	font-size: inherit;
+}
+
+.heel-web > .main > .mainRight {
+	font-size: inherit;
+}
+
+.heel-web > .main > .mainRight > .ui-tabs-body {
+	background-color: white;
+}	
+
+.heel-web div[id*="home_page_browser"] {
+	height: calc(100vh - 90px) !important;
+}

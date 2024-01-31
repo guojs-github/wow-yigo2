@@ -1,0 +1,47 @@
+/**
+ * dict input control style.
+ * 
+ * 2023.8.28 created by guojs.
+ */
+.heel-web .ui-dict {
+    position: relative;
+}
+
+.heel-web .ui-dict > .arrow
+,.heel-web .ui-dict > .arrowgif 
+{
+    width: 15px;
+    cursor: pointer;
+}
+
+.heel-web .ui-dict > .clear {
+    position: absolute;
+    right: 15px;
+    top: 0;
+    text-align: center;
+
+    width: 15px;
+    height: inherit;
+
+    color: #aaaaaa;
+    background-color: transparent;
+
+    font-size: 10px;
+
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.heel-web .ui-dict > .clear:hover
+{
+    color: #40a8e8;
+}
+
+.heel-web .ui-dict > .arrow:hover {
+    background-image: url("../../image/combobox-arrow-down-blue.png");
+}

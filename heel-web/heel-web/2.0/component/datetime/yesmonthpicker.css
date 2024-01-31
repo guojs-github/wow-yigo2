@@ -1,0 +1,46 @@
+/*
+    New style month picker 
+    2023.8.29 created by guojs
+*/
+
+.heel-web .ui-mp {
+    position: relative;
+}
+
+.heel-web .ui-mp > .arrow
+{
+    margin-right: 2px;
+
+    width: 10px;
+
+    background-size: contain;
+    cursor: pointer;
+}
+
+.heel-web .ui-mp > .clear {
+    position: absolute;
+    right: 15px;
+    top: 0;
+    text-align: center;
+
+    width: 15px;
+    height: inherit;
+
+    color: #aaaaaa;
+    background-color: transparent;
+
+    font-size: 10px;
+
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.heel-web .ui-mp > .clear:hover
+{
+    color: #40a8e8;
+}
+

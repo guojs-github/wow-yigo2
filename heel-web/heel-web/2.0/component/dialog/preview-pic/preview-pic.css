@@ -1,0 +1,51 @@
+/**
+	heel-web component preview picture style
+	2023.4.20 created by guojs
+**/
+.heel-web .hw-dialog.hw-preview-pic {
+    position: fixed;
+    top: auto;
+    right: auto;
+    left: 10px;
+    bottom: 10px;
+    line-height: 0;
+}
+
+.heel-web .hw-dialog.hw-preview-pic > .dialog {
+    margin: 0;
+}
+
+.heel-web .hw-dialog.hw-preview-pic > .dialog > .dialog-header {
+    cursor: pointer;
+}
+
+.heel-web .hw-dialog.hw-preview-pic > .dialog > .dialog-header > .dialog-title {
+    cursor: inherit;
+}
+
+.heel-web .hw-dialog.hw-preview-pic .hw-preview-pic-content {
+    margin: 5px;
+    justify-content: center;
+}
+
+.heel-web .hw-dialog.hw-preview-pic .hw-preview-pic-content > img {
+    width: 100%;
+}
+
+.heel-web .hw-dialog.hw-preview-pic .hw-preview-pic-content > .resize-bar {
+    justify-content: flex-end;
+
+    width: 100%;
+    height: 10px;
+}
+
+.heel-web .hw-dialog.hw-preview-pic .hw-preview-pic-content > .resize-bar > .resize-box {
+    margin-top: 5px;
+
+    width: 10px;
+    height: 10px;
+    border: 3px solid #2e6e9e;
+    border-radius: 50%;
+
+    cursor: nw-resize;
+}

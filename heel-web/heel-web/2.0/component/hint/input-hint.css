@@ -1,0 +1,37 @@
+/**
+	heel-web component input hint message style
+	2023.8.16 created by guojs 
+**/
+.heel-web input.hw-input-hint-error::-webkit-input-placeholder /* 使用webkit内核的浏览器 */
+{   
+	color: darkred;
+}
+
+.heel-web input.hw-input-hint-error:-moz-placeholder{    /* Firefox版本4-18 */
+	color: darkred;
+}              
+
+.heel-web input.hw-input-hint-error::-moz-placeholder{    /* Firefox版本19+ */
+	color: darkred;
+}
+
+.heel-web input.hw-input-hint-error:-ms-input-placeholder{   /* IE浏览器 */
+	color: darkred;
+}      
+
+.heel-web input.hw-input-hint-warn::-webkit-input-placeholder /* 使用webkit内核的浏览器 */
+{   
+	color: #ed6d15;
+}
+
+.heel-web input.hw-input-hint-warn:-moz-placeholder{    /* Firefox版本4-18 */
+	color: #ed6d15;
+}              
+
+.heel-web input.hw-input-hint-warn::-moz-placeholder{    /* Firefox版本19+ */
+	color: #ed6d15;
+}
+
+.heel-web input.hw-input-hint-warn:-ms-input-placeholder{   /* IE浏览器 */
+	color: #ed6d15;
+}      

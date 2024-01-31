@@ -1,0 +1,146 @@
+.ui-state-default a,.ui-state-default a:link,.ui-state-default a:visited
+{
+	color: #2e6e9e;
+	text-decoration: none
+}
+
+.ui-widget-header {
+	border: 1px solid #4297d7;
+	background: #5c9ccc url(images/ui-bg_gloss-wave_55_5c9ccc_500x100.png)
+		50% 50% repeat-x;
+	color: #fff;
+	font-weight: bold
+}
+.ui-corner-all,.ui-corner-top,.ui-corner-left,.ui-corner-tl {
+	border-top-left-radius: 5px
+}
+.ui-corner-top:hover a {
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+.ui-corner-all,.ui-corner-top,.ui-corner-right,.ui-corner-tr {
+	border-top-right-radius: 5px
+}
+
+.ui-corner-all,.ui-corner-bottom,.ui-corner-left,.ui-corner-bl {
+	border-bottom-left-radius: 5px
+}
+
+.ui-corner-all,.ui-corner-bottom,.ui-corner-right,.ui-corner-br {
+	border-bottom-right-radius: 5px
+}
+
+.ui-icon,.ui-widget-content .ui-icon {
+	background-image: url(images/ui-icons_469bdd_256x240.png)
+}
+
+.ui-widget-header .ui-icon {
+	background-image: url(images/ui-icons_d8e7f3_256x240.png)
+}
+
+.ui-state-default .ui-icon {
+	background-image: url(images/ui-icons_6da8d5_256x240.png)
+}
+
+.ui-state-hover .ui-icon,.ui-state-focus .ui-icon {
+	background-image: url(images/ui-icons_217bc0_256x240.png)
+}
+
+.ui-state-active .ui-icon {
+	background-image: url(images/ui-icons_f9bd01_256x240.png)
+}
+.ui-tooltip {
+    padding: 8px;
+    position: absolute;
+    z-index: 9999;
+    max-width: 300px;
+    -webkit-box-shadow: 0 0 5px #aaa;
+    box-shadow: 0 0 5px #aaa
+}
+
+body .ui-tooltip {
+    border-width: 2px
+}
+.ui-state-highlight,.ui-widget-content .ui-state-highlight,.ui-widget-header .ui-state-highlight {
+    border: 1px solid #fad42e;
+    background: #fbec88 url(images/ui-bg_flat_55_fbec00_30x100.png) 50% 50%;
+    color: #363636
+}
+.ui-state-highlight a,.ui-widget-content .ui-state-highlight a,.ui-widget-header .ui-state-highlight a
+{
+    color: #363636
+}
+.ui-state-highlight .ui-icon {
+	background-image: url(images/ui-icons_2e83ff_256x240.png)
+}
+
+.ui-state-error .ui-icon,.ui-state-error-text .ui-icon {
+	background-image: url(images/ui-icons_cd0a0a_256x240.png)
+}
+.ui-icon-close {
+	background-position: -80px -128px
+}
+.ui-icon-trash {
+    background-position: -176px -96px
+}
+.ui-icon-plus {
+     background-position: -16px -128px
+ }
+
+.ui-icon-up {
+    background-position: 0 -48px
+}
+
+.ui-icon-down {
+    background-position: -64px -48px
+}
+.ui-icon-refresh {
+    background-position: -64px -80px
+}
+.ui-icon-asc {
+    background-position: 0 -16px
+}
+.ui-icon-desc {
+    background-position: -64px -16px
+}
+
+.ui-icon-seek-next {
+    background-position: -32px -160px
+}
+
+.ui-icon-seek-prev {
+    background-position: -48px -160px
+}
+
+.ui-icon-seek-end {
+    background-position: -64px -160px
+}
+
+.ui-icon-seek-start {
+    background-position: -80px -160px
+}
+
+.ui-icon-seek-first {
+    background-position: -80px -160px
+}
+.ui-icon {
+	display: block;
+	text-indent: -99999px;
+	overflow: hidden;
+	background-repeat: no-repeat
+}
+.ui-widget-content {
+	border: 1px solid #dadada;
+	background: #fcfdfd url(images/ui-bg_inset-hard_100_fcfdfd_1x100.png)
+		50% bottom repeat-x;
+}
+.ui-state-disabled
+{
+    opacity: .35;
+    filter: Alpha(Opacity = 35);
+    background-image: none
+}
+.ui-icon {
+	width: 16px;
+	height: 16px
+}

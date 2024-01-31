@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Caption="提示框" Key="Dialog">
+	<Body PopWidth="400px" PopHeight="260px"> 
+		<Block>
+			<FlexFlowLayoutPanel Key="main">
+				<GridLayoutPanel Key="content" Height="100%" Padding="5px">
+						<RowDefCollection RowHeight="30" RowGap="5">
+							<RowDef/>
+							<RowDef Height="auto"/>
+							<RowDef/>
+							<RowDef/>
+							<RowDef/>
+							<RowDef/>
+						</RowDefCollection>
+						<ColumnDefCollection ColumnGap="5">
+							<ColumnDef Width="20%"/>
+							<ColumnDef Width="20%"/>
+							<ColumnDef Width="20%"/>
+							<ColumnDef Width="20%"/>
+							<ColumnDef Width="20%"/>
+						</ColumnDefCollection>
+					<Label Key="MSG" Caption="提示信息。提示信息。提示信息。提示信息。提示信息。提示信息。提示信息。" X="1" Y="1" XSpan="3"/>
+					<Button Key="OK" Caption="确定(O)" ShortCuts="Alt+O" X="2" Y="3">
+						<OnClick>
+							<![CDATA[
+								doEventCallback("OK");Close();
+							]]>	
+						</OnClick>
+					</Button>
+					<Button Key="Yes" Caption="是(Y)" ShortCuts="Alt+Y" X="1" Y="3">
+						<OnClick>
+							<![CDATA[
+								doEventCallback("Yes");Close();
+							]]>	
+						</OnClick>
+					</Button>
+					<Button Key="No" Caption="否(N)" ShortCuts="Alt+N" X="2" Y="3">
+						<OnClick>
+							<![CDATA[
+								doEventCallback("No");Close();
+							]]>	
+						</OnClick>
+					</Button>
+					<Button Key="Cancel" Caption="取消(C)" ShortCuts="Alt+C" X="3" Y="3">
+						<OnClick>
+							<![CDATA[
+								doEventCallback("Cancel");Close();
+							]]>	
+						</OnClick>
+					</Button>
+				</GridLayoutPanel>
+			</FlexFlowLayoutPanel>
+		</Block>
+	</Body>
+</Form>
+	

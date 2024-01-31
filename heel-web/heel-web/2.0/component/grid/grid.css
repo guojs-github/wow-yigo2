@@ -1,0 +1,195 @@
+/**
+ * Grid control style.
+ * 
+ * 2023.8.31 created by guojs
+ */
+
+.heel-web .ui-ygrid .colCaption { /* 表格头 */
+    color: #666;
+} 
+
+.heel-web .ui-ygrid.ui-readonly td.ygrid-rownum { /* 只读时，序号列样式 */
+    background-color: #f9f9f9;
+}
+
+/* 单元格样式 */
+.heel-web .ui-ygrid td.ui-cell-disabled {
+    color: black;
+}
+
+.heel-web td.ui-cell-disabled .txt
+,.heel-web .ui-readonly td:hover .txt.button
+,.heel-web td.ui-cell-disabled button:focus .txt
+,.heel-web .ui-cell-disabled .ui-hlk
+,.heel-web td.ui-cell-disabled textarea {
+    color: black;
+}
+
+.heel-web .ui-ygrid td.ui-cell-disabled:hover button
+,.heel-web .ui-ygrid td.ui-cell-disabled:hover .txt.button
+,.heel-web td.ui-cell-disabled:hover textarea
+,.heel-web .ui-ygrid td.ui-cell-disabled:hover .ui-upload {
+    color: black;
+    border: none;
+}
+
+/* 调整字段宽度分割线 */
+.heel-web .ui-ygrid-view span.ui-ygrid-resize.ui-ygrid-resize-ltr {
+    transition: transform 0.25s ease;
+}
+
+.heel-web .ui-ygrid-view span.ui-ygrid-resize.ui-ygrid-resize-ltr:hover {
+    transform: scaleX(1.05);
+    background-color: #5cacee;
+}
+
+.heel-web .ui-ygrid .ui-ygrid-resize-mark {
+    background-color: #5cacee;
+}
+
+.heel-web div.ui-ygrid td.ui-cell-disabled .ui-btn.cellEditor > button,
+.heel-web div.ui-ygrid td.ui-cell-disabled .ui-btn.cellEditor > button > span
+{
+	cursor: default;
+}
+
+.heel-web div.ui-ygrid td:not(.ui-cell-disabled) .ui-btn.cellEditor {
+	transition: transform 0.2s;
+}
+
+.heel-web div.ui-ygrid td:not(.ui-cell-disabled) .ui-btn.cellEditor:hover {
+	transform: scale(0.9);
+}
+
+
+/* 自定义显示相关样式 */
+.heel-web .ui-ygrid > .grid-customize-menu {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+}
+
+.heel-web .ui-ygrid > .grid-customize-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.heel-web .ui-ygrid > .grid-customize-menu > .icon > svg {
+    margin: 5px 10px 5px 5px;
+
+    color: #ed6d15;
+    font-size: 16px;
+
+    cursor: pointer;
+}
+
+.heel-web .ui-ygrid > .grid-customize-menu > .menu-container {
+    display: none;
+    overflow: hidden;
+
+    width: 100px;
+    height: 80px;
+}
+
+.heel-web .ui-ygrid > .grid-customize-menu > .menu-container > .menu {
+    margin: 5px;
+
+    background-color: white;
+    border: 0;
+    box-shadow: -2px 2px 10px 0px #ccc;
+
+    color: #323232;
+    font-size: 10px;
+}
+
+.heel-web .ui-ygrid > .grid-customize-menu > .menu-container > .menu.show-grid-customize-menu {
+	animation: -show-grid-customize-menu; 
+	animation-duration: 0.2s;
+	-webkit-animation: -show-grid-customize-menu 0.2s;
+    animation-timing-function: ease-out;
+}
+
+.heel-web .ui-ygrid > .grid-customize-menu > .menu-container > .menu > .menu-item > svg {
+    color: #ed6d15;
+}
+
+/*show grid customize menu**********************/
+@keyframes -show-grid-customize-menu {  
+    0% {
+		transform: translateX(100px);
+	}  
+    100% {
+		transform: translateX(0);
+	}  
+}  
+
+@-webkit-keyframes -show-grid-customize-menu {
+    0% {
+		transform: translateX(100px);
+	}  
+    100% {
+		transform: translateX(0);
+	}  
+} 
+
+.heel-web .ui-ygrid > .grid-customize-menu > .menu-container > .menu.hide-grid-customize-menu {
+	animation: -hide-grid-customize-menu; 
+	animation-duration: 0.2s;
+	-webkit-animation: -hide-grid-customize-menu 0.2s;
+    animation-timing-function: ease-out;
+}
+
+/*hide grid customize menu**********************/
+@keyframes -hide-grid-customize-menu {  
+    0% {
+		transform: translateX(0);
+	}  
+    100% {
+		transform: translateX(100px);
+	}  
+}  
+
+@-webkit-keyframes -hide-grid-customize-menu {
+    0% {
+		transform: translateX(0);
+	}  
+    100% {
+		transform: translateX(100px);
+	}  
+} 
+
+.heel-web .ui-ygrid > .grid-customize-menu > .menu-container > .menu > .menu-item  {
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+
+    cursor: pointer;
+}
+
+.heel-web .ui-ygrid > .grid-customize-menu > .menu-container > .menu > .menu-item > .menu-item-icon {
+    position: absolute;
+    top: 10px;
+    left: -12px;
+
+    font-size: 10px;
+
+    transition: transform 0.3s ease-in;
+}
+
+.heel-web .ui-ygrid > .grid-customize-menu > .menu-container > .menu > .menu-item > .menu-item-text {
+    display: inline-block;
+}
+
+.heel-web .ui-ygrid > .grid-customize-menu > .menu-container > .menu > .menu-item:hover  {
+    background-color: #c7e0f4;
+}
+
+.heel-web .ui-ygrid > .grid-customize-menu > .menu-container > .menu > .menu-item:hover > .menu-item-icon  {
+    transform: translateX(17px);
+}

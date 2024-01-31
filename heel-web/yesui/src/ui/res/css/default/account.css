@@ -1,0 +1,12 @@
+.account .ui-btn.exit {
+	background: #ffc26c;
+	border: 0;
+	font-size: 24px;
+}
+.account .ui-btn.exit:focus {
+	box-shadow: none;
+}
+.account .ui-btn.exit span {
+	font-size: 24px;
+	color: #fff;
+}

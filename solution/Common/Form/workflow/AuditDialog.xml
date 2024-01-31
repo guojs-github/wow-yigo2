@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Caption="审批对话框" Key="AuditDialog">
+    <DataSource>
+        <DataObject>
+            <TableCollection/>
+            <OIDFilter/>
+        </DataObject>
+    </DataSource>
+    <Body>
+        <Block>
+            <GridLayoutPanel Caption="GridLayoutPanel0" Key="GridLayoutPanel0" Padding="5px">
+                <TextArea Caption="意见" Enable="True" Key="Opinion" X="0" XSpan="4" Y="1" HAlign="Left">
+                    <DataBinding/>
+                </TextArea>
+                <Button Caption="通过" Enable="True" Key="APPROVE" ShowText="false" X="1" Y="3">
+                    <DataBinding/>
+                    <OnClick>
+                        <![CDATA[parent.CommitWorkitem(-1,1,Opinion);
+Close();
+]]>
+                    </OnClick>
+                </Button>
+                <Button Caption="驳回" Enable="True" Key="OPPOSE" ShowText="false" X="2" Y="3">
+                    <DataBinding/>
+                    <OnClick>
+                        <![CDATA[parent.CommitWorkitem(-1,0,Opinion);
+Close();
+			]]>
+                    </OnClick>
+                </Button>
+                <Button Caption="取消" Enable="True" Key="cancel" X="3" Y="3">
+                    <DataBinding/>
+                    <OnClick>
+                        <![CDATA[
+Close();
+			]]>
+                    </OnClick>
+                </Button>
+                <Label Caption="意见" Key="T_Opinion" X="0" XSpan="4" Y="0">
+                    <DataBinding/>
+                </Label>
+                <RowDefCollection RowGap="8">
+                    <RowDef Height="30px"/>
+                    <RowDef Height="174px"/>
+                    <RowDef Height="10px"/>
+                    <RowDef Height="20px"/>
+                    <RowDef Height="10px"/>
+                </RowDefCollection>
+                <ColumnDefCollection ColumnGap="8">
+                    <ColumnDef Width="100%"/>
+                    <ColumnDef Width="100px"/>
+                    <ColumnDef Width="100px"/>
+                    <ColumnDef Width="100px"/>
+                </ColumnDefCollection>
+            </GridLayoutPanel>
+        </Block>
+    </Body>
+</Form>

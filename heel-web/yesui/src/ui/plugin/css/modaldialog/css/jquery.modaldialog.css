@@ -1,0 +1,230 @@
+.dialog {
+	position:fixed; 
+	/*width:525px; */
+	padding:0px; 
+	z-index:200; 
+	background:#fff; 
+	font-family:Verdana, Arial, Helvetica; 
+	font-size:14px; /* 
+	user-select: auto;
+	-webkit-user-select: auto;
+	-moz-user-select: auto; */
+	overflow: hidden;
+	/* 
+	-moz-box-shadow: rgba(0, 0, 0, 0.0980392) 0px 1px 2px inset, rgba(179, 179, 179, 0.901961) 0px 0px 26px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.0980392) 0px 1px 2px inset, rgba(179, 179, 179, 0.901961) 0px 0px 26px;
+	box-shadow: rgba(0, 0, 0, 0.0980392) 0px 1px 2px inset, rgba(179, 179, 179, 0.901961) 0px 0px 26px; */
+	-moz-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 16px rgba(179, 179, 179, 0.9);
+    -webkit-box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 16px rgba(179, 179, 179, 0.9);
+	box-shadow: 4px 4px 6px rgba(218, 218, 218, 0.9);
+	/*box-shadow: 1px 1px 3px #cccccc;*/
+    
+    filter: progid:DXImageTransform.Microsoft.Shadow(Strength=6, Direction=135, Color="#dadada");
+	
+}
+.dialog-header {
+	display:block; 
+	position:relative;
+	font-size:14px; 
+	font-weight:bold;
+	overflow: hidden;
+	cursor: move;
+	background: #f5f5f5; 
+	color:#333333; 
+	border:1px solid #cccccc; 
+	border-bottom:none;
+	padding:3px 14px 3px; 
+}
+.dialog.show{
+	 box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.3);
+}
+.dialog.show.error{
+	/*box-shadow: 4px 4px 6px rgba(218, 218, 218, 0.9);*/
+	box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.3);
+}
+.ui-dlg.dialog .dialog-header,.dialog.error .dialog-header {
+	height:39px;
+}
+.dialog-title {
+	float:left;
+	color:#333333;
+	letter-spacing:4px;
+	font-size:14px;
+	line-height:32px;
+}
+.dialog-close {
+	/*float:right; */
+	cursor:pointer;  
+	height:11px; 
+	width:11px; 
+	background:url(../img/ToolTip_Icon_normal.png) no-repeat;
+	position: absolute;
+	top:13px;
+	right: 14px;
+}
+.dialog-close{
+
+}
+.dialog-close:hover{
+	background:url(../img/ToolTip_Icon_hover.png) no-repeat;
+}
+.dialog-content {
+	display:block; 
+	min-height:100px; 
+	color:#000; 
+	font-size:13px;
+	background:#fff; 
+	border:1px solid #cccccc;
+	border-top:none; 
+	overflow: hidden;
+	position: relative;
+}
+.ui-dlg.dialog .dialog-content,.dialog.error .dialog-content{
+	height: 132px;
+}
+.dialog-content-inner { 
+	min-height:128px; 
+	overflow: hidden; 
+	background:url(../img/jquery.modaldialog/close.gif) no-repeat;
+}
+.dialog-mask, .mask {
+	position:fixed; 
+	top:0; left:0; 
+	height:100%; 
+	width:100%; 
+	background:#FFF; 
+	opacity:0; 
+	filter:alpha(opacity=0); 
+	z-index:100
+}
+.dialog-mask.undefined{
+	background-color: #000000;
+	opacity: 0.3;
+}
+.dialog-button-container { 
+	text-align:center;
+	height: 35px;
+
+}
+.dialog-button {
+	font-size:1.1em; 
+	font-family:Arial, sans-serif; 
+	padding:2px 5px 2px 5px; 
+	color: #666;
+	width: 68px;
+	height: 29px;
+	font-size: 12px;
+	border: 1px solid #dadada;
+	border-radius: 2px;
+	background-color: #fdfdfd;
+}
+.dialog-button:hover{ 
+	background-color: #ffffff;
+	cursor: pointer;
+}
+.dialog-button.detail, .dialog-button.close {
+	float: right;
+}
+.dialog-button.close {
+	margin-right: 15px;
+	position: absolute;
+    bottom: 20px;
+    right: 0px;
+}
+.dialog-button.close:hover,.dialog-button.detail:hover{
+	border-color: #66b6e8;
+	color:#66b6e8;
+    cursor: pointer;
+}
+.dialog-button.close:active,.dialog-button.detail:active{
+	outline: 0;
+    border-color: #3890c7;
+    color: #3890c7;
+}
+.dialog-button.detail {
+	/*margin-right: 25px;*/
+	position: absolute;
+	bottom: 20px;
+	right: 90px;
+}
+.dialog.error .dialog-header {
+	background: #f9f9f9;
+	/*height: 30px;*/
+	/*padding: 6px 10px 0 20px;*/
+}
+.dialog.error .dialog-content-inner {
+	display:table-cell;
+	vertical-align: middle;
+	color: #3e3e3e;
+	padding: 0px 40px 0px 120px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	background: url("../img/error.png") no-repeat 60px 30px ;
+}
+.dialog.error .dialog-detail {
+	overflow: hidden;
+	overflow-y: auto;
+	display: none;
+	padding: 10px 20px;
+}
+.dialog.error .dialog-detail.open {
+	height: 100px;
+	display: block;
+}
+
+.rRightDown, .rLeftDown, .rLeftUp, .rRightUp, .rRight, .rLeft, .rUp, .rDown { 
+	position: absolute;
+	background: .C00;
+	width: 10px;
+	height: 10px;
+	z-index: 5;
+	font-size: 0;
+} 
+.rLeftDown, .rRightUp {
+	cursor: ne-resize;
+} 
+.rRightDown, .rLeftUp {
+	cursor: nw-resize;
+} 
+.rRight, .rLeft {
+	cursor: e-resize;
+} 
+.rUp, .rDown {
+	cursor: n-resize;
+} 
+.rRightDown { 
+	bottom: -3px; 
+	right: -3px;
+} 
+.rLeftDown { 
+	bottom: -3px; 
+	left: -3px;
+} 
+.rRightUp { 
+	top: -3px; 
+	right: -3px;
+} 
+.rLeftUp { 
+	top: -3px; 
+	left: -3px;
+} 
+.rRight { 
+	right: -3px; 
+	top: 0;
+	height: 100%;
+} 
+.rLeft { 
+	left: -3px;
+	top: 0;
+	height: 100%;
+} 
+.rUp { 
+	top: -3px; 
+	left: 0;
+	width: 100%;
+} 
+.rDown { 
+	bottom: -3px; 
+	left: 0;
+	width: 100%;
+} 

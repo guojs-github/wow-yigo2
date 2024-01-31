@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Solution Caption="2.0最佳实践" Key="solution">
+    <ProjectCollection>
+        <Project Caption="公共配置" Key="Common"/>
+        <Project Caption="主数据" Key="MasterData"/>
+        <Project Caption="运输安全" Key="TransportSafety"/>
+    </ProjectCollection>
+    <InplaceToolbarCollection>
+        <InplaceToolbar Description="BPM融合" Handler="com.bokesoft.yes.bpm.BPMInplaceToolBarCallback" Tag="BPM"/>
+        <InplaceToolbar Description="提交工作项" Handler="com.bokesoft.yes.bpm.LoadWorkitemInplaceToolBarCallback" Tag="WORKITEM"/>
+    </InplaceToolbarCollection>
+    <PreLoadItemCollection>
+        <PreLoadItem Key="HomePage" EntryPath="Common/System/HomePage" Condition="true"/>
+    </PreLoadItemCollection>
+</Solution>

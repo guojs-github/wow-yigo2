@@ -1,0 +1,88 @@
+/**
+	Yigo2.0 主窗口tab标签
+	2022.11.11 GuoJS 创建
+**/
+.heel-web .ui-tabs-nav li.ui-tabcontainer {
+	height: 2.829em;
+	margin-top: 0.3143em;
+	margin-right: 0.1572em;
+
+	font-size: inherit;
+
+	transition: transform 0.2s;
+}
+
+.heel-web .ui-tabs-nav li.ui-tabcontainer a {
+	padding-left: 1.5712em;
+
+	height: 2.829em;
+	line-height: 2.829em;
+
+	font-size: inherit;
+}
+
+.heel-web .ui-tabs-nav li.ui-tabcontainer:hover {
+	transform: translateY(-2.5px);
+}
+
+.heel-web .ui-tabs-nav li.ui-tabcontainer a:hover {
+	background-color: transparent;
+	border-radius: 0px;
+}
+
+.heel-web .ui-tabs-nav li.ui-tabcontainer a:hover label {
+	color: #40a8e8;
+}
+
+.heel-web .ui-tabs-nav li.ui-tabcontainer.aria-selected {
+	background-color: white;
+	box-shadow: 0 0 2px 0 rgba(0,0,0,0.5);
+}
+
+.heel-web .ui-tabs-nav li.ui-tabcontainer.aria-selected:after {
+	height: 0px;
+}
+
+.heel-web .mainRight.ui-tabcnt.ui-panel {
+	background: linear-gradient(90deg, #deecf9 0%, white 100%);
+}
+
+.heel-web .ui-tabs-header {
+	height: 3.143em;
+	background-color: transparent;
+
+	font-size: inherit;
+}
+
+.heel-web .ui-tabs-nav.ui-corner-all {
+	height: 3.143em;
+	background-color: transparent;
+
+	font-size: inherit;
+}
+
+.heel-web .ui-tabs-nav li.ui-tabcontainer .ui-anchor-label {
+	font-size: 0.9em;
+}
+
+.heel-web .ui-tabs-nav li.ui-tabcontainer > .ui-tans-anchor > .ui-icon {
+	margin: 0.7856em 0.3928em 0;
+
+	width: 1.257em;
+	height: 1.257em;
+
+	font-size: inherit;
+}
+
+.heel-web span.ui-tabs.dropdownBtn {
+	width: 2.357em;
+    height: 3.1426em;
+
+	font-size: inherit;
+
+	background-color: transparent;
+}
+
+.heel-web span.ui-tabs.dropdownBtn.show {
+	cursor: pointer;
+}

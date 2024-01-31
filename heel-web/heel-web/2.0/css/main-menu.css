@@ -1,0 +1,93 @@
+/**
+	Yigo2.0 主窗口menu树
+	2022.11.17 GuoJS 创建
+**/
+.heel-web > .main > .mainLeft > #listBox {
+	height: calc(100vh - 6.94em) !important;
+
+	font-size: inherit;
+}
+
+.heel-web > .main > .mainLeft > #listBox ul 
+, .heel-web > .main > .mainLeft > #listBox li
+, .heel-web > .main > .mainLeft > #listBox a
+{
+	font-size: inherit;
+}
+
+.heel-web > .main > .mainLeft > #listBox a {
+	height: 2.36em;
+	line-height: 2.36em;
+
+	background-size: 0.7853em;
+}
+
+/* 一级节点 */
+.heel-web > .main > .mainLeft > #listBox li.isparent.top-level > a {
+	padding-left: 2.67em !important;
+
+	height: 3.1411em;
+	line-height: 3.1411em;
+
+	background-position: 1.099em center !important;
+}
+
+/* 二级节点 */
+.heel-web > .main > .mainLeft > #listBox li.isparent.top-level > ul > li > a {
+	padding-left: 3.535em !important;
+
+	background-position: 2.121em center !important;
+}
+
+/* 三级节点 */
+.heel-web > .main > .mainLeft > #listBox li.isparent.top-level > ul > li > ul > li > a {
+	padding-left: 4.4em !important;
+
+	background-position: 3.143em center !important;
+}
+
+/* 四级节点 */
+.heel-web > .main > .mainLeft > #listBox li.isparent.top-level > ul > li > ul > li > ul > li > a {
+	padding-left: 5.265em !important;
+
+	background-position: 4.165em center !important;
+}
+
+.heel-web .mainLeft .tm > li.tm-node.isparent.top-level > a.open {
+	background-image: url(../image/expand_l.png);
+}
+
+.heel-web .mainLeft .tm > li.tm-node.isparent.top-level > a.close {
+	background-image: url(../image/collapse_l.png);
+}
+
+.heel-web .mainLeft .tm .tm-node .tm-anchor{
+	transition: transform 0.3s;	
+}
+
+.heel-web .mainLeft .tm .tm-node .tm-anchor:hover {
+	background-color: #c7e0f4;
+	box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
+	transform: translateY(-3px);
+}
+
+.heel-web .mainLeft .tm .tm-node span.tm-name {
+	font-size: 1em;
+}
+
+.heel-web .mainLeft .scroll-middle-V {
+	width: 0.616em;
+	
+	font-size: inherit;
+	background-color: transparent;
+}
+
+.heel-web .mainLeft .scroll-middle-V > .scroll-slider-V {
+	top: 0.616em;
+
+	width: 0.616em;
+
+	font-size: inherit;
+	background-color: rgba(0, 0, 0, 0.2);
+	border-radius: 0.3em;
+}

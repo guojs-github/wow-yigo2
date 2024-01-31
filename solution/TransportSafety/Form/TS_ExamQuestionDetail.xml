@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Key="TS_ExamQuestionDetail" Caption="试题详情" FormType="Entity" Version="367">
+    <DataSource RefObjectKey="TS_ExamQuestion"/>
+    <OperationCollection>
+        <Operation Key="New" Caption="新增" Visible="ReadOnly()">
+            <Action>
+                <![CDATA[New('TS_ExamQuestionDetail');]]>
+            </Action>
+        </Operation>
+        <Operation Key="CopyNew" Caption="复制新增" Visible="ReadOnly()">
+            <Action>
+                <![CDATA[CopyNew();]]>
+            </Action>
+        </Operation>
+        <Operation Key="Delete" Caption="删除" Visible="ReadOnly()&amp;&amp;(Status==StatusValue('PREPARED') || Status==StatusValue('DISABLED'))">
+            <Action>
+                <![CDATA[// Confirm("表单ID="&GetOID());
+SetPara("OID", GetOID());
+Confirm(
+    "是否删除当前试题？",
+    'YES_NO',
+    {
+        YES:{
+            // DeleteData();
+            InvokeService("QuestionDelete", false, false, ""&GetPara("OID"));
+            UpdateView(); // 更新关联列表视图
+            Close();
+        },
+        NO:{}
+    }
+);]]>
+            </Action>
+        </Operation>
+        <Operation Key="Save" Caption="保存" Visible="!ReadOnly()&amp;&amp;Status==StatusValue('PREPARED')">
+            <Action>
+                <![CDATA[if (!IsNew() && isDeleted()) { return false;};
+generateAnswer();
+generateOptionsDescription();
+if (!checkData()) { return false;}
+SaveData();
+UpdateView();
+after_update();]]>
+            </Action>
+        </Operation>
+        <Operation Key="Cancel" Caption="取消" Visible="!ReadOnly()">
+            <Action>
+                <![CDATA[if ((IsNew()==false) && isDeleted()) { return false;};
+Confirm('您要放弃保存吗？','YES_NO',{YES:{Cancel();},NO:{}});]]>
+            </Action>
+        </Operation>
+        <Operation Key="Edit" Caption="修改" Visible="ReadOnly()&amp;&amp;Status==StatusValue('PREPARED')">
+            <Action>
+                <![CDATA[Edit();]]>
+            </Action>
+        </Operation>
+        <Operation Key="Enable" Caption="启用" Visible="ReadOnly()&amp;&amp;(Status==StatusValue('PREPARED') || Status==StatusValue('DISABLED'))">
+            <Action>
+                <![CDATA[if (isDeleted()) { return false;};
+SetValue('Status', StatusValue('ENABLED'));
+SaveData();
+]]>
+            </Action>
+        </Operation>
+        <Operation Key="Disable" Caption="停用" Visible="ReadOnly()&amp;&amp;Status==StatusValue('ENABLED')">
+            <Action>
+                <![CDATA[if (isDeleted()) { return false;};
+SetValue('Status', StatusValue('DISABLED'));
+SaveData();]]>
+            </Action>
+        </Operation>
+    </OperationCollection>
+    <Body>
+        <Block>
+            <FlexFlowLayoutPanel Key="panel_main" Caption="panel_main">
+                <ToolBar Key="main_toolbar" Height="pref" Caption="main_toolbar">
+                    <ToolBarItemCollection/>
+                </ToolBar>
+                <SplitPanel Key="panel_content" Orientation="Vertical" Height="100%" Caption="panel_content">
+                    <TabPanel Caption="Tabs" Key="Tabs">
+                        <GridLayoutPanel Key="TabBasic" Caption="基本信息">
+                            <TextEditor Key="No" Caption="题目编号" BuddyKey="Lab_No" X="1" Y="1" Enable="false" CopyNew="false">
+                                <DataBinding ColumnKey="No" TableKey="TS_EXAM_QUESTION_HEADER"/>
+                            </TextEditor>
+                            <Label Key="Lab_No" Caption="题目编号" X="0" Y="1">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <Dict Key="Category" Caption="类别" BuddyKey="Lab_Category" X="3" Y="1" ItemKey="MD_Enum">
+                                <DataBinding ColumnKey="Category" TableKey="TS_EXAM_QUESTION_HEADER" Required="true"/>
+                                <ItemFilter>
+                                    <Filter Query="select oid from md_enum where type = '考题类别'" Type="DataSet"/>
+                                </ItemFilter>
+                            </Dict>
+                            <Label Key="Lab_Category" Caption="类别" X="2" Y="1">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <Dict Key="Department" Caption="发布部门" BuddyKey="Lab_Department" X="5" Y="1" ItemKey="MD_Enum">
+                                <DataBinding ColumnKey="Department" TableKey="TS_EXAM_QUESTION_HEADER" Required="true"/>
+                                <ItemFilter>
+                                    <Filter Query="select oid from md_enum where type = '发布部门'" Type="DataSet"/>
+                                </ItemFilter>
+                            </Dict>
+                            <Label Key="Lab_Department" Caption="发布部门" X="4" Y="1">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <ComboBox Key="Status" Caption="状态" BuddyKey="Lab_Status" X="7" Y="1" SourceType="Status" Enable="false" CopyNew="false">
+                                <DataBinding ColumnKey="Status" TableKey="TS_EXAM_QUESTION_HEADER" DefaultFormulaValue="StatusValue('PREPARED')" Required="true"/>
+                            </ComboBox>
+                            <Label Key="Lab_Status" Caption="状态" X="6" Y="1">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <Dict Key="Type" Caption="题型" BuddyKey="Lab_Type" X="1" Y="3" ItemKey="MD_Enum">
+                                <DataBinding ColumnKey="Type" TableKey="TS_EXAM_QUESTION_HEADER" Required="true">
+                                    <ValueChanged>
+                                        <![CDATA[var id = GetValue("Type");
+var code = GetDictValue("MD_Enum", id, "MD_Enum.Code");
+// Confirm(code);
+if ((code == 'SINGLE_CHOICE') || (code == 'MULTI_CHOICE')) {    
+    showAnswer(false, true, true); // 答案  
+    showAnswerTrueOrFalse(false, false, true); // 判断答案
+
+    // 备选项
+    SetEnable('GridOptions', true);   
+} else {
+    if (code == 'JUDGEMENT') {
+        showAnswer(false, false, true); // 答案  
+        showAnswerTrueOrFalse(true, true, true); // 判断答案
+    } else {
+        showAnswer(true, true, true); // 答案  
+        showAnswerTrueOrFalse(false, false, true); // 判断答案
+    }
+
+    // 备选项
+    SetEnable('GridOptions', false);   
+}]]>
+                                    </ValueChanged>
+                                </DataBinding>
+                                <ItemFilter>
+                                    <Filter Query="select oid from md_enum where type = '题型'" Type="DataSet"/>
+                                </ItemFilter>
+                            </Dict>
+                            <Label Key="Lab_Type" Caption="题型" X="0" Y="3">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <ComboBox Key="IsMandatory" Caption="是否必考" BuddyKey="Lab_IsMandatory" X="3" Y="3">
+                                <DataBinding ColumnKey="IsMandatory" TableKey="TS_EXAM_QUESTION_HEADER" DefaultValue="0"/>
+                                <Item Caption="是" Key="YES" Value="1"/>
+                                <Item Caption="否" Key="NO" Value="0"/>
+                            </ComboBox>
+                            <Label Key="Lab_IsMandatory" Caption="是否必考" X="2" Y="3">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <TextArea Key="Question" Caption="题目内容" BuddyKey="Lab_Question" X="1" Y="5" MaxLength="1000" XSpan="7" YSpan="3" Tip="请输入题目，【填空题】至少输入一对括号()，以标识需要填空的位置">
+                                <DataBinding ColumnKey="Question" TableKey="TS_EXAM_QUESTION_HEADER" Required="true"/>
+                            </TextArea>
+                            <Label Key="Lab_Question" Caption="题目内容" X="0" Y="5">
+                                <Format HAlign="Right" VAlign="Top"/>
+                            </Label>
+                            <TextEditor Key="Answer" Caption="答案" BuddyKey="Lab_Answer" X="1" Y="9" Enable="isAnswerEnabled()" Visible="isAnswerVisible()" MaxLength="100" XSpan="7">
+                                <DataBinding ColumnKey="Answer" TableKey="TS_EXAM_QUESTION_HEADER" Required="true"/>
+                            </TextEditor>
+                            <Label Key="Lab_Answer" Caption="答案" X="0" Y="9">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <TextArea Key="Remark" Caption="备注" BuddyKey="Lab_Remark" X="1" Y="11" MaxLength="1000" XSpan="7" YSpan="3">
+                                <DataBinding ColumnKey="Remark" TableKey="TS_EXAM_QUESTION_HEADER"/>
+                            </TextArea>
+                            <Label Key="Lab_Remark" Caption="备注" X="0" Y="11">
+                                <Format HAlign="Right" VAlign="Top"/>
+                            </Label>
+                            <TextArea Key="Options" Caption="备选项" BuddyKey="Lab_Options" X="1" Y="15" Enable="false" Visible="false" XSpan="7" YSpan="3" MaxLength="1000">
+                                <DataBinding ColumnKey="Options" TableKey="TS_EXAM_QUESTION_HEADER"/>
+                            </TextArea>
+                            <Label Key="Lab_Options" Caption="备选项" X="0" Y="15" Visible="false">
+                                <Format HAlign="Right" VAlign="Top"/>
+                            </Label>
+                            <ComboBox Key="AnswerTrueOrFalse" Caption="判断答案" X="1" Y="9" Enable="isAnswerEnabled()" BuddyKey="Lab_AnswerTrueOrFalse" Visible="!isAnswerVisible() ">
+                                <DataBinding ColumnKey="AnswerTrueOrFalse" TableKey="TS_EXAM_QUESTION_HEADER">
+                                    <ValueChanged>
+                                        <![CDATA[// 同步更新【答案】框的显示
+var text = GetText('AnswerTrueOrFalse');
+SetValue('Answer', text, false);]]>
+                                    </ValueChanged>
+                                </DataBinding>
+                                <Item Caption="对" Key="1" Value="1"/>
+                                <Item Caption="错" Key="2" Value="0"/>
+                            </ComboBox>
+                            <Label Key="Lab_AnswerTrueOrFalse" Caption="判断答案" X="0" Y="9">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <RowDefCollection RowGap="5">
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                            </RowDefCollection>
+                            <ColumnDefCollection ColumnGap="5">
+                                <ColumnDef Width="100px"/>
+                                <ColumnDef MinWidth="100px"/>
+                                <ColumnDef Width="100px"/>
+                                <ColumnDef MinWidth="100px"/>
+                                <ColumnDef Width="100px"/>
+                                <ColumnDef MinWidth="100px"/>
+                                <ColumnDef Width="100px"/>
+                                <ColumnDef MinWidth="100px"/>
+                                <ColumnDef Width="100px"/>
+                            </ColumnDefCollection>
+                        </GridLayoutPanel>
+                        <Grid Key="GridOptions" Caption="备选项" Enable="is_options_enable()" Option="">
+                            <GridColumnCollection>
+                                <GridColumn Key="column1" Caption="选择" Width="80px"/>
+                                <GridColumn Key="OID" Caption="OID" Width="80px"/>
+                                <GridColumn Key="Seq" Caption="顺序号" Width="80px"/>
+                                <GridColumn Key="IsAnswer" Caption="是否答案" Width="80px"/>
+                                <GridColumn Key="Title" Caption="选项文字" Width="200px"/>
+                                <GridColumn Key="PictureId" Caption="图片ID" Width="80px"/>
+                                <GridColumn Key="Picture" Caption="图片" Width="200px"/>
+                                <GridColumn Key="PictureUrl" Caption="图片位置" Width="300px"/>
+                                <GridColumn Key="UploadPicture" Caption="上传图片" Width="80px"/>
+                                <GridColumn Key="DeletePicture" Caption="删除图片" Width="80px"/>
+                            </GridColumnCollection>
+                            <GridRowCollection>
+                                <GridRow Key="row1" TableKey="TS_EXAM_QUESTION_OPTION">
+                                    <GridCell Key="select" Caption="选择" CellType="CheckBox" IsSelect="true" CellSortType="None"/>
+                                    <GridCell Key="OID" CellSortType="None">
+                                        <DataBinding ColumnKey="OID"/>
+                                    </GridCell>
+                                    <GridCell Key="Seq" Caption="顺序号" CellType="TextEditor">
+                                        <DataBinding ColumnKey="Seq" Required="true"/>
+                                    </GridCell>
+                                    <GridCell Key="IsAnswer" Caption="是否答案" CellType="ComboBox" CellSortType="None">
+                                        <DataBinding ColumnKey="IsAnswer" Required="true" DefaultValue="0">
+                                            <ValueChanged>
+                                                <![CDATA[generateAnswer()]]>
+                                            </ValueChanged>
+                                        </DataBinding>
+                                        <Item Caption="是" Key="YES" Value="1"/>
+                                        <Item Caption="否" Key="NO" Value="0"/>
+                                    </GridCell>
+                                    <GridCell Key="Title" Caption="选项文字" CellType="TextEditor" CellSortType="None">
+                                        <DataBinding ColumnKey="Title" Required="true"/>
+                                    </GridCell>
+                                    <GridCell Key="PictureId" Caption="图片ID" CellType="TextEditor" Enable="False" CellSortType="None">
+                                        <DataBinding ColumnKey="PictureId"/>
+                                    </GridCell>
+                                    <GridCell Key="Picture" Caption="图片" CellType="TextEditor" Enable="False" MaxLength="100" CellSortType="None">
+                                        <DataBinding ColumnKey="Picture"/>
+                                    </GridCell>
+                                    <GridCell Key="PictureUrl" CellType="HyperLink" Enable="True" CellSortType="None">
+                                        <DataBinding ColumnKey="PictureUrl"/>
+                                        <OnClick>
+                                            <![CDATA[var url = PictureUrl;
+var filename = Picture;
+if (Length(Trim(url)) > 0) {
+    hw_preview_pic(filename, url);
+}]]>
+                                        </OnClick>
+                                    </GridCell>
+                                    <GridCell Key="UploadPicture" Caption="上传图片" CellType="Button" CellSortType="None">
+                                        <OnClick>
+                                            <![CDATA[var question_id = GetOID();
+var option_id = OID;
+var grid_name = "GridOptions";
+var row_num = GetRowIndex(grid_name);
+hw_question_attachment(question_id, option_id, grid_name, row_num);]]>
+                                        </OnClick>
+                                    </GridCell>
+                                    <GridCell Key="DeletePicture" Caption="删除图片" CellType="Button" CellSortType="None">
+                                        <OnClick>
+                                            <![CDATA[if (ToInt(OID) > 0) {
+    SetCellValue("GridOptions", GetRowIndex("GridOptions"), "PictureId", -1);
+    SetCellValue("GridOptions", GetRowIndex("GridOptions"), "Picture", "");
+    SetCellValue("GridOptions", GetRowIndex("GridOptions"), "PictureUrl", "");
+}]]>
+                                        </OnClick>
+                                    </GridCell>
+                                </GridRow>
+                            </GridRowCollection>
+                            <RowInsert>
+                                <![CDATA[generateAnswer();]]>
+                            </RowInsert>
+                            <RowDelete>
+                                <![CDATA[generateAnswer();]]>
+                            </RowDelete>
+                        </Grid>
+                        <GridLayoutPanel Key="TabSystem" Caption="系统信息">
+                            <Dict Key="Creator" Caption="创建人" BuddyKey="Lab_Creator" X="1" Y="1" Enable="false" ItemKey="Operator" CopyNew="false" StateMask="Enable|Disable|Discard">
+                                <DataBinding ColumnKey="CREATOR" TableKey="TS_EXAM_QUESTION_HEADER" DefaultFormulaValue="GetOperator()" Required="true"/>
+                            </Dict>
+                            <Label Key="Lab_Creator" Caption="创建人" X="0" Y="1">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <DatePicker Key="CreateTime" Caption="创建时间" BuddyKey="Lab_CreateTime" X="3" Y="1" Enable="false" CopyNew="false">
+                                <DataBinding ColumnKey="CREATETIME" TableKey="TS_EXAM_QUESTION_HEADER" DefaultFormulaValue="ServerDate()" Required="true"/>
+                            </DatePicker>
+                            <Label Key="Lab_CreateTime" Caption="创建时间" X="2" Y="1">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <Dict Key="Modifier" Caption="修改人" BuddyKey="Lab_Modifier" X="1" Y="3" Enable="false" ItemKey="Operator" CopyNew="false" StateMask="Enable|Disable|Discard">
+                                <DataBinding ColumnKey="MODIFIER" TableKey="TS_EXAM_QUESTION_HEADER" DefaultFormulaValue="GetOperator()" Required="true"/>
+                            </Dict>
+                            <Label Key="Lab_Modifier" Caption="修改人" X="0" Y="3">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <DatePicker Key="ModifyTime" Caption="修改时间" BuddyKey="Lab_ModifyTime" X="3" Y="3" Enable="false" CopyNew="false">
+                                <DataBinding ColumnKey="MODIFYTIME" TableKey="TS_EXAM_QUESTION_HEADER" DefaultFormulaValue="ServerDate()" Required="true"/>
+                            </DatePicker>
+                            <Label Key="Lab_ModifyTime" Caption="修改时间" X="2" Y="3">
+                                <Format HAlign="Right"/>
+                            </Label>
+                            <RowDefCollection RowGap="5">
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                                <RowDef Height="30px"/>
+                                <RowDef Height="5px"/>
+                            </RowDefCollection>
+                            <ColumnDefCollection ColumnGap="5">
+                                <ColumnDef Width="100px"/>
+                                <ColumnDef MinWidth="100px"/>
+                                <ColumnDef Width="100px"/>
+                                <ColumnDef MinWidth="100px"/>
+                                <ColumnDef Width="100px"/>
+                                <ColumnDef MinWidth="100px"/>
+                                <ColumnDef Width="100px"/>
+                                <ColumnDef MinWidth="100px"/>
+                            </ColumnDefCollection>
+                        </GridLayoutPanel>
+                    </TabPanel>
+                    <SplitSize Size="100%"/>
+                </SplitPanel>
+            </FlexFlowLayoutPanel>
+        </Block>
+    </Body>
+    <MacroCollection>
+        <Macro Key="checkData">
+            <![CDATA[// 检查单据数据有效性
+if (!checkOptions()) {
+    return false;
+}
+
+if (!checkQuestion()) {
+    return false;
+}
+
+return true;]]>
+        </Macro>
+        <Macro Key="checkOptions">
+            <![CDATA[// 检查选项表格数据有效性
+var typeId = GetValue("Type");
+var typeCode = GetDictValue("MD_Enum", typeId, "MD_Enum.Code");
+if ((typeCode != 'SINGLE_CHOICE') && (typeCode != 'MULTI_CHOICE')) { // 检查题型：单选或者多选
+    return true;
+}
+
+// 遍历选项清单
+var count = 0;
+var answers = 0;
+var isAnswer = 0;
+loop 'GridOptions'(true){
+    // 计数
+    count = count + 1;
+
+    // 选择为答案？
+    isAnswer = GetCellValue('GridOptions', count - 1, 'IsAnswer');
+    // Confirm('count='&count&'IsAnswer='&isAnswer);
+    if (isAnswer == 1) {
+        answers = answers + 1;
+    }
+}
+
+// 检查数量
+// Confirm(count);
+if (count <= 1) {
+    Confirm('备选项应大于1条');
+    return false;
+}
+
+// 单选
+if ((typeCode == 'SINGLE_CHOICE') && (answers != 1)) {
+    Confirm('【单选】题，【备选项】中，有且只能有一个正确答案');
+    return false;
+}
+
+// 多选
+if ((typeCode == 'MULTI_CHOICE') && (answers <= 1)) {
+    Confirm('【多选】题，【备选项】中，需要有两个或者两个以上正确答案');
+    return false;
+}
+
+return true;]]>
+        </Macro>
+        <Macro Key="checkQuestion">
+            <![CDATA[// 检查考题
+var typeId = GetValue("Type");
+var typeCode = GetDictValue("MD_Enum", typeId, "MD_Enum.Code");
+if (typeCode == "FILL_IN_THE_BLANKS") { // 填空题
+    // 题目内容
+    var question = GetValue("Question");
+    question = Replace(question, "（", "(");
+    question = Replace(question, "）", ")");
+    SetValue('Question', question, false);
+    if (IndexOf(question, "()") < 0) {
+        Confirm("【填空题】，需至少输入一对括号()，代表输入位置");
+        return false;
+    }
+}
+
+var remark = GetValue("Remark"); // 设置备注默认值
+if (Length(Trim(remark)) == 0) {
+    SetValue("Remark", " ", false);
+}
+
+var options = GetValue("Options"); // 设置备选项默认值
+if (Length(Trim(options)) == 0) {
+    SetValue("Options", " ", false);
+}
+
+return true;]]>
+        </Macro>
+        <Macro Key="generateAnswer">
+            <![CDATA[// 生成答案
+var typeId = GetValue("Type");
+var typeCode = GetDictValue("MD_Enum", typeId, "MD_Enum.Code");
+if ((typeCode != 'SINGLE_CHOICE') && (typeCode != 'MULTI_CHOICE')) { // 检查题型：单选或者多选
+    return true;
+}
+
+// 遍历选项表格，生成答案
+var count = 0;
+var answers = '';
+var seq = '';
+var isAnswer = 0;
+loop 'GridOptions'(true){
+    count = count + 1;
+    seq = Trim(GetCellValue('GridOptions', count - 1, 'Seq'));
+    isAnswer = GetCellValue('GridOptions', count - 1, 'IsAnswer');
+    if ((isAnswer) && (seq != '')) { // 选择为答案？
+        if (answers != '') {
+            answers = answers & '、';
+        } 
+        answers = answers & seq;
+    }
+}
+
+SetValue('Answer', answers);]]>
+        </Macro>
+        <Macro Key="isAnswerEnabled">
+            <![CDATA[// 答案输入区域是否可用？
+var typeId = GetValue("Type");
+var typeCode = GetDictValue("MD_Enum", typeId, "MD_Enum.Code");
+if ((typeCode == 'SINGLE_CHOICE') || (typeCode == 'MULTI_CHOICE')) { // 检查题型：单选或者多选
+    return false;
+} 
+
+return !ReadOnly();]]>
+        </Macro>
+        <Macro Key="isAnswerVisible">
+            <![CDATA[// 答案输入区域是否可见
+var typeId = GetValue("Type");
+var typeCode = GetDictValue("MD_Enum", typeId, "MD_Enum.Code");
+if (typeCode == 'JUDGEMENT') { // 检查题型：单选或者多选
+    return false;
+} 
+
+return true;]]>
+        </Macro>
+        <Macro Key="generateOptionsDescription">
+            <![CDATA[// 生成选择题备选项描述信息
+var typeId = GetValue("Type");
+var typeCode = GetDictValue("MD_Enum", typeId, "MD_Enum.Code");
+if ((typeCode != 'SINGLE_CHOICE') && (typeCode != 'MULTI_CHOICE')) { // 检查题型：单选或者多选
+    return true;
+}
+
+// 遍历选项清单
+var count = 0;
+var options = '';
+var seq = '';
+var title = '';
+loop 'GridOptions'(true){
+    count = count + 1;
+    seq = Trim(GetCellValue('GridOptions', count - 1, 'Seq'));
+    title = Trim(GetCellValue('GridOptions', count - 1, 'Title'));
+    if ((seq != '') && (title != '')) { // 数据完整的选项
+        if (options != '') {
+            options = options & '；';
+        } 
+        options = options & '【' & seq & '】' & title;
+    }
+}
+
+SetValue('Options', options);]]>
+        </Macro>
+        <Macro Key="is_options_enable">
+            <![CDATA[// 备选项是否可用？
+var typeId = GetValue("Type");
+var typeCode = GetDictValue("MD_Enum", typeId, "MD_Enum.Code");
+if ((typeCode == 'SINGLE_CHOICE') || (typeCode == 'MULTI_CHOICE')) { // 检查题型：单选或者多选
+    return !ReadOnly();
+} 
+
+return false;]]>
+        </Macro>
+        <Macro Key="showAnswer" Args="enabled,visible,reset">
+            <![CDATA[// 答案区域状态控制
+SetEnable('Answer', enabled);
+SetVisible('Answer', visible);
+if (reset) {
+    SetValue('Answer', '', false); // 清空
+}
+]]>
+        </Macro>
+        <Macro Key="showAnswerTrueOrFalse" Args="enabled,visible,reset">
+            <![CDATA[// 判断题答案区域状态控制
+SetEnable('AnswerTrueOrFalse', enabled);
+SetVisible('AnswerTrueOrFalse', visible);
+if (reset) {
+    SetValue('AnswerTrueOrFalse', -1, true); // 默认值
+}
+]]>
+        </Macro>
+        <Macro Key="isDeleted">
+            <![CDATA[// 判断记录是否已经被删除
+var isDeleted = false;
+isDeleted = InvokeService("QuestionIsDeleted", false, false, ""&GetOID()); 
+if (isDeleted) {
+    Confirm("试题已被删除,不能继续进行编辑。");
+}
+
+return isDeleted;]]>
+        </Macro>
+        <Macro Key="after_update">
+            <![CDATA[// 单据更新后处理
+InvokeService("QuestionUpdateOptionPic", false, false, "", ""&GetOID());]]>
+        </Macro>
+    </MacroCollection>
+</Form>

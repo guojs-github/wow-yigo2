@@ -1,0 +1,136 @@
+/**
+	Yigo2.0 主窗口标题头部样式
+	2022.11.16 GuoJS 创建
+**/
+
+/* 导航栏 */
+.heel-web > .nav {
+	font-size: inherit;
+	height: 3.9288em;
+
+	border-bottom: 1px solid lightgray;
+	background-color: transparent;
+
+	overflow: hidden;
+}
+
+.heel-web > .nav > .nav-left {
+	display: none;
+}
+
+.heel-web > .nav > .logo {
+	display: inline-block;
+	float: left;
+	margin-top: 1.02124em;
+	margin-left: 1.17835em;
+	
+	font-size: inherit;
+	width: 4.714em;
+	height: 1.964em;
+	background-image: url(/yigo/heel-web/common/image/logo.png);
+	background-size: cover;	
+
+	/* animation: -rotate-y 3s infinite ease-in-out;  */
+}
+
+.heel-web > .nav .logo-text{
+	font-size: 1.5712em;
+	font-weight: bold;
+	letter-spacing: 0.18em;
+	text-indent: 0.5em;
+
+	height: 2.5em;
+	line-height: 2.5em;
+}
+
+.heel-web-main-head-font-family {
+	font-family: PingFangSC-Regular !important;
+}
+
+.heel-web-main-head-font-color {
+	color: #666666 !important;
+}
+
+.heel-web > .nav > .navRight {
+	font-size: inherit;
+}
+
+.heel-web > .nav > .navRight > span.login_username {
+	line-height: 3.5em;
+	font-size: 1.1em;	
+	margin-right: 0.3571em;
+}
+
+.heel-web > .nav > .navRight .nav-field-box {
+	text-align: center;
+
+	width: 3.143em;
+	height: 3.536em;
+	line-height: 3.536em;
+	border-left: 0;
+
+	font-size: inherit;
+	background-color: transparent;
+}
+
+.heel-web > .nav > .navRight .nav-field-box.setting {
+	margin-right: 0.25em;
+}
+
+.heel-web > .nav > .navRight .nav-field-box > .hw-nav-field-btn {
+	display: inline-block;
+	vertical-align: middle;
+
+	height: 3.614em;
+	line-height: 3.614em;
+	width: 2.357em;
+
+	font-size: inherit;
+
+	border: 0;
+	background-color: transparent;
+	background-image: none;
+}
+
+.heel-web > .nav > .navRight .nav-field-box > .hw-nav-field-btn:hover {
+	cursor: pointer;
+}
+
+.heel-web > .nav > .navRight .nav-field-box > .hw-nav-field-btn > svg {
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 1.6667em;
+}
+
+.hw-nav-dropdown-menu {
+	position: fixed;
+	top: 2em;
+	right:0;
+    display:none;
+	min-width: 9.427em;
+	z-index: 999;
+	white-space: nowrap;
+
+	font-size: inherit;
+}
+
+.hw-nav-dropdown-menu .nav-field-list li.nav-field-items{
+	padding: 0 0.786em;
+	
+	height: 2.75em;
+	line-height: 2.75em;
+	
+	background: white;
+}
+
+.hw-nav-dropdown-menu .nav-field-list li.nav-field-items:hover{
+	color: #323232;
+	background: #c7e0f4;
+}
+
+.hw-nav-dropdown-menu .nav-field-list
+, .hw-nav-dropdown-menu .nav-field-list li.nav-field-items
+, .hw-nav-dropdown-menu .nav-field-list li.nav-field-items > a {
+	font-size: inherit;
+}
+

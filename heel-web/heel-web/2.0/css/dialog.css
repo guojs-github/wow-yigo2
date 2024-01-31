@@ -1,0 +1,80 @@
+/**
+	Yigo2.0 Dialog
+	2022.11.21 GuoJS Created
+**/
+
+.heel-web .dialog {
+	box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.heel-web .dialog > .dialog-header {
+	color: #666666;
+	cursor: pointer;
+}
+
+.heel-web .dialog > .dialog-header:hover {
+	background-color: #c7e0f4;
+}
+
+.heel-web .dialog {
+	animation: -flip-in-simple; 
+	animation-duration: 0.4s;
+	-webkit-animation: -flip-in-simple 0.4s;
+}
+
+.heel-web .dialog-close {
+	top: 5px;
+	right: 5px;
+	
+	width: 25px;
+	height: 25px;
+	background-position: center;
+}
+
+.heel-web .dialog-close:hover {
+	color: #40a8e8;
+}
+
+.heel-web .dialog-mask.modal, .heel-web .dialog-mask 
+{
+	background-color: black;
+	opacity: 0.5 !important;
+}
+
+.heel-web .dialog > .dialog-content .ui-btn 
+, .heel-web .dialog > .dialog-content button
+, .heel-web .dialog > .dialog-content input.dialog-button {
+	background-color: white;
+	border: 1px solid white;
+	border-radius: 2px;
+	-webkit-border-radius: 2px;
+
+	transition: transform 0.3s;
+}
+
+.heel-web .dialog > .dialog-content button > span.txt {
+	color: #323232;
+}
+
+.heel-web .dialog > .dialog-content button:hover
+, .heel-web .dialog > .dialog-content input.dialog-button:hover {
+	box-shadow:0 0 4px 0 #40a8e8;
+	outline: 1.5px solid #40a8e8;
+
+	cursor: pointer;	
+	transform: translateY(-3px);	
+}
+
+.heel-web .dialog > .dialog-content button:hover > span.txt {
+	color: #40a8e8;	
+}
+
+
+.heel-web .dialog .ui-btn.dlg-btn[key=OK] > button >span.txt
+, .heel-web .dialog button[class*=ok] >span.txt
+, .heel-web .dialog .ui-btn[id*=OK] > button >span.txt
+ {
+	color: #40a8e8;
+	font-weight: bold;
+}
+

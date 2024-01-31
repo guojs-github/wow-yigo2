@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Form Caption="登录" Key="Login" Authenticate="False">
+	<Body> 
+		<Block>
+			<GridLayoutPanel Key="body" Width="390px" Height="280px">
+				
+				<RowDefCollection RowHeight="35">
+					<RowDef Height="30px"/>
+					<RowDef Height="20px"/>
+					<RowDef/>
+					<RowDef Height="20px"/>
+					<RowDef/>
+					<RowDef Height="40px"/>
+					<RowDef/>
+					<RowDef Height="30px"/>
+				</RowDefCollection>
+				<ColumnDefCollection ColumnGap="25">
+					<ColumnDef Width="100%"/>
+				</ColumnDefCollection>
+				<Label Key="username" Caption="用户名" X="0" Y="1"/>
+				<TextEditor Key="code" Caption="用户名" EmbedText="用户名" PreIcon="Resource/User.png" X="0" Y="2">
+				</TextEditor>
+				<Label Key="pw" Caption="密码" X="0" Y="3"/>
+				<PasswordEditor Key="password" Caption="密码" EmbedText="密码" PreIcon="Resource/Password.png" X="0" Y="4"/>
+				
+				<CheckBox Key="ck1" DefaultValue="记住密码" Caption="记住密码" X="0" Y="5"/> 
+				
+				<Button Key="login" Caption="登录" X="0" Y="6">
+					<OnClick>
+					<![CDATA[
+			Login(code,password);SetResult(true);Close();
+						]]>	
+					</OnClick>
+				</Button>
+			</GridLayoutPanel>
+		</Block>
+	</Body>
+</Form>

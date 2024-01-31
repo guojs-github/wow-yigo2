@@ -1,0 +1,76 @@
+/**
+	Yigo2.0 通用样式界面
+	2022.10.24 GuoJS 创建
+	2022.11.16 GuoJS 分拆tricks.css
+	2022.11.21 GuoJS 修改placeholder颜色
+**/
+@import "loading.css";
+@import "dialog.css";
+@import "tricks.css";
+
+@media screen and (max-height: 600px) {
+    .heel-web {
+        font-size: 13px !important;
+    }
+}
+
+@media screen and (min-height: 600px) {
+    .heel-web {
+        font-size: 1.8vh !important;
+    }
+}
+
+.heel-web {
+	font-family: PingFangSC-Regular !important;
+}
+
+.heel-web input:disabled {
+	background-color: transparent;
+	cursor: not-allowed;
+}
+
+.heel-web input::-webkit-input-placeholder{
+	color: #999999;
+}
+
+.heel-web input::-moz-placeholder{
+	color: #999999;
+}
+
+.heel-web input::-moz-placeholder{
+	color: #999999;
+}
+
+.heel-web input::-ms-input-placeholder{
+	color: #999999;
+}
+
+.heel-web-default-color {
+	color: #323232;
+}
+
+.hw-def-button-color {
+	color: #40a8e8;
+}
+
+.hw-def-head-font-size {
+	font-size: 20px;
+}
+
+::-webkit-scrollbar { /* 整个滚动条 */
+	width: 6px; /* 垂直滚动条滑块宽度 */
+	height: 6px; /* 水平滚动条滑块高度 */
+	background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb { /* 滚动条滑块 */
+	background: rgba(0, 0, 0, 0.2);
+	border-radius: 3px;
+	-webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+
+	cursor: grab;
+}
+
+::-webkit-scrollbar-thumb:hover { /* 滚动条滑块 */
+	cursor: move;
+}
